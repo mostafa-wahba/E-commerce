@@ -1,0 +1,53 @@
+nav .navbar-toggler {
+    border: none;
+}
+
+nav .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+nav .nav-item {
+    position: relative;
+    padding: 20px 0;
+    font-size: 14px;
+    transition: all 0.4s;
+}
+
+@media (min-width: 768px) {
+    nav .nav-item {
+        padding: 20px 0;
+    }
+}
+
+.navbar-nav .active,
+.navbar-nav .nav-link.show {
+    transition: all 0.4s;
+    color: var(--hover-color) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    transition: all 0.4s;
+    color: var(--hover-color) !important;
+}
+
+nav svg {
+    font-size: 1.5rem;
+    transition: all 0.4s;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+nav svg:hover {
+    transition: all 0.4s;
+    color: var(--hover-color);
+}
+
+.menu-icons .search {
+    width: 50px;
+}
+
+.menu-icons .search input {
+    transition: all 0.4s;
+}
