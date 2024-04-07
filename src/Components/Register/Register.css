@@ -17,6 +17,9 @@
 .register .container [type="submit"]:hover {
   background-color: #eb6304;
 }
+.register .container p a{
+  color: #eb6304;
+}
 .reg-input {
   position: relative;
   margin: 20px 0 40px;

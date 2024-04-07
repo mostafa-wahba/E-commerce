@@ -55,6 +55,12 @@
   color: #eb6304;
   transform: translateY(-30px);
 }
+.login .container a{
+  color: #eb6304;
+}
+.login .container p a{
+  color: #eb6304;
+}
 @media (min-width: 0) and (max-width: 750px) {
     .login{
          display: flex;

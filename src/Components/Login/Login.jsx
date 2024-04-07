@@ -1,6 +1,7 @@
 import React from 'react'
 import './Login.css';
 import bg from "../../Assets/bg_1.jpg.webp";
+import { NavLink } from 'react-router-dom';
 export default function Login() {
     return <>
         <div className="login w-100 vh-100">
@@ -31,7 +32,9 @@ export default function Login() {
               <span style={{ transitionDelay: "350ms" }}>d</span>
             </label>
           </div>
+          <NavLink to="#">Forget Password</NavLink>
           <input type='submit' value='Login' className='btn btn-primary text-white p-3 btn-blue'/>
+          <p>Don't have an account ? <NavLink to="/register">Sign Up</NavLink></p>
         </form>
       </div>
     </>

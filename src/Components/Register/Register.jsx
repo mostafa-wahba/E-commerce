@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import "./Register.css";
 import bg from "../../Assets/bg_1.jpg.webp";
+import { NavLink } from "react-router-dom";
 export default function Register() {
   return (
     <Fragment>
@@ -67,6 +68,8 @@ export default function Register() {
             </label>
           </div>
           <input type='submit' value='Register' className='btn btn-primary text-white p-3 btn-blue'/>
+          <p>Already have an account ? <NavLink to="/login">Login</NavLink></p>
+
           {/* 
                 <input type='text' placeholder='Username' className=''/>
                 <input type='email' placeholder='Email' className=''/>
