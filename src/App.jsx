@@ -8,17 +8,18 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 const App = () => {
   return (
-    <Fragment>
-      <Navbar />
-      <Routes>
-        <Route path="" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-      </Routes>
-      <Footer />
-    </Fragment>
+    <>
+        <Navbar />
+        <Routes>
+          <Route path="" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+        </Routes>
+        <Footer />
+
+    </>
   );
 };
 
