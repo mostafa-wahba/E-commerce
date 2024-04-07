@@ -1,0 +1,77 @@
+.register{
+    display: flex;
+}
+.register .container {
+  background-color: #ebeff2;
+  padding: 50px;
+}
+.register .container [type="submit"] {
+  background-color: #ff6a00;
+  border-bottom: none;
+}
+.register .image{
+    /* display: block !important; */
+    width: 100%;
+    object-fit: cover;
+}
+.register .container [type="submit"]:hover {
+  background-color: #eb6304;
+}
+.reg-input {
+  position: relative;
+  margin: 20px 0 40px;
+  width: 100%;
+}
+.register .container input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #eb6304 solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: #000000;
+}
+
+.register .container input:focus,
+.register .container input:valid {
+  outline: 0;
+  border-bottom-color: #eb6304;
+}
+
+.register .container label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.register .container label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  color: #6D3C1D;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.register .container input:focus + label span,
+.register .container input:valid + label span {
+  color: #eb6304;
+  transform: translateY(-30px);
+}
+@media (min-width: 0) and (max-width: 750px) {
+    .register{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      flex-direction: column;
+    }
+    .register .image{
+        width: 100%;
+        object-fit: cover;
+    }
+    .register .container{
+        height: 100vh;
+    }
+    
+  }
