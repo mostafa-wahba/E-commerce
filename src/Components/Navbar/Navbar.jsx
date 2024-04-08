@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { MainContext } from "../../Context/MainContext";
-import logo from "../../Assets/logo.png";
+import logo from "../../Assets/png/logo-no-background.png";
 import { Link, NavLink } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
@@ -142,7 +142,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="wishlist">
+              <Link to="profile">
                 <CgProfile />
               </Link>
             </li>

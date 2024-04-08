@@ -1,0 +1,53 @@
+.carousel{
+    height: calc(100vh - 77px);
+}
+.carousel-inner {
+    height: 100%;
+}
+.carousel-item{
+    height: 100%;
+}
+.carousel-item img{
+    height: 100%;
+    object-fit: cover;
+}
+.carousel-control-next, .carousel-control-prev{
+    width: 5%;
+}
+.carousel-item-text{
+    top: 50%;
+    transform: translateY(-50%);
+}
+.carousel-item-text p{
+    font-family: Poppins;
+    font-size: 28px;
+    line-height: 1.2857;
+    color: var(--text-color);
+}
+.carousel-item-text h1{
+    font-family: Playfair Display;
+    font-size: 60px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    color: var(--text-color);
+}
+.carousel-item-text button{
+    border-radius: 23px;
+    border-color: var(--hover-color);
+    background-color: var(--hover-color);
+    min-width: 161px;
+    height: 46px;
+    font-family: Poppins;
+    font-size: 15px;
+    line-height: 1.466667;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+}
+.carousel-item-text button:hover{
+    border-color: var(--text-color);
+    background-color: var(--text-color);
+    color: #fff;
+    transition: all .4s;
+}
