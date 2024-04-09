@@ -33,7 +33,7 @@ export default function SingleProduct() {
   return (
     <>
       <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5">
-        <div className="product-and-product-details d-flex justify-content-center align-items-center gap-5">
+        <div className="product-and-product-details d-flex justify-content-center gap-5">
           <div
             id="carouselExampleIndicators"
             className="carousel slide w-100"
@@ -103,11 +103,11 @@ export default function SingleProduct() {
               <span className="visually-hidden">Next</span>
             </button>
           </div>
-          <div className="product-details w-100">
+          <div className="product-details  pt-3">
             <h5>Ribbed Bodycon Dress</h5>
             <div className="price d-flex justify-content-between">
               <p>$30.00</p>
-              <p className=" text-info curser-pointer">In Stock</p>
+              <p className=" text-info">In Stock</p>
             </div>
             <hr />
             <p>
@@ -198,42 +198,7 @@ export default function SingleProduct() {
         </div>
         <div className="related-products">
           <h4 className=" text-center">Related Product (s)</h4>
-          <div className="products-card d-flex justify-content-between gap-5">
-            <div
-              className=" position-relative card"
-              style={{ width: "18rem;" }}
-            >
-              <img src={img3} class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            {/* <div className="  bg-black position-absolute w-100 h-100 overlaye"></div> */}
-            <div class="card" style={{ width: "18rem;" }}>
-              <img src={img3} class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            <div class="card" style={{ width: "18rem;" }}>
-              <img src={img3} class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </>

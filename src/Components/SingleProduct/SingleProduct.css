@@ -40,6 +40,29 @@
 span{
     color: rgb(201, 195, 195);
 }
+.social-icons svg{
+    transition: .5s;
+}
+.social-icons svg:nth-child(1):hover{
+    cursor: pointer;
+    color: #3B5998;
+    transition: .5s;
+}
+.social-icons svg:nth-child(2):hover{
+    cursor: pointer;
+    color: #00ACED;
+    transition: .5s;
+}
+.social-icons svg:nth-child(3):hover{
+    cursor: pointer;
+    transition: .5s;
+    color: #CB2027;
+}
+.social-icons svg:nth-child(4):hover{
+    cursor: pointer;
+    transition: .5s;
+    color: #ff0000;
+}
 @media screen and (max-width:500) {
     .single-product-container{
         display: flex;
