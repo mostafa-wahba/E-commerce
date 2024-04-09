@@ -63,8 +63,8 @@ span{
     transition: .5s;
     color: #ff0000;
 }
-@media screen and (max-width:500) {
-    .single-product-container{
+@media screen and (max-width:576px)  {
+    .product-and-product-details{
         display: flex;
         flex-direction: column;
     }

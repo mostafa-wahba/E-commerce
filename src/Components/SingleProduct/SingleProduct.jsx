@@ -32,7 +32,7 @@ export default function SingleProduct() {
   }
   return (
     <>
-      <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5">
+      <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5 ">
         <div className="product-and-product-details d-flex justify-content-center gap-5">
           <div
             id="carouselExampleIndicators"
