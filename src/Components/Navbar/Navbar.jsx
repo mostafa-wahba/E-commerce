@@ -14,7 +14,7 @@ export default function Navbar() {
   const [searchShow, setSearchShow] = useState(false);
   return (
     <>
-      <nav className="navbar navbar-expand-lg d-flex py-3 py-lg-0 bg-transparent">
+      <nav className="navbar navbar-expand-lg d-flex py-3 py-lg-0 bg-transparent fixed-top">
         <div className="container">
           <Link className="navbar-brand" to="">
             <img src={logo} alt="" />
