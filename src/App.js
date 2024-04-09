@@ -6,6 +6,7 @@ import Register from './Components/Register/Register';
 import About from './Components/About/About';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
+import SingleProduct from './Components/SingleProduct/SingleProduct';
 const App = () => {
   return (
     <Fragment>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path='/singleProduct' element={<SingleProduct/>}/>
       </Routes>
       <Footer/>
 
