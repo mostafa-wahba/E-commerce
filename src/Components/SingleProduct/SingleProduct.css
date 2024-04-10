@@ -10,14 +10,17 @@
 }
 .product-and-product-details .product-details h5{
     font-size: 30px;
+    font-weight: 600;
     font-family: "M PLUS 1 Code", monospace;
-    letter-spacing: 2px
+    letter-spacing: 2px;
+    color: #999;
 }
-.product-and-product-details .product-details .description-text , span , p{
+.product-and-product-details .product-details .description-text{
+    color: #999;
     font: 20px lato;
     letter-spacing: 1px
 }
-.product-and-product-details .product-details .description-text , span, h5{
+.product-and-product-details .product-details .product-country span{
     color: #999;
 }
 .carousel-indicators [data-bs-target] {
