@@ -157,45 +157,6 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
-          <section className="related-products">
-            <h4 className=" text-center">Related Product (s)</h4>
-            <div className="products-card d-flex justify-content-between gap-5">
-              <div
-                className=" position-relative card"
-                style={{ width: "18rem;" }}
-              >
-                <img src={img3} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                </div>
-              </div>
-              {/* <div className="  bg-black position-absolute w-100 h-100 overlaye"></div> */}
-              <div class="card" style={{ width: "18rem;" }}>
-                <img src={img3} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                </div>
-              </div>
-              <div class="card" style={{ width: "18rem;" }}>
-                <img src={img3} class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </main>
     </>
