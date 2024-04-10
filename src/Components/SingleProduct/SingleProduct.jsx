@@ -36,7 +36,7 @@ export default function SingleProduct() {
     <>
       <main>
         <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5">
-          <div className="product-and-product-details d-flex justify-content-center align-items-center gap-5">
+          <div className="product-and-product-details d-flex justify-content-center gap-5">
             <div
               id="carouselExampleIndicators"
               className="carousel slide w-100"
@@ -106,14 +106,14 @@ export default function SingleProduct() {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="product-details w-100">
+            <div className="product-details pt-3 w-100">
               <h5>Ribbed Bodycon Dress</h5>
               <div className="price d-flex justify-content-between">
                 <p>$30.00</p>
-                <p className=" text-info curser-pointer">In Stock</p>
+                <p className="curser-pointer">In Stock</p>
               </div>
               <hr />
-              <p className="mb-3">
+              <p className="mb-3 description-text">
                 Go sporty this summer with this vintage navy and white striped
                 v-neck t-shirt from the Nike. Perfect for pairing with denim and
                 white kicks for a stylish sporty vibe.
@@ -138,7 +138,7 @@ export default function SingleProduct() {
                 </div>
               </div>
 
-              <div className="product-country mt-5">
+              <div className="product-country mt-5 d-flex flex-column gap-2">
                 <p>
                   SKU: <span>P-01</span>
                 </p>
