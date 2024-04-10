@@ -105,7 +105,7 @@ span {
     color: rgb(201, 195, 195);
 }
 .social-icons svg{
-    transition: .5s;
+    transition: all .4s;
 }
 .social-icons svg:nth-child(1):hover{
     cursor: pointer;

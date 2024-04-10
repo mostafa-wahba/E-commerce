@@ -6,10 +6,15 @@ import img2 from "../../Assets/banner-02.jpg";
 import img3 from "../../Assets/slide-03.jpg";
 import img4 from "../../Assets/banner-01.jpg";
 import img5 from "../../Assets/banner-03.jpg";
+import img6 from "../../Assets/product-01.jpg";
+import { GoHeartFill } from "react-icons/go";
+
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [btnState, setBtnState] = useState(false);
   const totalSlides = 4; // Update based on the number of slides
 
   const handleSlideChange = (newIndex) => {
@@ -21,7 +26,12 @@ export default function Home() {
       setCurrentSlide(newIndex);
     }
   };
-
+  const handleButtonsClicks = () => {
+    setBtnState(true); // Disable the buttons
+    setTimeout(() => {
+      setBtnState(false); // Enable the buttons after 3 seconds
+    }, 1000);
+  };
   useEffect(() => {
     const interval = setInterval(() => {
       // Calculate the new index and pass it to handleSlideChange
@@ -37,7 +47,7 @@ export default function Home() {
   }, [currentSlide]);
   return (
     <>
-      <main>
+      <main id="home">
         <section
           id="carouselExampleFade"
           className="carousel slide carousel-fade vh-100"
@@ -47,7 +57,7 @@ export default function Home() {
               className={`carousel-item ${currentSlide === 0 ? "active" : ""}`}
             >
               <img src={img} className="d-block w-100" alt="..." />
-              <div className="container px-5 p-xxl-0">
+              <div className="container px-5 p-xxl-2">
                 <div className="carousel-item-text position-absolute">
                   <motion.p
                     key={`motion-p1-${currentSlide}`}
@@ -92,7 +102,7 @@ export default function Home() {
               className={`carousel-item ${currentSlide === 1 ? "active" : ""}`}
             >
               <img src={img1} className="d-block w-100" alt="..." />
-              <div className="container px-5 p-xxl-0">
+              <div className="container px-5 p-xxl-2">
                 <div className="carousel-item-text position-absolute">
                   <motion.p
                     key={`motion-p2-${currentSlide}`}
@@ -137,7 +147,7 @@ export default function Home() {
               className={`carousel-item ${currentSlide === 2 ? "active" : ""}`}
             >
               <img src={img2} className="d-block w-100" alt="..." />
-              <div className="container px-5 p-xxl-0">
+              <div className="container px-5 p-xxl-2">
                 <div className="carousel-item-text position-absolute">
                   <motion.p
                     key={`motion-p3-${currentSlide}`}
@@ -182,7 +192,7 @@ export default function Home() {
               className={`carousel-item ${currentSlide === 3 ? "active" : ""}`}
             >
               <img src={img3} className="d-block w-100" alt="..." />
-              <div className="container px-5 p-xxl-0">
+              <div className="container px-5 p-xxl-2">
                 <div className="carousel-item-text position-absolute">
                   <motion.p
                     key={`motion-p4-${currentSlide}`}
@@ -230,19 +240,32 @@ export default function Home() {
           <button
             className="carousel-control-prev"
             type="button"
+            disabled={btnState}
             data-bs-target="#carouselExampleFade"
             data-bs-slide="prev"
-            onClick={() => handleSlideChange(currentSlide - 1)}
+            onClick={() => {
+              if (!btnState) {
+                handleSlideChange(currentSlide - 1);
+                handleButtonsClicks();
+              }
+            }}
           >
             <span className="carousel-control-prev-icon" aria-hidden="true" />
             <span className="visually-hidden">Previous</span>
           </button>
+
           <button
             className="carousel-control-next"
+            disabled={btnState} // Set the disabled attribute based on btnState
             type="button"
             data-bs-target="#carouselExampleFade"
             data-bs-slide="next"
-            onClick={() => handleSlideChange(currentSlide + 1)}
+            onClick={() => {
+              if (!btnState) {
+                handleSlideChange(currentSlide + 1);
+                handleButtonsClicks();
+              }
+            }}
           >
             <span className="carousel-control-next-icon" aria-hidden="true" />
             <span className="visually-hidden">Next</span>
@@ -250,7 +273,7 @@ export default function Home() {
         </section>
         <section className="category-boxs py-3 px-2 py-md-4 px-md-4 my-5">
           <div className="container">
-            <div className="row gx-5">
+            <div className="row">
               <div className="col-12 col-md-6 col-lg-4 p-3">
                 <div className="category-box w-100 border border-1 position-relative">
                   <img src={img4} alt="" />
@@ -285,6 +308,103 @@ export default function Home() {
                   <span className="shop-btn position-absolute text-white text-uppercase">
                     shop now
                   </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="product-overview">
+          <div className="container">
+            <h2 className="title">PRODUCT OVERVIEW</h2>
+            <div className="row justify-content-center row-gap-4 row-gap-lg-5 flex-wrap">
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div className="product-card d-flex flex-column justify-content-center align-items-center">
+                  <div className="product-img position-relative">
+                    <img src={img6} alt="product" />
+                    <Link to="singleProduct" className="quick-view">Quick View</Link>
+                  </div>
+                  <div className="product-content w-100 pt-3 position-relative">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
+                      <GoHeartFill />
+                    </div>
+                    <span>$16.64</span>
+                  </div>
                 </div>
               </div>
             </div>

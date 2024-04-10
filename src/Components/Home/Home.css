@@ -57,7 +57,9 @@
     color: #fff;
     transition: all .4s;
 }
-
+.carousel-inner .carousel-control-next-icon{
+    color: var(--hover-color);
+}
 /* -----------------------------section2------------------------- */
 .category-boxs {
     padding: 4rem 3rem;
@@ -66,6 +68,7 @@
 .category-boxs .category-box {
     height: 250px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -167,4 +170,79 @@
 .category-boxs .category-box:hover .shop-btn::after,
 .category-boxs .category-box:hover .shop-btn::before {
     width: 50%;
+}
+/* -----------------------------section3------------------------- */
+.product-overview{
+    margin: 4rem 0;
+}
+.product-overview .title{
+    font-family: Poppins;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+.product-card .product-img{
+    overflow: hidden;
+    transition: all 0.4s;
+}
+.product-card .product-img img{
+    transition: all 0.8s;
+}
+.product-card .product-img:hover img{
+    transform: scale(1.1);
+    transition: all 0.8s;
+}
+.product-card .product-content{
+    background-color: #fff;
+    position: relative;
+}
+.product-card .product-content svg{
+    color: rgb(201, 195, 195);
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all .4s;
+}
+.product-card .product-content svg:hover,.product-card .product-content a:hover{
+    color: var(--hover-color);
+    transition: all .4s;
+}
+.product-card .product-content a{
+    font-family: Poppins;
+    font-size: 14px;
+    line-height: 1.466667;
+    color: var(--text-color);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all .4s;
+}
+.product-overview .product-content span{
+    font-family: Poppins;
+    font-size: 14px;
+    line-height: 1.466667;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: var(--bg-color);
+}
+.product-card .product-img .quick-view{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15%;
+    z-index: 2;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    background-color: #fff;
+    transition:  all .4s;
+    color: var(--bg-color);
+}
+.product-card .product-img .quick-view:hover{
+    background-color: var(--bg-color);
+    color: #fff;
+}
+.product-card .product-img:hover .quick-view{
+    bottom: 5%;
 }

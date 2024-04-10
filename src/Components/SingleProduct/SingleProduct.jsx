@@ -3,7 +3,6 @@ import { FaRegHeart } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
 
-import { BsHeartFill } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SlSocialPintarest } from "react-icons/sl";
