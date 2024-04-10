@@ -131,7 +131,7 @@ export default function SingleProduct() {
                   Add to cart
                 </button>
                 <div className="heart-icon p-3 h-100">
-                  <FaRegHeart />
+                  <BsHeartFill />
                 </div>
               </div>
 
