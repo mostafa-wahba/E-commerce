@@ -1,0 +1,9 @@
+.section-background{
+    width: 100%;
+    height: 30vh;
+    background-image: url('../../Assets/bg-01.jpg.webp');
+    margin-top: 10vh;
+}
+.section-background h1{
+    font-weight: 900;
+}
