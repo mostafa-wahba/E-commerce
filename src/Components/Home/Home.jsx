@@ -6,13 +6,14 @@ import img2 from "../../Assets/banner-02.jpg";
 import img3 from "../../Assets/slide-03.jpg";
 import img4 from "../../Assets/banner-01.jpg";
 import img5 from "../../Assets/banner-03.jpg";
-import img6 from "../../Assets/product-01.jpg";
-import { GoHeartFill } from "react-icons/go";
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function Home() {
+  const productCards = [1, 2, 3, 4, 5, 6]; // An array to represent each ProductCard
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [btnState, setBtnState] = useState(false);
   const totalSlides = 4; // Update based on the number of slides
@@ -41,10 +42,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [currentSlide, totalSlides]); // Added totalSlides to the dependency array
 
-  // Separate useEffect for logging if needed
-  useEffect(() => {
-    console.log(currentSlide);
-  }, [currentSlide]);
   return (
     <>
       <main id="home">
@@ -317,96 +314,11 @@ export default function Home() {
           <div className="container">
             <h2 className="title">PRODUCT OVERVIEW</h2>
             <div className="row justify-content-center row-gap-4 row-gap-lg-5 flex-wrap">
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
+              {productCards.map((card, index) => (
+                <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                  <ProductCard />
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div className="product-card d-flex flex-column justify-content-center align-items-center">
-                  <div className="product-img position-relative">
-                    <img src={img6} alt="product" />
-                    <Link to="singleProduct" className="quick-view">Quick View</Link>
-                  </div>
-                  <div className="product-content w-100 pt-3 position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-                      <GoHeartFill />
-                    </div>
-                    <span>$16.64</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

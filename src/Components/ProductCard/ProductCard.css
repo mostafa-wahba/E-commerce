@@ -1,0 +1,171 @@
+.product-card {
+  position: relative;
+  display: flex;
+  background: #717fe0;
+  box-shadow: inset 0 0 0 4px transparent;
+  transition: .6s 0.4s;
+  padding: 2px;
+  height: 400px;
+}
+
+.product-card>svg {
+  position: absolute;
+}
+
+.lines-effect line {
+  stroke-width: 5px;
+  stroke: #fff;
+  fill: none;
+}
+
+/* Animations for each line */
+@keyframes moveTop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes moveBottom {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-200%);
+  }
+}
+
+@keyframes moveRight {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(200%);
+  }
+}
+
+.product-card.animate-lines .lines-effect line.top {
+  animation: moveTop 2s forwards;
+}
+
+.product-card.animate-lines .lines-effect line.bottom {
+  animation: moveBottom 2s forwards;
+}
+
+.product-card.animate-lines .lines-effect line.left {
+  animation: moveLeft 2s forwards;
+}
+
+.product-card.animate-lines .lines-effect line.right {
+  animation: moveRight 2s forwards;
+}
+
+.product-card .product-img {
+  overflow: hidden;
+  transition: all 0.4s;
+  height: 80%;
+  width: 100%;
+}
+
+.product-card .product-img img {
+  transition: all 0.8s;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.product-card .product-img:hover img {
+  transform: scale(1.1);
+  transition: all 0.8s;
+}
+
+.product-card .product-content {
+  background-color: #fff;
+  position: relative;
+  height: 20%;
+}
+
+.product-card .product-content svg {
+  color: rgb(201, 195, 195);
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all .4s;
+}
+
+.product-card .product-content .cart-icon svg:hover,
+.product-card .product-content a:hover {
+  color: var(--hover-color);
+  transition: all .4s;
+}
+
+.product-card .product-content .cart-icon svg:hover {
+  transform: rotateY(180deg) scale(1.3);
+}
+
+.product-card .product-content .check-icon svg {
+  cursor: default;
+  color: var(--hover-color);
+}
+
+.product-card .product-content .cart-icon svg {
+  transform: rotateY(180deg);
+  transition: all .4s;
+}
+
+.product-card .product-content a {
+  font-family: Poppins;
+  font-size: 14px;
+  line-height: 1.466667;
+  color: var(--text-color);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all .4s;
+}
+
+.product-overview .product-content span {
+  font-family: Poppins;
+  font-size: 14px;
+  line-height: 1.466667;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: var(--bg-color);
+}
+
+.product-card .product-img .quick-view {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15%;
+  z-index: 2;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  background-color: #fff;
+  transition: all .4s;
+  color: var(--bg-color);
+}
+
+.product-card .product-img .quick-view:hover {
+  background-color: var(--bg-color);
+  color: #fff;
+}
+
+.product-card .product-img:hover .quick-view {
+  bottom: 5%;
+}
