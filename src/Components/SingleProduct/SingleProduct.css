@@ -91,8 +91,7 @@
     margin: 30px 0;
 }
 .social-icons svg{
-    transition: .5s;
-    cursor: pointer;
+    transition: all .4s;
 }
 .social-icons svg:nth-child(1):hover{
     color: #3B5998;

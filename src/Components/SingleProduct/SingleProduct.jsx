@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
+import { BsHeartFill } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SlSocialPintarest } from "react-icons/sl";
@@ -10,7 +11,6 @@ import "./SingleProduct.css";
 import img from "../../Assets/g-01.jpg";
 import img1 from "../../Assets/g-04.jpg";
 import img2 from "../../Assets/g-03.jpg";
-// import img3 from "../../Assets/p-11.jpg";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -131,7 +131,7 @@ export default function SingleProduct() {
                   Add to cart
                 </button>
                 <div className="heart-icon p-3 h-100">
-                  <FaRegHeart />
+                  <BsHeartFill />
                 </div>
               </div>
 
