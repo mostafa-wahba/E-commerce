@@ -229,6 +229,16 @@ body {
   font-weight: 900;
   font-style: italic;
 }
+.regular-text{
+  font-family:' Poppins-Regular';
+  font-size: 24px;
+  line-height: 1.5;
+}
+.price-text{
+  font-family: 'Poppins-SemiBold';
+    font-size: 18px;
+    line-height: 1.388888;
+}
 p{
   margin: 0 !important;
   padding: 0 !important;

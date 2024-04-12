@@ -104,9 +104,9 @@ export default function SingleProduct() {
               </button>
             </div>
             <div className="product-details pt-3 w-100">
-              <h5>Ribbed Bodycon Dress</h5>
+              <h4>Lightweight Jacket</h4>
               <div className="price d-flex justify-content-between">
-                <p>$30.00</p>
+                <p className="price-text">$30.00</p>
                 <p className="curser-pointer">In Stock</p>
               </div>
               <hr />
@@ -154,6 +154,7 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
+          
         </div>
       </main>
     </>
