@@ -14,7 +14,7 @@ export default function About() {
         </div>
       </div>
       <div className="container mb-5">
-        <div className="row mt-5 g-5">
+        <div className="row about-row mt-5 g-5">
           <div className="col-md-7 text-section1">
             <h3>Our Story</h3>
             <p>

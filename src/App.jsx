@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import Contact from "./Components/Contact/Contact";
+import Cart from "./Components/Cart/Cart";
 const App = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
       <Footer />
     </>

@@ -15,7 +15,7 @@ export default function Contact() {
         </div>
       </div>
       <div className="container mt-5">
-        <div className="row">
+        <div className="row contact-row">
           <div className="col-md-6">
             <h3 className=" text-center p-3">Send Us A Message</h3>
             <form
