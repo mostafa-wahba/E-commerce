@@ -6,6 +6,7 @@ import img2 from "../../Assets/banner-02.jpg";
 import img3 from "../../Assets/slide-03.jpg";
 import img4 from "../../Assets/banner-01.jpg";
 import img5 from "../../Assets/banner-03.jpg";
+import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -247,7 +248,7 @@ export default function Home() {
               }
             }}
           >
-            <span className="carousel-control-prev-icon" aria-hidden="true" />
+            <BiSolidLeftArrow/>
             <span className="visually-hidden">Previous</span>
           </button>
 
@@ -264,7 +265,7 @@ export default function Home() {
               }
             }}
           >
-            <span className="carousel-control-next-icon" aria-hidden="true" />
+            <BiSolidRightArrow/>
             <span className="visually-hidden">Next</span>
           </button>
         </section>

@@ -7,7 +7,7 @@
 :root {
   --text-color: #222;
   --text-color2: #888;
-  --hover-color: #717fe0;
+  --hover-color: rgb(113, 127, 224);
   --grey-color: #e6e6e6;
   --bg-color: #222;
 }

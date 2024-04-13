@@ -15,7 +15,17 @@
 .carousel-control-prev {
     width: 5%;
 }
-
+.carousel-control-next:hover svg,
+.carousel-control-prev:hover svg {
+    color: var(--hover-color);
+}
+.carousel-control-prev svg,.carousel-control-next svg{
+    font-size: 2rem;
+    color: var(--bg-color);
+}
+.carousel-control-prev svg:hover,.carousel-control-next svg:hover{
+    color: var(--hover-color);
+}
 .carousel-item-text {
     top: 50%;
     transform: translateY(-50%);
