@@ -7,7 +7,7 @@
 :root {
   --text-color: #222;
   --text-color2: #888;
-  --hover-color: rgb(113, 127, 224);
+  --hover-color: #717fe0;
   --grey-color: #e6e6e6;
   --bg-color: #222;
 }
@@ -269,7 +269,28 @@ img {
 .transition {
   transition: all .4s;
 }
-
+.up-btn{
+  background-color: rgb(113, 127, 224,0.5);
+  position: fixed;
+  bottom: 2.5%;
+  color: #fff;
+  right: 3.5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  z-index: 99;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.up-btn:hover{
+  background-color: var(--hover-color);
+  transition: all 0.4s;
+}
+.up-btn svg{
+  font-size: 1.5rem;
+}
 @media (max-width: 1600px) {
   .container {
     max-width: 1200px;

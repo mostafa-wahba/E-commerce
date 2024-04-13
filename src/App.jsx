@@ -9,6 +9,9 @@ import Footer from "./Components/Footer/Footer";
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
+import { BiUpArrow } from "react-icons/bi";
+import { IoMdArrowDropup } from "react-icons/io";
+
 const App = () => {
   return (
     <>
@@ -16,7 +19,6 @@ const App = () => {
       <Routes>
         <Route path="" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
-        {/* <Route path="/about" element={<About />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
@@ -24,6 +26,9 @@ const App = () => {
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/cart" element={<Cart/>}/>
       </Routes>
+      <span className="up-btn">
+        <IoMdArrowDropup/>
+      </span>
       <Footer />
     </>
   );
