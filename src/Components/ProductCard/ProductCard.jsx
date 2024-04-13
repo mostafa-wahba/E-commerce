@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./ProductCard.css";
 import img6 from "../../Assets/product-01.jpg";
 import { Link } from "react-router-dom";
-import { GoHeartFill } from "react-icons/go";
-import { FaCartPlus } from "react-icons/fa6";
-import { BsCartCheckFill } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
 import { BsFillPatchCheckFill, BsCartPlusFill } from 'react-icons/bs';
 
@@ -17,6 +14,7 @@ export default function ProductCard() {
   };
   const [addToCart, setAddToCart] = useState(false);
   const [animate, setAnimate] = useState(false);
+  const [showCheck, setShowCheck] = useState(false);
 
   useEffect(() => {
     if (addToCart) {
@@ -31,7 +29,6 @@ export default function ProductCard() {
       return () => clearTimeout(timer); // Cleanup timeout on component unmount or state change
     }
   }, [addToCart]);
-  const [showCheck, setShowCheck] = useState(false);
 
   const handleAddToCart = () => {
     setAddToCart(true); // Set addToCart to trigger the useEffect
