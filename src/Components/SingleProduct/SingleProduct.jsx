@@ -118,6 +118,7 @@ export default function SingleProduct() {
               <div className="count-cart d-flex justify-content-start align-items-start gap-4">
                 <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
                   <span className="ms-4">{count}</span>
+
                   <div className="counter-btn-container d-flex justify-content-center align-items-center flex-column">
                     <button className="bg-transparent " onClick={increment}>
                       <IoIosArrowRoundUp />
