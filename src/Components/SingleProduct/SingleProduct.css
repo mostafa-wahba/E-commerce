@@ -1,33 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap');
+
 .single-product-container {
     margin-top: 100px;
     margin-bottom: 100px;
 }
-.product-and-product-details .product-details .price :nth-child(2){
+
+.product-and-product-details .product-details .price :nth-child(2) {
     color: var(--hover-color);
 }
-.product-and-product-details .product-details h4{
-    font-family:' Poppins-Regular';
+
+.product-and-product-details .product-details h4 {
+    font-family: ' Poppins';
     font-size: 24px;
     line-height: 1.5;
-    color: #333;;
+    color: #333;
+    ;
 }
+
 .product-and-product-details .product-details .description-text,
-.product-and-product-details .product-details .product-country span{
+.product-and-product-details .product-details .product-country span {
     color: #666;
-    font-family: Poppins-Regular;
+    font-family: Poppins;
     font-size: 16px;
     line-height: 1.7;
 }
+
 .carousel-indicators [data-bs-target] {
     width: 80px;
     height: 80px;
     text-indent: 0;
     overflow: hidden;
 }
+
 .count-cart {
     height: 40px;
 }
+
 .product-count {
     border: 1px solid var(--hover-color);
     border-radius: 0.15rem;
@@ -81,39 +89,48 @@
     border: 1px solid var(--hover-color);
     transition: all 0.4s;
 }
+
 .count-cart .heart-icon:hover {
     color: #fff;
     background-color: var(--hover-color);
     transition: all 0.4s;
     cursor: pointer;
 }
-.social-icons{
+
+.social-icons {
     margin: 30px 0;
 }
-.social-icons svg{
+
+.social-icons svg {
     transition: all .4s;
 }
-.social-icons svg:nth-child(1):hover{
+
+.social-icons svg:nth-child(1):hover {
     color: #3B5998;
     transition: .5s;
 }
-.social-icons svg:nth-child(2):hover{
+
+.social-icons svg:nth-child(2):hover {
     color: #00ACED;
     transition: .5s;
 }
-.social-icons svg:nth-child(3):hover{
+
+.social-icons svg:nth-child(3):hover {
     transition: .5s;
     color: #CB2027;
 }
-.social-icons svg:nth-child(4):hover{
+
+.social-icons svg:nth-child(4):hover {
     transition: .5s;
     color: #ff0000;
 }
-@media screen and (max-width:700px)  {
-    .product-and-product-details{
+
+@media screen and (max-width:700px) {
+    .product-and-product-details {
         display: flex;
         flex-direction: column;
     }
+
     .count-cart .add-cart-btn {
         font: 12px;
     }

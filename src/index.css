@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --text-color: #222;
   --text-color2: #888;
@@ -11,6 +13,7 @@
   --grey-color: #e6e6e6;
   --bg-color: #222;
 }
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -33,7 +36,7 @@ body {
   font-style: normal;
 }
 
-.poppins-regular {
+.Poppins {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -87,7 +90,7 @@ body {
   font-style: italic;
 }
 
-.poppins-regular-italic {
+.Poppins-italic {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: italic;
@@ -122,6 +125,7 @@ body {
   font-weight: 900;
   font-style: italic;
 }
+
 .playfair-display-thin {
   font-family: "Playfair Display", serif;
   font-weight: 100;
@@ -229,20 +233,24 @@ body {
   font-weight: 900;
   font-style: italic;
 }
-.regular-text{
-  font-family:' Poppins-Regular';
+
+.regular-text {
+  font-family: ' Poppins';
   font-size: 24px;
   line-height: 1.5;
 }
-.price-text{
+
+.price-text {
   font-family: 'Poppins-SemiBold';
-    font-size: 18px;
-    line-height: 1.388888;
+  font-size: 18px;
+  line-height: 1.388888;
 }
-p{
+
+p {
   margin: 0 !important;
   padding: 0 !important;
 }
+
 a {
   text-decoration: none;
   color: white;
@@ -269,8 +277,9 @@ img {
 .transition {
   transition: all .4s;
 }
-.up-btn{
-  background-color: rgb(113, 127, 224,0.5);
+
+.up-btn {
+  background-color: rgb(113, 127, 224, 0.5);
   position: fixed;
   bottom: 2.5%;
   color: #fff;
@@ -284,13 +293,16 @@ img {
   cursor: pointer;
   transition: all 0.4s;
 }
-.up-btn:hover{
+
+.up-btn:hover {
   background-color: var(--hover-color);
   transition: all 0.4s;
 }
-.up-btn svg{
+
+.up-btn svg {
   font-size: 1.5rem;
 }
+
 @media (max-width: 1600px) {
   .container {
     max-width: 1200px;

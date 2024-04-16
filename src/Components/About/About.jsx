@@ -85,14 +85,13 @@ export default function About() {
               6879
             </p>
             <div className="second-p">
-                <p >
-              Creativity is just connecting things. When you ask creative people
-              how they did something, they feel a little guilty because they
-              didn't really do it, they just saw something. It seemed obvious to
-              them after a while. <span>- Steve Job’s</span>
-            </p>
+              <p>
+                Creativity is just connecting things. When you ask creative
+                people how they did something, they feel a little guilty because
+                they didn't really do it, they just saw something. It seemed
+                obvious to them after a while. <span>- Steve Job’s</span>
+              </p>
             </div>
-            
           </div>
         </div>
       </div>

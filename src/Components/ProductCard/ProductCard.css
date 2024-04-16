@@ -179,3 +179,24 @@
 .product-card .product-img:hover .quick-view {
   bottom: 5%;
 }
+.wishlist-btn{
+  position: absolute;
+  top: 2.5%;
+  right: 5%;
+  padding: 0.75rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.wishlist-btn svg{
+  color: var(--grey-color);
+  font-size: 1.25rem;
+  transition: all 0.4s;
+}
+.wishlist-btn:hover svg{
+  color: var(--hover-color);
+  transition: all 0.4s;
+}
