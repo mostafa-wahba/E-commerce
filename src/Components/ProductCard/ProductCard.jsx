@@ -3,8 +3,9 @@ import "./ProductCard.css";
 import img6 from "../../Assets/product-01.jpg";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { BsFillPatchCheckFill, BsCartPlusFill } from 'react-icons/bs';
-
+import { BsFillPatchCheckFill, BsCartPlusFill } from "react-icons/bs";
+import { FaHeart } from "react-icons/fa";
+import { ToastContainer, toast, Zoom } from "react-toastify";
 
 export default function ProductCard() {
   const iconVariants = {
@@ -37,7 +38,35 @@ export default function ProductCard() {
       setShowCheck(false);
     }, 1500); // Display check mark for 1 second
   };
-
+  const addToCartNotify = () => {try {
+    toast.success("Product has been added to cart successfully", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Zoom,
+    });}catch (error) {
+      console.error("Toast notification error:", error);
+    }
+  
+  };
+  const addToWishlistNotify = () => {
+    toast.info("Product has been added to wishlist successfully", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Zoom,
+    });
+  };
   return (
     <>
       <div
@@ -60,7 +89,7 @@ export default function ProductCard() {
         <div className="product-content w-100 pt-3 p-2 position-relative">
           <div className="d-flex justify-content-between align-items-center">
             <Link to="singleProduct">Esprit Ruffle Shirt</Link>
-            <AnimatePresence mode='wait'>
+            <AnimatePresence mode="wait">
               {showCheck ? (
                 <motion.div
                   key="check"
@@ -79,7 +108,10 @@ export default function ProductCard() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  onClick={handleAddToCart}
+                  onClick={() => {
+                    handleAddToCart();
+                    addToCartNotify();
+                  }}
                   className="cart-icon"
                 >
                   <BsCartPlusFill />
@@ -89,6 +121,15 @@ export default function ProductCard() {
           </div>
           <span>$16.64</span>
         </div>
+        <span
+          onClick={() => {
+            addToWishlistNotify();
+          }}
+          className="wishlist-btn"
+        >
+          <FaHeart />
+        </span>
+        <ToastContainer />
       </div>
     </>
   );

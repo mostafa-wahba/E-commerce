@@ -9,8 +9,8 @@ import img5 from "../../Assets/banner-03.jpg";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import ProductCard from "../ProductCard/ProductCard";
+import Shop from "../Shop/Shop";
 
 export default function Home() {
   const productCards = [1, 2, 3, 4, 5, 6]; // An array to represent each ProductCard
@@ -124,7 +124,7 @@ export default function Home() {
                       duration: 0.6,
                     }}
                   >
-                    Hello Radwa
+                    Hello OOFA
                   </motion.h1>
                   <motion.button
                     key={`motion-button2-${currentSlide}`}
@@ -215,7 +215,7 @@ export default function Home() {
                       duration: 0.6,
                     }}
                   >
-                    Hello Thooooomiaaaaaa
+                    Hello OOFA
                   </motion.h1>
                   <motion.button
                     key={`motion-button4-${currentSlide}`}
@@ -314,16 +314,18 @@ export default function Home() {
         <section className="product-overview">
           <div className="container">
             <h2 className="title">PRODUCT OVERVIEW</h2>
-            <div className="row justify-content-center row-gap-4 row-gap-lg-5 flex-wrap">
+            {/* <div className="row justify-content-start row-gap-4 row-gap-lg-5 flex-wrap">
               {productCards.map((card, index) => (
                 <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
                   <ProductCard />
                 </div>
               ))}
-            </div>
+            </div> */}
+            <Shop/>
           </div>
         </section>
       </main>
+
     </>
   );
 }

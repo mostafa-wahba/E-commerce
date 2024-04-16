@@ -1,0 +1,75 @@
+#shop {
+    margin-top: 10vh;
+    padding: 3.5rem 0;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    border-radius: 0;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link:focus {
+    border-radius: 0;
+}
+
+.categories-filter .nav-item .nav-link,
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    font-family: Poppins;
+    cursor: pointer;
+    margin-right: 0.75rem;
+    padding: 2px;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--text-color2);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    transition: all 0.4s;
+    border-bottom: 1px solid transparent;
+}
+
+.categories-filter .nav-item .nav-link.active {
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    transition: all 0.4s;
+}
+
+.categories-filter .nav-item .nav-link:hover {
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    transition: all 0.4s;
+}
+
+.filters-btns button {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    min-width: 94px;
+    height: 40px;
+    font-family: Poppins;
+    font-size: 15px;
+    line-height: 1.2;
+    color: var(--text-color2);
+    transition: all 0.4s;
+    background-color: transparent;
+}
+.filters-btns button:nth-child(2){
+    min-width: 111px;
+    height: 40px;
+}
+.filters-btns button:hover{
+    border-color: var(--hover-color);
+    background-color: var(--hover-color);
+    color: #fff;
+    transition: all 0.4s;
+}
+.filters-btns button svg{
+    color: var(--text-color);
+    transition: all 0.4s;
+}
+.filters-btns button:hover svg{
+    color: #fff;
+    transition: all 0.4s;
+}

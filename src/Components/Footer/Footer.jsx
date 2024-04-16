@@ -8,7 +8,7 @@ export default function Footer() {
     <>
       <footer>
         <div className="container">
-          <div className="row row-gap-4">
+          <div className="row row-gap-4 g-0">
             <div className="col-12 col-sm-6 col-md-3 text-white">
               <h6>CATEGORIES</h6>
               <ul>
@@ -29,7 +29,7 @@ export default function Footer() {
             </div>
             <div className="col-12 col-sm-6 col-md-3 text-white">
               <h6>GET IN TOUCH</h6>
-              <p>
+              <p className="pe-3 mb-3">
                 Any questions? Lorem ipsum dolor sit amet consectetur
                 adipisicing elit. Sint culpa quas dolorem nobis illum vero
                 exercitationem
