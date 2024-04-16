@@ -3,7 +3,7 @@
 }
 .register .container {
   background-color: #ebeff2;
-  padding: 50px;
+  padding: 10px 30px;
 }
 .register .container [type="submit"] {
   background-color: #ff6a00;
@@ -20,18 +20,24 @@
 .register .container p a{
   color: #eb6304;
 }
+.register .container .name{
+  margin-top: 80px;
+}
 .reg-input {
   position: relative;
-  margin: 20px 0 40px;
+  margin: 10px 10px 0 10px;
   width: 100%;
 }
+/* .reg-input .alert{
+  padding: 3px;
+} */
 .register .container input {
   background-color: transparent;
   border: 0;
   border-bottom: 2px #eb6304 solid;
   display: block;
   width: 100%;
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 18px;
   color: #000000;
 }

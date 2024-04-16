@@ -50,6 +50,10 @@ export default function About() {
             </div>
           </div>
         </div>
+
+
+
+
         <div className="row mt-5 g-5">
           <div className="col-md-5 order-2 order-lg-1">
             <div className="animated-img-and-border">

@@ -22,6 +22,9 @@
   margin: 20px 0 40px;
   width: 100%;
 }
+/* .log-input .alert{
+  padding: 3px;
+} */
 .login .container input {
   background-color: transparent;
   border: 0;

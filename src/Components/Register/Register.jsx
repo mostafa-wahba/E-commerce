@@ -1,17 +1,69 @@
 import React, { Fragment } from "react";
 import "./Register.css";
 import bg from "../../Assets/bg_1.jpg.webp";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 export default function Register() {
+  let toLogin=useNavigate()
+  async function handleRegister(values) {
+   let {data}= await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`,values).catch((err)=>console.log(err))
+   console.log(data)
+   if(data.message ==='success'){
+     console.log("ok")
+      toLogin("/login")
+   }
+  //  console.log(data)
+  }
+  let validation = Yup.object({
+    name: Yup.string()
+      .required("Name is required")
+      .min(3, "Minimum length is 3")
+      .max(20, "Miximum length is 10"),
+    email: Yup.string()
+      .required("Email is required")
+      .email("Email is invalid"),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
+    rePassword: Yup.string()
+      .required("rePassword is required")
+      .oneOf([Yup.ref("password")], "Password doesnt match"),
+    phone: Yup.string()
+      .required("Pphone is required")
+      .matches(/^01[012][0-9]{8}$/, "Phone number must be a valid number"),
+  });
+  let formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      rePassword: "",
+      phone: "",
+    },
+    onSubmit: handleRegister,
+    validationSchema: validation,
+  });
   return (
     <Fragment>
-      <div className="register w-100 vh-100">
-        <div className="image vh-100 d-none d-md-block">
+      <div className="register w-100 min-vh-100">
+        <div className="image min-vh-100 d-none d-md-block">
           <img src={bg} alt="bg" className="w-100 h-100" />
         </div>
-        <form className="container d-flex justify-content-center align-items-center flex-column gap-2">
-          <div className="reg-input">
-            <input type="text" required />
+        <form
+          onSubmit={formik.handleSubmit}
+          className="container d-flex justify-content-center align-items-center flex-column gap-2"
+        >
+          <div className="reg-input name">
+            <input
+              onBlur={formik.handleBlur}
+              type="text"
+              name="name"
+              id="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+            />
             <label>
               <span style={{ transitionDelay: "0ms" }}>U</span>
               <span style={{ transitionDelay: "50ms" }}>s</span>
@@ -22,9 +74,19 @@ export default function Register() {
               <span style={{ transitionDelay: "300ms" }}>m</span>
               <span style={{ transitionDelay: "350ms" }}>e</span>
             </label>
+            {formik.errors.name && formik.touched.name ? (
+              <div className=" alert alert-danger">{formik.errors.name}</div>
+            ) : null}
           </div>
           <div className="reg-input">
-            <input type="email" required />
+            <input 
+            onBlur={formik.handleBlur}
+              type="email"
+              name="email"
+              id="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+            />
             <label>
               <span style={{ transitionDelay: "0ms" }}>E</span>
               <span style={{ transitionDelay: "50ms" }}>m</span>
@@ -32,9 +94,19 @@ export default function Register() {
               <span style={{ transitionDelay: "150ms" }}>i</span>
               <span style={{ transitionDelay: "200ms" }}>l</span>
             </label>
+            {formik.errors.email && formik.touched.email ? (
+              <div className=" alert alert-danger">{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="reg-input">
-            <input type="password" required />
+            <input
+            onBlur={formik.handleBlur}
+              type="password"
+              name="password"
+              id="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+            />
             <label>
               <span style={{ transitionDelay: "0ms" }}>P</span>
               <span style={{ transitionDelay: "50ms" }}>a</span>
@@ -45,9 +117,21 @@ export default function Register() {
               <span style={{ transitionDelay: "300ms" }}>r</span>
               <span style={{ transitionDelay: "350ms" }}>d</span>
             </label>
+            {formik.errors.password && formik.touched.password ? (
+              <div className=" alert alert-danger">
+                {formik.errors.password}
+              </div>
+            ) : null}
           </div>
           <div className="reg-input">
-            <input type="password" required />
+            <input
+            onBlur={formik.handleBlur}
+              type="password"
+              name="rePassword"
+              id="rePassword"
+              value={formik.values.rePassword}
+              onChange={formik.handleChange}
+            />
             <label>
               <span style={{ transitionDelay: "0ms" }}>C</span>
               <span style={{ transitionDelay: "50ms" }}>o</span>
@@ -56,7 +140,7 @@ export default function Register() {
               <span style={{ transitionDelay: "200ms" }}>i</span>
               <span style={{ transitionDelay: "250ms" }}>r</span>
               <span style={{ transitionDelay: "300ms" }}>m</span>
-              <span style={{ transitionDelay: "350ms" }}> </span>  
+              <span style={{ transitionDelay: "350ms" }}> </span>
               <span style={{ transitionDelay: "400ms" }}>P</span>
               <span style={{ transitionDelay: "450ms" }}>a</span>
               <span style={{ transitionDelay: "500ms" }}>s</span>
@@ -66,9 +150,41 @@ export default function Register() {
               <span style={{ transitionDelay: "700ms" }}>r</span>
               <span style={{ transitionDelay: "750ms" }}>d</span>
             </label>
+            {formik.errors.rePassword && formik.touched.rePassword ? (
+              <div className=" alert alert-danger">
+                {formik.errors.rePassword}
+              </div>
+            ) : null}
           </div>
-          <input type='submit' value='Register' className='btn btn-primary text-white p-3 btn-blue'/>
-          <p>Already have an account ? <NavLink to="/login">Login</NavLink></p>
+          <div className="reg-input">
+            <input
+            onBlur={formik.handleBlur}
+              type="tel"
+              name="phone"
+              id="phone"
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+            />
+            <label>
+              <span style={{ transitionDelay: "0ms" }}>P</span>
+              <span style={{ transitionDelay: "50ms" }}>h</span>
+              <span style={{ transitionDelay: "100ms" }}>o</span>
+              <span style={{ transitionDelay: "150ms" }}>n</span>
+              <span style={{ transitionDelay: "200ms" }}>e</span>
+            </label>
+            {formik.errors.phone && formik.touched.phone ? (
+              <div className=" alert alert-danger">{formik.errors.phone}</div>
+            ) : null}
+          </div>
+          <input
+            type="submit"
+            value="Register"
+            className="btn btn-primary text-white p-3 btn-blue"
+            disabled={!(formik.isValid &&formik.dirty) }
+          />
+          <p>
+            Already have an account ? <NavLink to="/login">Login</NavLink>
+          </p>
 
           {/* 
                 <input type='text' placeholder='Username' className=''/>
