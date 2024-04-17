@@ -6,7 +6,7 @@ import ProductCard from "../ProductCard/ProductCard";
 
 export default function Shop() {
   const productCards = [1, 2, 3, 4, 5, 6]; // An array to represent each ProductCard
-
+// غالبا هنستخدم react-tabs عشان لما api تيجى اعرف اعملها fetch
   return (
     <>
       <div id="shop">

@@ -38,16 +38,29 @@ export default function Cart() {
   return (
     <>
       <div className="container cart-container">
-        <div className="row d-flex justify-content-between mb-4">
+        <div className="row justify-content-between mb-4">
           <div className="col-md-6 border border-1">
-            <div className="">
-              <div className="product-title d-flex justify-content-around align-items-center p-1 border-bottom">
-                <p>PRODUCT</p>
-                <p>PRICE</p>
-                <p>QUANTITY</p>
-                <p>TOTAL</p>
+            <div className="product-title d-flex flex-column">
+              <div className="title-row row">
+                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                  <p>PRODUCT</p>
+                </div>
+                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                  <p>PRICE</p>
+                </div>
+                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                  <p>QUANTITY</p>
+                </div>
+                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                  <p>TOTAL</p>
+                </div>
               </div>
-              {items.map((item) => (
+              {/* <p>PRODUCT</p>
+              <p>PRICE</p>
+              <p>QUANTITY</p>
+              <p>TOTAL</p> */}
+            </div>
+            {/* {items.map((item) => (
                 <div key={item.id} className="product-details d-flex justify-content-around align-items-center p-1 border-bottom">
                   <div className="product-image">
                   <img
@@ -86,8 +99,7 @@ export default function Cart() {
                   </div>
 
                 </div>
-              ))}
-            </div>
+              ))} */}
           </div>
           <div className="col-md-5 border border-1">
             <p>
