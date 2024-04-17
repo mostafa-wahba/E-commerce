@@ -47,7 +47,7 @@ export default function Cart() {
                 <p>QUANTITY</p>
                 <p>TOTAL</p>
               </div>
-              {/* {items.map((item) => (
+              {items.map((item) => (
                 <div key={item.id} className="product-details d-flex justify-content-around align-items-center p-1 border-bottom">
                   <div className="product-image">
                   <img
@@ -82,11 +82,11 @@ export default function Cart() {
                   </div>
                   <div className="product-total-price overflow-hidden">
 
-                  <p>{item.price * count}</p>
+                  <p>{Math.floor(item.price * count) }</p>
                   </div>
 
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
           <div className="col-md-5 border border-1">

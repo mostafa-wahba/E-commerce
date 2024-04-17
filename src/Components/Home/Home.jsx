@@ -314,6 +314,7 @@ export default function Home() {
         <section className="product-overview">
           <div className="container">
             <h2 className="title">PRODUCT OVERVIEW</h2>
+            </div>
             {/* <div className="row justify-content-start row-gap-4 row-gap-lg-5 flex-wrap">
               {productCards.map((card, index) => (
                 <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -322,7 +323,6 @@ export default function Home() {
               ))}
             </div> */}
             <Shop/>
-          </div>
         </section>
       </main>
 
