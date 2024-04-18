@@ -2,8 +2,21 @@
     margin-top: 20vh;
     
 }
+.product-image .product-overlay{
+    background-color: rgba(0, 0, 0, 0.282);
+    opacity: 0;
+    transition: .4s all;
+    cursor: pointer;
+    color: white;
+}
+.product-image:hover .product-overlay{
+    opacity: 1;
+    transition: .4s all;
+}
 /* 
 .container .row .col-md-7,
 .container .row .col-md-5{
     border: 1px solid #666;
 } */
+/* styles.css */
+/* styles.css */

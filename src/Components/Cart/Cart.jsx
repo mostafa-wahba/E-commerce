@@ -4,6 +4,7 @@ import "./Cart.css";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
 import img1 from "../../Assets/about-02.jpg.webp";
+import { Link } from "react-router-dom";
 export default function Cart() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -38,23 +39,77 @@ export default function Cart() {
   return (
     <>
       <div className="container cart-container">
-        <div className="row justify-content-between mb-4">
-          <div className="col-md-6 border border-1">
-            <div className="product-title d-flex flex-column">
-              <div className="title-row row">
-                <div className="col-md-3 d-flex justify-content-center align-items-center">
+        <div className="row justify-content-between mb-4 flex-column flex-lg-row">
+          <div className="col-12 col-lg-6 border border-1 ">
+            <div className="product-item  d-flex flex-column">
+              <div className="title-row  row  px-5 py-3 border-bottom">
+                <div className="col-md-5 d-flex justify-content-start align-items-center">
                   <p>PRODUCT</p>
                 </div>
-                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                <div className="col-md-2  d-flex justify-content-start align-items-center">
                   <p>PRICE</p>
                 </div>
-                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                <div className="col-md-3 d-flex justify-content-start align-items-center">
                   <p>QUANTITY</p>
                 </div>
-                <div className="col-md-3 d-flex justify-content-center align-items-center">
+                <div className="col-md-2 d-flex justify-content-start align-items-center">
                   <p>TOTAL</p>
                 </div>
               </div>
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="item-row  row  px-5 py-3 border-bottom"
+                >
+                  <div className="col-md-5 d-flex justify-content-start align-items-center gap-2">
+                    <div className="product-image position-relative">
+                      <img
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        // position:"relative"
+                      }}
+                      src={item.src}
+                      alt=""
+                    />
+                    <div className="product-overlay d-flex justify-content-center w-100 h-100 align-items-center position-absolute top-0"><h6>x</h6></div>
+                    </div>
+                    
+                    <p>{item.name}</p>
+                  </div>
+                  <div className="col-md-2  d-flex justify-content-start align-items-center">
+                    <p>{item.price}</p>
+                  </div>
+                  <div className="col-md-3 d-flex justify-content-start align-items-center">
+                    <div className="count-cart d-flex justify-content-start align-items-start gap-4">
+                      <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
+                        <span className="ms-4">{count}</span>
+
+                        <div className="counter-btn-container d-flex justify-content-center align-items-center flex-column">
+                          <button
+                            className="bg-transparent "
+                            onClick={increment}
+                            
+                          >
+                            <IoIosArrowRoundUp />
+                          </button>
+                          <button
+                            className="bg-transparent"
+                            onClick={decrement}
+                          >
+                            <IoIosArrowRoundDown />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-2 d-flex justify-content-start align-items-center">
+                    <p>{(item.price * count).toFixed(2)}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* </div> */}
               {/* <p>PRODUCT</p>
               <p>PRICE</p>
               <p>QUANTITY</p>
@@ -101,19 +156,9 @@ export default function Cart() {
                 </div>
               ))} */}
           </div>
-          <div className="col-md-5 border border-1">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              aut architecto, nihil, doloremque quis quod eius soluta quisquam
-              sequi voluptas corporis eaque deserunt cum beatae est blanditiis.
-              Quo, quos inventore.
-            </p>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              aut architecto, nihil, doloremque quis quod eius soluta quisquam
-              sequi voluptas corporis eaque deserunt cum beatae est blanditiis.
-              Quo, quos inventore.
-            </p>
+          <div className="col-12 col-lg-5 border border-1">
+            <h4 className="h1">CART TOTALS</h4>
+              <h5 className=" border-bottom border-light-subtle">Subtotal: $5000.55</h5>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
               aut architecto, nihil, doloremque quis quod eius soluta quisquam
@@ -129,6 +174,7 @@ export default function Cart() {
           </div>
         </div>
       </div>
+      
     </>
   );
 }
