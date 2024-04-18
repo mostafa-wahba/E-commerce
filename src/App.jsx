@@ -11,6 +11,7 @@ import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
 import { IoMdArrowDropup } from "react-icons/io";
 import Shop from "./Components/Shop/Shop";
+import Test from "./Components/Test/Test";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/test" element={<Test/>}/>
       </Routes>
       <span className="up-btn">
         <IoMdArrowDropup/>
