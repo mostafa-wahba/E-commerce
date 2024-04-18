@@ -3,13 +3,14 @@ export const MainContext = createContext();
 export default function MainContextProvider(props) {
  //   Search input
   const [test, setTest] = useState(false);
+  const [userToken, setUserToken] = useState([]);
 
 
   return (
     <MainContext.Provider
       value={{
         test,
-        setTest
+        setTest,userToken, setUserToken
       }}
     >
       {props.children}

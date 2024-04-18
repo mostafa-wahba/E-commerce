@@ -1,17 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { MainContext } from "../../Context/MainContext";
 import logo from "../../Assets/png/logo-no-background.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TiThMenuOutline } from "react-icons/ti";
+import Cookies from "universal-cookie";
 
 export default function Navbar() {
   const { test, setTest } = useContext(MainContext);
+  const [token, setToken] = useState(null);
   const [searchShow, setSearchShow] = useState(false);
+  let cookies = new Cookies();
+  useEffect(() => {
+    const userToken = cookies.get("userToken");
+    setToken(userToken); // Update token state whenever it changes
+  }, []);
+  const handleLogout = () => {
+    cookies.remove("userToken", { path: "/" });
+    setToken(null);
+    Navigate("/login");
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg d-flex py-3 py-lg-0 bg-transparent fixed-top">
@@ -145,6 +157,24 @@ export default function Navbar() {
               <Link to="profile">
                 <CgProfile />
               </Link>
+            </li>
+            <li className="nav-item d-lg-block d-flex justify-content-center align-items-center ">
+              {token ? (
+                <NavLink
+                  className="nav-link me-lg-4 poppins-medium login-logout"
+                  to="#"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink
+                  className="nav-link me-lg-4 poppins-medium login-logout"
+                  to="login"
+                >
+                  Login
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>

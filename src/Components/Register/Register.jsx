@@ -11,10 +11,9 @@ export default function Register() {
    let {data}= await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`,values).catch((err)=>console.log(err))
    console.log(data)
    if(data.message ==='success'){
-     console.log("ok")
+    //  console.log("ok")
       toLogin("/login")
    }
-  //  console.log(data)
   }
   let validation = Yup.object({
     name: Yup.string()
@@ -25,8 +24,8 @@ export default function Register() {
       .required("Email is required")
       .email("Email is invalid"),
     password: Yup.string()
-      .required("Password is required")
-      .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
+      .required("Password is required"),
+      // .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
     rePassword: Yup.string()
       .required("rePassword is required")
       .oneOf([Yup.ref("password")], "Password doesnt match"),
