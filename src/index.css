@@ -245,7 +245,11 @@ body {
   font-size: 18px;
   line-height: 1.388888;
 }
-
+.sp-text {
+  font-family: 'Poppins-SemiBold';
+  font-size: 14px;
+  line-height: 1.388888;
+}
 p {
   margin: 0 !important;
   padding: 0 !important;

@@ -124,7 +124,23 @@
     transition: .5s;
     color: #ff0000;
 }
-
+.description-and-ratting .reviews .user-review .user-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.description-and-ratting .reviews .user-review .user-image img{
+    width: 100%;
+    height: 100%;
+}
+.description-and-ratting .reviews .user-review .user-name .rating{
+    cursor: pointer;
+}
+.description-and-ratting .reviews .user-review .user-name .rating svg{
+    font-size: 20px;
+    color: #F9BA48;
+}
 @media screen and (max-width:700px) {
     .product-and-product-details {
         display: flex;
@@ -133,5 +149,9 @@
 
     .count-cart .add-cart-btn {
         font: 12px;
+    }
+    .description-and-ratting .reviews{
+        display: flex;
+        flex-direction: column;
     }
 }

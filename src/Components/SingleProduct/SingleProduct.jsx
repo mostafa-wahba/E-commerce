@@ -11,6 +11,7 @@ import "./SingleProduct.css";
 import img from "../../Assets/g-01.jpg";
 import img1 from "../../Assets/g-04.jpg";
 import img2 from "../../Assets/g-03.jpg";
+import { MdStarRate } from "react-icons/md";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -44,7 +45,7 @@ export default function SingleProduct() {
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to="0"
-                  class="active"
+                  className="active"
                   aria-current="true"
                   aria-label="Slide 1"
                 >
@@ -155,7 +156,151 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
-          
+          <div className="description-and-ratting w-100 row border p-5 ">
+            <ul
+              className="nav nav-pills mb-3 d-flex justify-content-center align-items-center"
+              id="pills-tab"
+              role="tablist"
+            >
+              <li className="nav-item text-dark" role="presentation">
+                <button
+                  className="nav-link active"
+                  id="pills-home-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-home"
+                  aria-selected="true"
+                >
+                  Description
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  className="nav-link"
+                  id="pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected="false"
+                >
+                  Addational Information
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  className="nav-link"
+                  id="pills-contact-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-contact"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-contact"
+                  aria-selected="false"
+                >
+                  Reviwes
+                </button>
+              </li>
+            </ul>
+            <div className="tab-content" id="pills-tabContent">
+              <div
+                className="tab-pane fade show active"
+                id="pills-home"
+                role="tabpanel"
+                aria-labelledby="pills-home-tab"
+                tabIndex="0"
+              >
+                <p className="text-muted">
+                  Aenean sit amet gravida nisi. Nam fermentum est felis, quis
+                  feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque
+                  luctus dui at ante aliquet, in hendrerit lectus interdum.
+                  Morbi elementum sapien rhoncus pretium maximus. Nulla lectus
+                  enim, cursus et elementum sed, sodales vitae eros. Ut ex quam,
+                  porta consequat interdum in, faucibus eu velit. Quisque
+                  rhoncus ex ac libero varius molestie. Aenean tempor sit amet
+                  orci nec iaculis. Cras sit amet nulla libero. Curabitur
+                  dignissim, nunc nec laoreet consequat, purus nunc porta lacus,
+                  vel efficitur tellus augue in ipsum. Cras in arcu sed metus
+                  rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                </p>
+              </div>
+              <div
+                className="tab-pane fade"
+                id="pills-profile"
+                role="tabpanel"
+                aria-labelledby="pills-profile-tab"
+                tabIndex="0"
+              >
+                <div className="row ">
+                  <div className="col-6 col-md-12 d-flex justify-content-center">
+                    <div className="items-details w-50 d-flex justify-content-center flex-column ">
+                      <div className="each-item d-flex justify-content-between gap-2 text-muted ">
+                        <span>Weight</span>
+                        <span>79.2Kg</span>
+                      </div>
+                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
+                        <span>Dimensions</span>
+                        <span>110 x 33 x 100 cm</span>
+                      </div>
+                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
+                        <span>Materials</span>
+                        <span>60% cotton</span>
+                      </div>
+                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
+                        <span>Color</span>
+                        <span>Black, Blue, Grey</span>
+                      </div>
+                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
+                        <span>Size</span>
+                        <span>XL, L, M, S</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="tab-pane fade"
+                id="pills-contact"
+                role="tabpanel"
+                aria-labelledby="pills-contact-tab"
+                tabIndex="0"
+              >
+                <div className="reviews d-flex justify-content-center align-items-center ">
+                  <div className="user-review d-flex ">
+                    <div className="user-image me-3">
+                      <img src={img} alt="" />
+                    </div>
+                    <div className="user-name ">
+                      <div className="name-and-rating d-flex justify-content-between align-items-center gap-5">
+                       <h6 className="">Ariana Grande</h6>
+                      <div className="rating">
+                        <MdStarRate />
+                        <MdStarRate />
+                        <MdStarRate />
+                        <MdStarRate />
+                        <MdStarRate />
+                      </div>
+                      </div>
+                      <p className="text-muted">
+                      Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+                    </p>
+                    </div>
+                   
+                  </div>
+                </div>
+                {/* <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Similique necessitatibus amet consequatur accusamus doloremque
+                  debitis veniam non. Consequatur ullam minima aliquid
+                  temporibus quia totam iste sed nisi tenetur quo. Voluptatem.
+                </p>
+                ... */}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>
