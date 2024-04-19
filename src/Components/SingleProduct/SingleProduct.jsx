@@ -12,6 +12,7 @@ import img from "../../Assets/g-01.jpg";
 import img1 from "../../Assets/g-04.jpg";
 import img2 from "../../Assets/g-03.jpg";
 import { MdStarRate } from "react-icons/md";
+import { CiStar } from "react-icons/ci";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -156,7 +157,7 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
-          <div className="description-and-ratting w-100 row border p-5 ">
+          <div className="description-and-ratting w-100 row border p-2 ">
             <ul
               className="nav nav-pills mb-3 d-flex justify-content-center align-items-center"
               id="pills-tab"
@@ -201,7 +202,7 @@ export default function SingleProduct() {
                   aria-controls="pills-contact"
                   aria-selected="false"
                 >
-                  Reviwes
+                  Reviwes (1)
                 </button>
               </li>
             </ul>
@@ -234,7 +235,31 @@ export default function SingleProduct() {
                 aria-labelledby="pills-profile-tab"
                 tabIndex="0"
               >
-                <div className="row ">
+                <div className="single-product-info d-flex justify-content-center align-items-center ">
+                  <div className="d-flex flex-column gap-3">
+                  <div className="each-info d-flex justify-content-around gap-5">
+                    <span>Weight</span>
+                    <span>79.2Kg</span>
+                  </div>
+                  <div className="each-info d-flex justify-content-around gap-5">
+                    <span>Dimensions</span>
+                    <span>110 x 33 x 100 cm</span>
+                  </div>
+                  <div className="each-info d-flex justify-content-around gap-5">
+                    <span>Materials</span>
+                    <span>60% cotton</span>
+                  </div>
+                  <div className="each-info d-flex justify-content-around gap-5">
+                    <span>Color</span>
+                    <span>Black, Blue, Grey</span>
+                  </div>
+                  <div className="each-info d-flex justify-content-around gap-5">
+                    <span>Size</span>
+                    <span>XL, L, M, S</span>
+                  </div>
+                  </div>
+                </div>
+                {/* <div className="row ">
                   <div className="col-6 col-md-12 d-flex justify-content-center">
                     <div className="items-details w-50 d-flex justify-content-center flex-column ">
                       <div className="each-item d-flex justify-content-between gap-2 text-muted ">
@@ -259,7 +284,7 @@ export default function SingleProduct() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div
                 className="tab-pane fade"
@@ -268,36 +293,81 @@ export default function SingleProduct() {
                 aria-labelledby="pills-contact-tab"
                 tabIndex="0"
               >
-                <div className="reviews d-flex justify-content-center align-items-center ">
+                <div className="reviews d-flex justify-content-center align-items-center flex-column ">
                   <div className="user-review d-flex ">
                     <div className="user-image me-3">
                       <img src={img} alt="" />
                     </div>
                     <div className="user-name ">
                       <div className="name-and-rating d-flex justify-content-between align-items-center gap-5">
-                       <h6 className="">Ariana Grande</h6>
-                      <div className="rating">
-                        <MdStarRate />
-                        <MdStarRate />
-                        <MdStarRate />
-                        <MdStarRate />
-                        <MdStarRate />
-                      </div>
+                        <h6 className="">Ariana Grande</h6>
+                        <div className="rating">
+                          <MdStarRate />
+                          <MdStarRate />
+                          <MdStarRate />
+                          <MdStarRate />
+                          <CiStar />
+                        </div>
                       </div>
                       <p className="text-muted">
-                      Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
-                    </p>
+                        Quod autem in homine praestantissimum atque optimum est,
+                        id deseruit. Apud ceteros autem philosophos
+                      </p>
                     </div>
-                   
                   </div>
+                  <form
+                    action=""
+                    className=" mt-5 d-flex flex-column gap-5 w-100"
+                  >
+                    <h6>Add a review</h6>
+                    <p className=" text-muted mb-4">
+                      Your email address will not be published. Required fields
+                      are marked *
+                    </p>
+                    <div className="your-rating d-flex justify-content-between ">
+                      <span>Your Rating</span>
+                      <span>
+                        <CiStar />
+                        <CiStar />
+                        <CiStar />
+                        <CiStar />
+                        <CiStar />
+                      </span>
+                    </div>
+                    <div className="textarea">
+                      <textarea
+                        name=""
+                        id=""
+                        cols="30"
+                        rows="10"
+                        placeholder="Your Review"
+                        className=" p-2 border-0"
+                      ></textarea>
+                    </div>
+                    <div className="name-and-email d-flex justify-content-between gap-4">
+                      <input
+                        type="text"
+                        name=""
+                        id=""
+                        placeholder="Name"
+                        className=" ps-5 border-1 "
+                      />
+                      <input
+                        type="email"
+                        name=""
+                        id=""
+                        placeholder="Email"
+                        className=" ps-5 border-1 "
+                      />
+                    </div>
+
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="btn btn-dark"
+                    />
+                  </form>
                 </div>
-                {/* <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Similique necessitatibus amet consequatur accusamus doloremque
-                  debitis veniam non. Consequatur ullam minima aliquid
-                  temporibus quia totam iste sed nisi tenetur quo. Voluptatem.
-                </p>
-                ... */}
               </div>
             </div>
           </div>

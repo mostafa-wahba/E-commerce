@@ -141,6 +141,25 @@
     font-size: 20px;
     color: #F9BA48;
 }
+.description-and-ratting form .your-rating svg{
+    font-size: 20px;
+    color: #F9BA48;
+}
+.description-and-ratting form .name-and-email input{
+    border: 1px solid #e6e6e6;
+    width: 600px;
+    padding:5px 10px;
+    outline: none;
+}
+.description-and-ratting form [type=submit]{
+    border: none;
+    width: 200px;
+    transition: .4s all;
+}
+.description-and-ratting form [type=submit]:hover{
+    background-color: var(--hover-color);
+    transition: .4s all;
+}
 @media screen and (max-width:700px) {
     .product-and-product-details {
         display: flex;
@@ -150,8 +169,11 @@
     .count-cart .add-cart-btn {
         font: 12px;
     }
-    .description-and-ratting .reviews{
+    .description-and-ratting .reviews, .description-and-ratting form .name-and-email{
         display: flex;
         flex-direction: column;
+    }
+    .description-and-ratting form .name-and-email input{
+        width: 100%;
     }
 }
