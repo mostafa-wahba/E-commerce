@@ -6,7 +6,6 @@ export default function ProtectedRoute(props) {
 
     let cookies = new Cookies()
     let token = cookies.get("userToken")
-
     if (token) {
         return <Navigate to={"/home"} />
     }

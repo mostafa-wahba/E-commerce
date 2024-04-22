@@ -18,19 +18,19 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="" element={<Home />}></Route>
+        <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/products" element={<Shop />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
-        <Route path="/about" element={<About/>}/>
-        <Route path="/contact" element={<Contact/>}/>
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/test" element={<Test/>}/>
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
       <span className="up-btn">
-        <IoMdArrowDropup/>
+        <IoMdArrowDropup />
       </span>
       <Footer />
     </>
