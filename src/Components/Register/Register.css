@@ -6,7 +6,7 @@
   padding: 10px 30px;
 }
 .register .container [type="submit"] {
-  background-color: #ff6a00;
+  background-color: var(--hover-color);
   border-bottom: none;
 }
 .register .image{
@@ -15,10 +15,10 @@
     object-fit: cover;
 }
 .register .container [type="submit"]:hover {
-  background-color: #eb6304;
+  background-color: var(--hover-color);
 }
 .register .container p a{
-  color: #eb6304;
+  color: var(--hover-color);
 }
 .register .container .name{
   margin-top: 80px;
@@ -28,13 +28,16 @@
   margin: 10px 10px 0 10px;
   width: 100%;
 }
+.register form .buttons .loading{
+  color: var(--hover-color);
+}
 /* .reg-input .alert{
   padding: 3px;
 } */
 .register .container input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px #eb6304 solid;
+  border-bottom: 2px var(--hover-color) solid;
   display: block;
   width: 100%;
   padding: 10px 0;
@@ -45,7 +48,7 @@
 .register .container input:focus,
 .register .container input:valid {
   outline: 0;
-  border-bottom-color: #eb6304;
+  border-bottom-color: var(--hover-color);
 }
 
 .register .container label {
@@ -65,7 +68,7 @@
 
 .register .container input:focus + label span,
 .register .container input:valid + label span {
-  color: #eb6304;
+  color: var(--hover-color);
   transform: translateY(-30px);
 }
 @media (min-width: 0) and (max-width: 750px) {

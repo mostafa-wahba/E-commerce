@@ -1,31 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "./Register.css";
-import bg from "../../Assets/bg_1.jpg.webp";
+import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import axios from "axios"; 
 export default function Register() {
-  let toLogin=useNavigate()
+  let toLogin = useNavigate();
+  const [isloading, setIsloading] = useState(false);
+  const [msgError,setMsgError]=useState('')
   async function handleRegister(values) {
-   let {data}= await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`,values).catch((err)=>console.log(err))
-   console.log(data)
-   if(data.message ==='success'){
-    //  console.log("ok")
-      toLogin("/login")
-   }
+    setIsloading(true);
+    let { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values).catch((errr)=>{
+        setIsloading(false)
+        setMsgError(`${errr.response.data.message}`)
+      })
+    console.log(data);
+    if (data.message === "success") {
+      //  console.log("ok")
+      setIsloading(false);
+      toLogin("/login");
+    }
   }
   let validation = Yup.object({
     name: Yup.string()
       .required("Name is required")
       .min(3, "Minimum length is 3")
       .max(20, "Miximum length is 10"),
-    email: Yup.string()
-      .required("Email is required")
-      .email("Email is invalid"),
-    password: Yup.string()
-      .required("Password is required"),
-      // .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    password: Yup.string().required("Password is required"),
+    // .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
     rePassword: Yup.string()
       .required("rePassword is required")
       .oneOf([Yup.ref("password")], "Password doesnt match"),
@@ -50,10 +54,14 @@ export default function Register() {
         <div className="image min-vh-100 d-none d-md-block">
           <img src={bg} alt="bg" className="w-100 h-100" />
         </div>
+        
+        
         <form
           onSubmit={formik.handleSubmit}
           className="container d-flex justify-content-center align-items-center flex-column gap-2"
-        >
+        >{msgError?<div className="alert alert-danger">
+          {msgError}
+        </div>:null }
           <div className="reg-input name">
             <input
               onBlur={formik.handleBlur}
@@ -78,8 +86,8 @@ export default function Register() {
             ) : null}
           </div>
           <div className="reg-input">
-            <input 
-            onBlur={formik.handleBlur}
+            <input
+              onBlur={formik.handleBlur}
               type="email"
               name="email"
               id="email"
@@ -99,7 +107,7 @@ export default function Register() {
           </div>
           <div className="reg-input">
             <input
-            onBlur={formik.handleBlur}
+              onBlur={formik.handleBlur}
               type="password"
               name="password"
               id="password"
@@ -124,7 +132,7 @@ export default function Register() {
           </div>
           <div className="reg-input">
             <input
-            onBlur={formik.handleBlur}
+              onBlur={formik.handleBlur}
               type="password"
               name="rePassword"
               id="rePassword"
@@ -157,7 +165,7 @@ export default function Register() {
           </div>
           <div className="reg-input">
             <input
-            onBlur={formik.handleBlur}
+              onBlur={formik.handleBlur}
               type="tel"
               name="phone"
               id="phone"
@@ -175,12 +183,22 @@ export default function Register() {
               <div className=" alert alert-danger">{formik.errors.phone}</div>
             ) : null}
           </div>
-          <input
+          <div className="buttons d-flex gap-2">
+            {isloading? <button type="button" className="border-0">
+            <div className="loading spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </button>:<button
             type="submit"
-            value="Register"
-            className="btn btn-primary text-white p-3 btn-blue"
-            disabled={!(formik.isValid &&formik.dirty) }
-          />
+            className="btn  text-white p-3 btn-blue"
+            disabled={!(formik.isValid && formik.dirty)}
+          >
+            Register
+          </button>}
+            
+          
+          </div>
+          
           <p>
             Already have an account ? <NavLink to="/login">Login</NavLink>
           </p>

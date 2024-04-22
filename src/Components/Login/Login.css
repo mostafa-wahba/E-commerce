@@ -6,7 +6,7 @@
   padding: 50px;
 }
 .login .container [type="submit"] {
-  background-color: #ff6a00;
+  background-color: var(--hover-color);
   border-bottom: none;
 }
 .login .image{
@@ -15,7 +15,7 @@
     object-fit: cover;
 }
 .login .container [type="submit"]:hover {
-  background-color: #eb6304;
+  background-color: var(--hover-color);
 }
 .log-input {
   position: relative;
@@ -28,7 +28,7 @@
 .login .container input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px #eb6304 solid;
+  border-bottom: 2px var(--hover-color) solid;
   display: block;
   width: 100%;
   padding: 15px 0;
@@ -38,7 +38,7 @@
 .login .container input:focus,
 .login .container input:valid {
   outline: 0;
-  border-bottom-color: #eb6304;
+  border-bottom-color: var(--hover-color);
 }
 .login .container label {
   position: absolute;
@@ -55,14 +55,14 @@
 }
 .login .container input:focus + label span,
 .login .container input:valid + label span {
-  color: #eb6304;
+  color: var(--hover-color);
   transform: translateY(-30px);
 }
 .login .container a{
-  color: #eb6304;
+  color: var(--hover-color);
 }
 .login .container p a{
-  color: #eb6304;
+  color: var(--hover-color);
 }
 @media (min-width: 0) and (max-width: 750px) {
     .login{

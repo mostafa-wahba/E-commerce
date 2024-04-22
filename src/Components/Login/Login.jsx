@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
-import bg from "../../Assets/bg_1.jpg.webp";
+import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -48,6 +48,7 @@ export default function Login() {
           <img src={bg} alt="bg" className="w-100 h-100" />
         </div>
         <form
+        id=""
           onSubmit={formik.handleSubmit}
           className="container d-flex justify-content-center align-items-center flex-column gap-2"
         >
