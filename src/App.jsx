@@ -14,6 +14,7 @@ import Test from "./Components/Test/Test";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
+import UpBtn from "./Components/UpBtn/UpBtn";
 
 const App = () => {
   return (
