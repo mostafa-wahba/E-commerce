@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/E-commerce/static/css/main.b88d07f0.css",
-    "main.js": "/E-commerce/static/js/main.c74ffa41.js",
-    "static/media/about-02.jpg.webp": "/E-commerce/static/media/about-02.jpg.a7ac291f750a0a429206.webp",
+    "main.css": "/E-commerce/static/css/main.c5ff5760.css",
+    "main.js": "/E-commerce/static/js/main.57a96b70.js",
+    "static/media/image.png": "/E-commerce/static/media/image.bca544d079af1bd090c4.png",
+    "static/media/about-02.jpg": "/E-commerce/static/media/about-02.a7ac291f750a0a429206.jpg",
     "static/media/g-03.jpg": "/E-commerce/static/media/g-03.ba75321d52cb7e8ddedd.jpg",
     "static/media/slide-02.jpg": "/E-commerce/static/media/slide-02.42a378abf9f1d35cc2d9.jpg",
     "static/media/slide-01.jpg": "/E-commerce/static/media/slide-01.b399dbdeb89f7fe820fc.jpg",
@@ -10,20 +11,19 @@
     "static/media/slide-03.jpg": "/E-commerce/static/media/slide-03.522dd034a589dc7cbb68.jpg",
     "static/media/g-01.jpg": "/E-commerce/static/media/g-01.2090440ead7583dc9fc8.jpg",
     "static/media/banner-02.jpg": "/E-commerce/static/media/banner-02.839abedb72233fcf49b5.jpg",
-    "static/media/bg_1.jpg.webp": "/E-commerce/static/media/bg_1.jpg.70bf900796ba33d14371.webp",
     "static/media/g-04.jpg": "/E-commerce/static/media/g-04.bef9e154a058f05bf4d1.jpg",
     "static/media/product-01.jpg": "/E-commerce/static/media/product-01.7062ae0a0a2c2fb4ddeb.jpg",
-    "static/media/logo-no-background.png": "/E-commerce/static/media/logo-no-background.8253072c4d155d85b395.png",
+    "static/media/logo-no-background.png": "/E-commerce/static/media/logo-no-background.74d9571dc6250379af9f.png",
     "static/media/banner-01.jpg": "/E-commerce/static/media/banner-01.1119941cd9ea3f01bda4.jpg",
     "static/media/banner-03.jpg": "/E-commerce/static/media/banner-03.9bba8651ce23f5ef5a22.jpg",
     "static/media/bg-01.jpg.webp": "/E-commerce/static/media/bg-01.jpg.32de94f697ad2e89c22a.webp",
     "index.html": "/E-commerce/index.html",
     "static/media/icon-email.png.webp": "/E-commerce/static/media/icon-email.png.9083e877c418b8ce5c41.webp",
-    "main.b88d07f0.css.map": "/E-commerce/static/css/main.b88d07f0.css.map",
-    "main.c74ffa41.js.map": "/E-commerce/static/js/main.c74ffa41.js.map"
+    "main.c5ff5760.css.map": "/E-commerce/static/css/main.c5ff5760.css.map",
+    "main.57a96b70.js.map": "/E-commerce/static/js/main.57a96b70.js.map"
   },
   "entrypoints": [
-    "static/css/main.b88d07f0.css",
-    "static/js/main.c74ffa41.js"
+    "static/css/main.c5ff5760.css",
+    "static/js/main.57a96b70.js"
   ]
 }
