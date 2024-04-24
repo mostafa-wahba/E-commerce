@@ -9,11 +9,11 @@ import Footer from "./Components/Footer/Footer";
 import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
-import { IoMdArrowDropup } from "react-icons/io";
 import Shop from "./Components/Shop/Shop";
 import Test from "./Components/Test/Test";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./Components/NotFound/NotFound";
+import UpBtn from "./Components/UpBtn/UpBtn";
 
 const App = () => {
   return (
@@ -33,9 +33,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} /> {/* This handles undefined routes */}
 
       </Routes>
-      <span className="up-btn">
-        <IoMdArrowDropup />
-      </span>
+      <UpBtn/>
       <Footer />
     </>
   );

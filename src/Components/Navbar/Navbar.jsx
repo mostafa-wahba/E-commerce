@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { MainContext } from "../../Context/MainContext";
 import logo from "../../Assets/png/logo-no-background.png";
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { Link, NavLink,useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -35,7 +35,7 @@ export default function Navbar() {
   }, []); // Empty dependency array to ensure this effect only runs once
 
   useEffect(() => {
-    console.log("Scroll offset:", scrollOffset); // Log the scroll offset to the console
+    // console.log("Scroll offset:", scrollOffset); // Log the scroll offset to the console
   }, [scrollOffset]); // This effect will run every time scrollOffset changes
 
   return (
