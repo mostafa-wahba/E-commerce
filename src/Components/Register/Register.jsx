@@ -4,20 +4,21 @@ import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios"; 
+import axios from "axios";
 export default function Register() {
   let toLogin = useNavigate();
   const [isloading, setIsloading] = useState(false);
-  const [msgError,setMsgError]=useState('')
+  const [msgError, setMsgError] = useState("");
   async function handleRegister(values) {
     setIsloading(true);
-    let { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values).catch((errr)=>{
-        setIsloading(false)
-        setMsgError(`${errr.response.data.message}`)
-      })
+    let { data } = await axios
+      .post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
+      .catch((errr) => {
+        setIsloading(false);
+        setMsgError(`${errr.response.data.message}`);
+      });
     console.log(data);
     if (data.message === "success") {
-      //  console.log("ok")
       setIsloading(false);
       toLogin("/login");
     }
@@ -31,10 +32,10 @@ export default function Register() {
     password: Yup.string().required("Password is required"),
     // .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be srtong"),
     rePassword: Yup.string()
-      .required("rePassword is required")
+      .required("Repassword is required")
       .oneOf([Yup.ref("password")], "Password doesnt match"),
     phone: Yup.string()
-      .required("Pphone is required")
+      .required("Phone Number is required")
       .matches(/^01[012][0-9]{8}$/, "Phone number must be a valid number"),
   });
   let formik = useFormik({
@@ -54,14 +55,13 @@ export default function Register() {
         <div className="image min-vh-100 d-none d-md-block">
           <img src={bg} alt="bg" className="w-100 h-100" />
         </div>
-        
-        
         <form
           onSubmit={formik.handleSubmit}
           className="container d-flex justify-content-center align-items-center flex-column gap-2"
-        >{msgError?<div className="alert alert-danger">
-          {msgError}
-        </div>:null }
+        >
+          {msgError ? (
+            <div className="alert alert-danger">{msgError}</div>
+          ) : null}
           <div className="reg-input name">
             <input
               onBlur={formik.handleBlur}
@@ -183,32 +183,26 @@ export default function Register() {
               <div className=" alert alert-danger">{formik.errors.phone}</div>
             ) : null}
           </div>
-          <div className="buttons d-flex gap-2">
-            {isloading? <button type="button" className="border-0">
-            <div className="loading spinner-border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </button>:<button
-            type="submit"
-            className="btn  text-white p-3 btn-blue"
-            disabled={!(formik.isValid && formik.dirty)}
-          >
-            Register
-          </button>}
-            
-          
+          <div className="buttons d-flex gap-2 w-100 justify-content-center my-2">
+            {isloading ? (
+              <button type="button" className="border-0">
+                <div className="loading spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="btn text-white p-3 btn-blue w-100"
+                disabled={!(formik.isValid && formik.dirty)}
+              >
+                Register
+              </button>
+            )}
           </div>
-          
           <p>
             Already have an account ? <NavLink to="/login">Login</NavLink>
           </p>
-
-          {/* 
-                <input type='text' placeholder='Username' className=''/>
-                <input type='email' placeholder='Email' className=''/>
-                <input type='password' placeholder='Password' className=''/>
-                <input type='password' placeholder='Confirm Password' className=''/>
-                <input type='submit' value='Register' className='btn btn-primary text-white p-3 btn-blue'/> */}
         </form>
       </div>
     </Fragment>

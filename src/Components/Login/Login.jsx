@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.css";
 import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -6,12 +6,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { MainContext } from "../../Context/MainContext";
 export default function Login() {
-  let toHome = useNavigate();
+  const [isloading, setIsloading] = useState(false);
+  let navigate = useNavigate();
   const cookies = new Cookies();
-  const [userToken, setUserToken] = useState([]);
+  const {setUserToken} = useContext(MainContext);
   async function handleLogin(values) {
     try {
+      setIsloading(true);
       const {data} = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/auth/signin`,
         values
@@ -20,11 +23,15 @@ export default function Login() {
         // Assuming the token is returned in response.data.token
         cookies.set("userToken", data.token, { path: "/" });
         setUserToken(data.token)
-        toHome("/");
+        setIsloading(false);
+        navigate("/");
+        console.log("ok");
       } else {
+        setIsloading(false);
         console.error("Login failed:", data.message);
       }
     } catch (error) {
+      setIsloading(false);
       console.error("Login error:", error);
     }
   }
@@ -98,12 +105,23 @@ export default function Login() {
             ) : null}
           </div>
           <NavLink to="#">Forget Password</NavLink>
-          <input
-            type="submit"
-            value="Login"
-            className="btn btn-primary text-white p-3 btn-blue"
-            disabled={!(formik.isValid && formik.dirty)}
-          />
+          <div className="buttons d-flex gap-2 w-100 justify-content-center my-2">
+            {isloading ? (
+              <button type="button" className="border-0">
+                <div className="loading spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            ) : (
+              <button
+              type="submit"
+              className="btn btn-primary text-white p-3 btn-blue w-100"
+              disabled={!(formik.isValid && formik.dirty)}
+            >
+              Login
+            </button>
+            )}
+          </div>
           <p>
             Don't have an account ? <NavLink to="/register">Sign Up</NavLink>
           </p>

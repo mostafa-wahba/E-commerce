@@ -9,11 +9,16 @@
   background-color: var(--hover-color);
   border-bottom: none;
 }
-.login .image{
-    /* display: block !important; */
-    width: 100%;
-    object-fit: cover;
+.login .image {
+  width: 50%;
+  object-fit: cover;
 }
+
+.login .image img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .login .container [type="submit"]:hover {
   background-color: var(--hover-color);
 }
@@ -21,6 +26,10 @@
   position: relative;
   margin: 20px 0 40px;
   width: 100%;
+}
+
+.login form {
+  width: 50%;
 }
 /* .log-input .alert{
   padding: 3px;
@@ -64,17 +73,20 @@
 .login .container p a{
   color: var(--hover-color);
 }
-@media (min-width: 0) and (max-width: 750px) {
+.login form .buttons .loading {
+  color: var(--hover-color);
+}
+@media (min-width: 0) and (max-width: 768px) {
     .login{
          display: flex;
          justify-content: center;
          align-items: center;
       flex-direction: column;
     }
-    .login .image{
-        width: 100%;
-        object-fit: cover;
+    .login form {
+      width: 100%;
     }
+  
     .login .container{
         height: 100vh;
     }

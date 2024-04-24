@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { MainContext } from "../../Context/MainContext";
 import logo from "../../Assets/png/logo-no-background.png";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -11,28 +11,46 @@ import { TiThMenuOutline } from "react-icons/ti";
 import Cookies from "universal-cookie";
 
 export default function Navbar() {
-  const { test, setTest } = useContext(MainContext);
-  const [token, setToken] = useState(null);
+  const { userToken, setUserToken } = useContext(MainContext);
   const [searchShow, setSearchShow] = useState(false);
-  let cookies = new Cookies();
-  useEffect(() => {
-    const userToken = cookies.get("userToken");
-    setToken(userToken); // Update token state whenever it changes
-  }, []);
+  const [scrollOffset, setScrollOffset] = useState(0);
+
+  const navigate = useNavigate();
+  const cookies = new Cookies();
   const handleLogout = () => {
-    cookies.remove("userToken", { path: "/" });
-    setToken(null);
-    Navigate("/login");
+    cookies.remove("userToken", { path: "/" }); // Remove cookie
+    setUserToken(null); // Reset context
+    navigate("/login"); // Redirect to login page
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollOffset(window.pageYOffset);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []); // Empty dependency array to ensure this effect only runs once
+
+  useEffect(() => {
+    console.log("Scroll offset:", scrollOffset); // Log the scroll offset to the console
+  }, [scrollOffset]); // This effect will run every time scrollOffset changes
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg d-flex py-3 py-lg-0 bg-transparent fixed-top">
+      <nav
+        className={`navbar navbar-expand-lg d-flex py-3 py-lg-0 ${
+          scrollOffset ? "bg-white" : "bg-transparent"
+        } transition fixed-top`}
+      >
         <div className="container">
-          <Link className="navbar-brand" to="">
+          <Link className="navbar-brand me-auto" to="">
             <img src={logo} alt="" />
           </Link>
           <button
-            className="navbar-toggler ms-auto"
+            className="navbar-toggler m-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -159,10 +177,10 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item d-lg-block d-flex justify-content-center align-items-center ">
-              {token ? (
+              {userToken ? (
                 <NavLink
                   className="nav-link me-lg-4 poppins-medium login-logout"
-                  to="#"
+                  to="/login"
                   onClick={handleLogout}
                 >
                   Logout
@@ -170,7 +188,7 @@ export default function Navbar() {
               ) : (
                 <NavLink
                   className="nav-link me-lg-4 poppins-medium login-logout"
-                  to="login"
+                  to="/login"
                 >
                   Login
                 </NavLink>

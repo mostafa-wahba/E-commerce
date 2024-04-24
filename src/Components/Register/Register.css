@@ -1,36 +1,53 @@
-.register{
-    display: flex;
+.register {
+  display: flex;
 }
+
 .register .container {
   background-color: #ebeff2;
   padding: 10px 30px;
 }
+
 .register .container [type="submit"] {
   background-color: var(--hover-color);
   border-bottom: none;
 }
-.register .image{
-    /* display: block !important; */
-    width: 100%;
-    object-fit: cover;
+
+.register .image {
+  width: 50%;
+  object-fit: cover;
 }
+
+.register .image img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .register .container [type="submit"]:hover {
   background-color: var(--hover-color);
 }
-.register .container p a{
+
+.register .container p a {
   color: var(--hover-color);
 }
-.register .container .name{
+
+.register .container .name {
   margin-top: 80px;
 }
+
 .reg-input {
   position: relative;
   margin: 10px 10px 0 10px;
   width: 100%;
 }
-.register form .buttons .loading{
+
+.register form {
+  width: 50%;
+}
+
+.register form .buttons .loading {
   color: var(--hover-color);
 }
+
 /* .reg-input .alert{
   padding: 3px;
 } */
@@ -66,24 +83,26 @@
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.register .container input:focus + label span,
-.register .container input:valid + label span {
+.register .container input:focus+label span,
+.register .container input:valid+label span {
   color: var(--hover-color);
   transform: translateY(-30px);
 }
-@media (min-width: 0) and (max-width: 750px) {
-    .register{
-         display: flex;
-         justify-content: center;
-         align-items: center;
-      flex-direction: column;
-    }
-    .register .image{
-        width: 100%;
-        object-fit: cover;
-    }
-    .register .container{
-        height: 100vh;
-    }
-    
+
+@media (min-width: 0) and (max-width: 768px) {
+  .register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
+
+  .register form {
+    width: 100%;
+  }
+
+  .register .container {
+    height: 100vh;
+  }
+
+}

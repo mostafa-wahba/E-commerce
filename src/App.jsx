@@ -12,6 +12,8 @@ import Cart from "./Components/Cart/Cart";
 import { IoMdArrowDropup } from "react-icons/io";
 import Shop from "./Components/Shop/Shop";
 import Test from "./Components/Test/Test";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import NotFound from "./Components/NotFound/NotFound";
 
 const App = () => {
   return (
@@ -21,13 +23,15 @@ const App = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/products" element={<Shop />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/login" element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
+        <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
         <Route path="/singleProduct" element={<SingleProduct />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/test" element={<Test />} />
+        <Route path="*" element={<NotFound />} /> {/* This handles undefined routes */}
+
       </Routes>
       <span className="up-btn">
         <IoMdArrowDropup />

@@ -321,7 +321,7 @@ export default function Home() {
                   <ProductCard />
                 </div>
               ))}
-            </div> */}
+            </div > */}
             <Shop/>
         </section>
       </main>
