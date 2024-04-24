@@ -5,6 +5,10 @@ nav{
     -o-box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.2);
     -ms-box-shadow: 0 0px 3px 0px rgba(0, 0, 0, 0.2);
 }
+.nav-hight-85{
+    height: 85px;
+}
+
 nav .navbar-brand{
     width: 120px;
 } 

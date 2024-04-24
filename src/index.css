@@ -7,8 +7,9 @@
 }
 
 :root {
-  --text-color: #222;
-  --text-color2: #888;
+  --text-color: #222222;
+  --text-color2: #888888;
+  --text-color3: #555555;
   --hover-color: #717fe0;
   --grey-color: #e6e6e6;
   --bg-color: #222;

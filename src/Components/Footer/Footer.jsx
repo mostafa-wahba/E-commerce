@@ -60,7 +60,7 @@ export default function Footer() {
               </span>{" "}
               by
               {" "}
-              <span className="us">RKMS</span>
+              <span className="us">RMS</span>
             </p>
           </div>
         </div>

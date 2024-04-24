@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { MainContext } from "../../Context/MainContext";
-import logo from "../../Assets/png/logo-no-background.png";
-import { Link, NavLink,useNavigate } from "react-router-dom";
+import logo from "../../Assets/logo-no-background.png";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -33,16 +33,11 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []); // Empty dependency array to ensure this effect only runs once
-
-  useEffect(() => {
-    // console.log("Scroll offset:", scrollOffset); // Log the scroll offset to the console
-  }, [scrollOffset]); // This effect will run every time scrollOffset changes
-
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg d-flex py-3 py-lg-0 ${
-          scrollOffset ? "bg-white" : "bg-transparent"
+        className={`navbar navbar-expand-lg d-flex py-3  ${
+          scrollOffset ? "bg-white py-lg-0" : "bg-transparent py-lg-1"
         } transition fixed-top`}
       >
         <div className="container">
@@ -171,11 +166,13 @@ export default function Navbar() {
                 <FaRegHeart />
               </Link>
             </li>
-            <li>
-              <Link to="profile">
-                <CgProfile />
-              </Link>
-            </li>
+            {userToken && (
+              <li>
+                <Link to="profile">
+                  <CgProfile />
+                </Link>
+              </li>
+            )}
             <li className="nav-item d-lg-block d-flex justify-content-center align-items-center ">
               {userToken ? (
                 <NavLink

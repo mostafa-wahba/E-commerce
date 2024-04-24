@@ -7,18 +7,17 @@ import img3 from "../../Assets/slide-03.jpg";
 import img4 from "../../Assets/banner-01.jpg";
 import img5 from "../../Assets/banner-03.jpg";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
-import ProductCard from "../ProductCard/ProductCard";
 import Shop from "../Shop/Shop";
 
 export default function Home() {
   const productCards = [1, 2, 3, 4, 5, 6]; // An array to represent each ProductCard
-
   const [currentSlide, setCurrentSlide] = useState(0);
   const [btnState, setBtnState] = useState(false);
-  const totalSlides = 4; // Update based on the number of slides
-
+  const totalSlides = 3; // Update based on the number of slides
+  const navigate = useNavigate();
   const handleSlideChange = (newIndex) => {
     if (newIndex >= totalSlides) {
       setCurrentSlide(0); // Wrap around to the first slide
@@ -90,6 +89,8 @@ export default function Home() {
                       ease: "linear",
                       duration: 0.6,
                     }}
+                    onClick={()=>{navigate("/products")}}
+
                   >
                     Explore More
                   </motion.button>
@@ -103,51 +104,6 @@ export default function Home() {
               <div className="container px-5 p-xxl-2">
                 <div className="carousel-item-text position-absolute">
                   <motion.p
-                    key={`motion-p2-${currentSlide}`}
-                    initial={{ x: -300, opacity: 0, rotate: -90 }}
-                    animate={{ x: 0, opacity: 1, rotate: 0 }}
-                    transition={{
-                      type: "Tween",
-                      ease: "linear",
-                      duration: 0.6,
-                    }}
-                  >
-                    Women's New Collection
-                  </motion.p>
-                  <motion.h1
-                    key={`motion-h2-${currentSlide}`}
-                    initial={{ x: 300, opacity: 0, rotate: 90 }}
-                    animate={{ x: 0, opacity: 1, rotate: 0 }}
-                    transition={{
-                      type: "Tween",
-                      ease: "linear",
-                      duration: 0.6,
-                    }}
-                  >
-                    Hello OOFA
-                  </motion.h1>
-                  <motion.button
-                    key={`motion-button2-${currentSlide}`}
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      type: "Tween",
-                      ease: "linear",
-                      duration: 0.6,
-                    }}
-                  >
-                    Explore More
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`carousel-item ${currentSlide === 2 ? "active" : ""}`}
-            >
-              <img src={img2} className="d-block w-100" alt="..." />
-              <div className="container px-5 p-xxl-2">
-                <div className="carousel-item-text position-absolute">
-                  <motion.p
                     key={`motion-p3-${currentSlide}`}
                     initial={{ x: 300, opacity: 0, rotateY: 180 }}
                     animate={{ x: 0, opacity: 1, rotateY: 0 }}
@@ -157,7 +113,7 @@ export default function Home() {
                       duration: 0.6,
                     }}
                   >
-                    Akhoya's New Collection
+                    Winter New Collection
                   </motion.p>
                   <motion.h1
                     key={`motion-h3-${currentSlide}`}
@@ -168,8 +124,9 @@ export default function Home() {
                       ease: "linear",
                       duration: 0.6,
                     }}
+                    
                   >
-                    Hello Kerooooo
+                    Hello RADWAAAA
                   </motion.h1>
                   <motion.button
                     key={`motion-button3-${currentSlide}`}
@@ -180,6 +137,7 @@ export default function Home() {
                       ease: "linear",
                       duration: 0.6,
                     }}
+                    onClick={()=>{navigate("/products")}}
                   >
                     Explore More
                   </motion.button>
@@ -187,7 +145,7 @@ export default function Home() {
               </div>
             </div>
             <div
-              className={`carousel-item ${currentSlide === 3 ? "active" : ""}`}
+              className={`carousel-item ${currentSlide === 2 ? "active" : ""}`}
             >
               <img src={img3} className="d-block w-100" alt="..." />
               <div className="container px-5 p-xxl-2">
@@ -215,7 +173,7 @@ export default function Home() {
                       duration: 0.6,
                     }}
                   >
-                    Hello OOFA
+                    Hello THOOOOOMAIAAAAAAA
                   </motion.h1>
                   <motion.button
                     key={`motion-button4-${currentSlide}`}
@@ -228,6 +186,7 @@ export default function Home() {
                       scale: { duration: 0.1 },
                     }}
                     whileTap={{ scale: 0.1 }}
+                    onClick={()=>{navigate("/products")}}
                   >
                     Explore More
                   </motion.button>

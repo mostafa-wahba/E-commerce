@@ -2,7 +2,7 @@ import React from "react";
 import "./About.css";
 import img from "../../Assets/bg-01.jpg.webp";
 import about from "../../Assets/about-01.jpg.webp";
-import about2 from "../../Assets/about-02.jpg.webp";
+import about2 from "../../Assets/about-02.jpg";
 
 export default function About() {
   return (
