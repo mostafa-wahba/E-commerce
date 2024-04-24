@@ -117,7 +117,7 @@ export default function Contact() {
             scrolling="no"
             marginHeight="0"
             marginWidth="0"
-            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=el%20haram,egypt+(RKMStore)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=el%20haram,egypt+(RMStore)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
           >
             <a href="https://www.gps.ie/">gps tracker sport</a>
           </iframe>

@@ -14,6 +14,7 @@ import Shop from "./Components/Shop/Shop";
 import Test from "./Components/Test/Test";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./Components/NotFound/NotFound";
+import Checkout from "./Components/Checkout/Checkout";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NotFound />} /> {/* This handles undefined routes */}
 

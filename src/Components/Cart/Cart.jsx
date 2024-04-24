@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import "./Cart.css";
-
-import { IoIosArrowRoundDown } from "react-icons/io";
-import { IoIosArrowRoundUp } from "react-icons/io";
-import img1 from "../../Assets/about-02.jpg.webp";
+import img1 from "../../Assets/item-cart-04.jpg";
+import img2 from "../../Assets/item-cart-05.jpg";
 import { Link } from "react-router-dom";
+import { FaXmark } from "react-icons/fa6";
+
 export default function Cart() {
-  const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
+  const shippingCost = 9.65;
+  const [count, setCount] = useState(1);
+  const increment = (id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
 
-  function increment() {
-    setCount(function (prevCount) {
-      return (prevCount += 1);
-    });
-  }
-
-  function decrement() {
-    setCount(function (prevCount) {
-      if (prevCount > 0) {
-        return (prevCount -= 1);
-      } else {
-        return (prevCount = 0);
-      }
-    });
-  }
+  const decrement = (id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id && item.quantity > 0
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
   const [items, setItems] = useState([
     {
       id: 1,
@@ -31,150 +33,164 @@ export default function Cart() {
       quantity: 2,
       src: img1,
     },
-    { id: 2, name: "Product B", price: 19.99, quantity: 1, src: img1 },
+    {
+      id: 2,
+      name: "Product B",
+      price: 19.99,
+      quantity: 1,
+      src: img2,
+    },
   ]);
-  // const calculateTotal = () => {
-  //   return items.reduce((total, item) => total + item.price * item.quantity, 0);
-  // };
+  const removeItem = (id) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+  const calculateTotal = () => {
+    // Calculate the subtotal by summing the price and quantity of all items
+    const subtotal = items.reduce(
+      (total, item) => Math.round((total + item.price * item.quantity) * 100) / 100,
+      0
+    );
+  
+    // Calculate the VAT at 14% on the subtotal
+    const tax = Math.round(subtotal * 0.14 * 100) / 100; // Round to two decimal places
+  
+    // Shipping cost is 9.65
+
+  
+    // Calculate the final total by adding the tax and shipping to the subtotal
+    const finalTotal = Math.round((subtotal + tax + shippingCost) * 100) / 100;
+  
+    return {
+      subtotal, // Return the subtotal
+      total: finalTotal, // Return the final total
+    };// Return the final total
+  };
+  const { subtotal, total } = calculateTotal(); // Destructure to get both values
+
   return (
     <>
-      <div className="container cart-container">
-        <div className="row justify-content-between mb-4 flex-column flex-lg-row">
-          <div className="col-12 col-lg-6 border border-1 ">
-            <div className="product-item  d-flex flex-column">
-              <div className="title-row  row  px-5 py-3 border-bottom">
-                <div className="col-md-5 d-flex justify-content-start align-items-center">
-                  <p>PRODUCT</p>
-                </div>
-                <div className="col-md-2  d-flex justify-content-start align-items-center">
-                  <p>PRICE</p>
-                </div>
-                <div className="col-md-3 d-flex justify-content-start align-items-center">
-                  <p>QUANTITY</p>
-                </div>
-                <div className="col-md-2 d-flex justify-content-start align-items-center">
-                  <p>TOTAL</p>
-                </div>
-              </div>
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="item-row  row  px-5 py-3 border-bottom"
-                >
-                  <div className="col-md-5 d-flex justify-content-start align-items-center gap-2">
-                    <div className="product-image position-relative">
-                      <img
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        // position:"relative"
-                      }}
-                      src={item.src}
-                      alt=""
-                    />
-                    <div className="product-overlay d-flex justify-content-center w-100 h-100 align-items-center position-absolute top-0"><h6>x</h6></div>
-                    </div>
-                    
-                    <p>{item.name}</p>
+      <main id="cart">
+        <div className="container">
+          <div className="row align-items-start">
+            <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
+              <div className="d-flex justify-content-center align-items-center flex-column w-100 border">
+                <div className="titles-row row g-3 px-5 py-3 border-bottom w-100">
+                  <div className="col-md-5 d-flex justify-content-start align-items-center">
+                    <p>PRODUCT</p>
                   </div>
                   <div className="col-md-2  d-flex justify-content-start align-items-center">
-                    <p>{item.price}</p>
+                    <p>PRICE</p>
                   </div>
                   <div className="col-md-3 d-flex justify-content-start align-items-center">
-                    <div className="count-cart d-flex justify-content-start align-items-start gap-4">
-                      <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
-                        <span className="ms-4">{count}</span>
-
-                        <div className="counter-btn-container d-flex justify-content-center align-items-center flex-column">
-                          <button
-                            className="bg-transparent "
-                            onClick={increment}
-                            
-                          >
-                            <IoIosArrowRoundUp />
-                          </button>
-                          <button
-                            className="bg-transparent"
-                            onClick={decrement}
-                          >
-                            <IoIosArrowRoundDown />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <p>QUANTITY</p>
                   </div>
                   <div className="col-md-2 d-flex justify-content-start align-items-center">
-                    <p>{(item.price * count).toFixed(2)}</p>
+                    <p>TOTAL</p>
                   </div>
                 </div>
-              ))}
-
-              {/* </div> */}
-              {/* <p>PRODUCT</p>
-              <p>PRICE</p>
-              <p>QUANTITY</p>
-              <p>TOTAL</p> */}
-            </div>
-            {/* {items.map((item) => (
-                <div key={item.id} className="product-details d-flex justify-content-around align-items-center p-1 border-bottom">
-                  <div className="product-image">
-                  <img
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                    }}
-                    src={item.src}
-                    alt=""
-                  />
-                  </div>
-                  <div className="product-price">
-
-                  <p>{item.price}</p>
-                  </div>
-                  <div className="product-quntity">
-
-                  <div className="count-cart d-flex justify-content-start align-items-start gap-4">
-                    <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
-                      <span className="ms-4">{count}</span>
-
-                      <div className="counter-btn-container d-flex justify-content-center align-items-center flex-column">
-                        <button className="bg-transparent " onClick={increment}>
-                          <IoIosArrowRoundUp />
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="product-row row g-3 p-5 border-bottom w-100"
+                  >
+                    <div className="col-md-5 d-flex justify-content-start align-items-center">
+                      <div className="d-flex justify-content-center align-items-center">
+                        <div
+                          className="product-image me-4"
+                          onClick={() => removeItem(item.id)}
+                        >
+                          <div className="product-image-overlay">
+                            <FaXmark />
+                          </div>
+                          <img src={item.src} alt="product" />
+                        </div>
+                        <p>{item.name}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 d-flex justify-content-start align-items-center">
+                      <span className="fs-6 text-secondary">
+                        $ {item.price}
+                      </span>
+                    </div>
+                    <div className="col-md-3 d-flex justify-content-start align-items-center p-0">
+                      <div className="w-100 row border border-light-subtle quantity-btns rounded-2">
+                        <button
+                          className="d-flex justify-content-center align-items-center col-4 transition"
+                          onClick={() => decrement(item.id)}
+                        >
+                          -
                         </button>
-                        <button className="bg-transparent" onClick={decrement}>
-                          <IoIosArrowRoundDown />
+                        <div className="d-flex justify-content-center align-items-center col-4 p-0">
+                          <input
+                            type="number"
+                            className="amount-input w-100 h-100 d-flex justify-content-center align-items-center bg-body-tertiary text-center"
+                            value={item.quantity}
+                          />
+                        </div>
+                        <button
+                          className="d-flex justify-content-center align-items-center col-4 transition"
+                          onClick={() => increment(item.id)}
+                        >
+                          +
                         </button>
                       </div>
                     </div>
+                    <div className="col-md-2 d-flex justify-content-start align-items-center">
+                      <span className="fs-6 text-secondary-emphasis">
+                        $ {item.price * item.quantity}
+                      </span>
+                    </div>
                   </div>
-                  </div>
-                  <div className="product-total-price overflow-hidden">
-
-                  <p>{Math.floor(item.price * count) }</p>
-                  </div>
-
+                ))}
+              </div>
+            </div>
+            <div className="shipping-details d-flex justify-content-center align-items-center col-sm-10 col-lg-7 col-xl-5 ms-auto mb-5 p-0">
+              <form className="d-flex justify-content-center align-items-start flex-column gap-4 w-75 p-5 border">
+                <h4 className="title">CART TOTALS</h4>
+                <div className="d-flex border-bottom border-light-subtle pb-3 w-100 gap-4">
+                  <p className="subtitle w-25">Subtotal:</p>
+                  <span className="amount">${subtotal}</span>
                 </div>
-              ))} */}
-          </div>
-          <div className="col-12 col-lg-5 border border-1">
-            <h4 className="h1">CART TOTALS</h4>
-              <h5 className=" border-bottom border-light-subtle">Subtotal: $5000.55</h5>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              aut architecto, nihil, doloremque quis quod eius soluta quisquam
-              sequi voluptas corporis eaque deserunt cum beatae est blanditiis.
-              Quo, quos inventore.
-            </p>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              aut architecto, nihil, doloremque quis quod eius soluta quisquam
-              sequi voluptas corporis eaque deserunt cum beatae est blanditiis.
-              Quo, quos inventore.
-            </p>
+                <div className="d-flex justify-content-center align-items-start flex-column w-100">
+                  <input
+                    type="text"
+                    className="address-input form-control mb-4 w-100"
+                    placeholder="Please Enter Your Addres"
+                  />
+
+                  <div className="d-flex border-bottom border-light-subtle pb-3 w-100 flex-column">
+                    <div className="d-flex justify-content-start align-items-center w-100 gap-4 mb-2">
+                      <p className="subtitle w-25">Shipping:</p>
+                      <span className="amount">${total > 100 ? 0 : shippingCost}</span>
+                    </div>
+                    <p className="text">
+                      Free Shipping for orders more than 100$
+                    </p>
+                  </div>
+                </div>
+                <div className="d-flex mb-2 w-100 flex-column">
+                  <div className="d-flex mb-2 w-100 gap-4">
+                    <p className="subtitle w-25 fs-5">Total:</p>
+                    <span className="amount">${total}</span>
+                  </div>
+                  <p className="text">
+                    There is a 14% value added tax on the total value of
+                    purchases
+                  </p>
+                </div>
+                <div className="form-btn d-flex justify-content-center-align-items-center w-100">
+                  <Link
+                    to={"/checkout"}
+                    className="rounded-pill text-uppercase w-100 border-0"
+                  >
+                    Proceed to Checkout
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      
+      </main>
     </>
   );
 }

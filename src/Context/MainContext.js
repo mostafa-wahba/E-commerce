@@ -4,7 +4,8 @@ export default function MainContextProvider(props) {
   //   Search input
   const [test, setTest] = useState(false);
   const [userToken, setUserToken] = useState([]);
-
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   return (
     <MainContext.Provider
       value={{

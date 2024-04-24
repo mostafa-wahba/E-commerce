@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { MainContext } from '../../Context/MainContext';
 
 function Test() {
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const {products, setProducts,categories, setCategories} = useContext(MainContext);
     const [error, setError] = useState('');
-
     useEffect(() => {
         const fetchData = async () => {
             try {
