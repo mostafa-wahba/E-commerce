@@ -13,6 +13,7 @@ import Cookies from "universal-cookie";
 export default function Navbar() {
   const { userToken, setUserToken } = useContext(MainContext);
   const [searchShow, setSearchShow] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
 
   const navigate = useNavigate();
@@ -32,12 +33,19 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); // Empty dependency array to ensure this effect only runs once
+  }, []);
+useEffect(() => {
+  if (cookies.get("userToken")) {
+    setUserToken(true)
+  }
+  else setUserToken(false)
+}, [])
+
   return (
     <>
       <nav
         className={`navbar navbar-expand-lg d-flex py-3  ${
-          scrollOffset ? "bg-white py-lg-0" : "bg-transparent py-lg-1"
+          (scrollOffset||showDropDown) ? "bg-white py-lg-0" : "bg-transparent py-lg-1"
         } transition fixed-top`}
       >
         <div className="container">
@@ -53,7 +61,7 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <TiThMenuOutline />
+            <TiThMenuOutline onClick={()=>{setShowDropDown(!showDropDown)}}/>
           </button>
           <ul className="menu-icons d-flex d-lg-none justify-content-center align-items-center gap-4 ms-auto mb-0">
             <li>

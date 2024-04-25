@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Cart.css";
 import img1 from "../../Assets/item-cart-04.jpg";
 import img2 from "../../Assets/item-cart-05.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
+import { MainContext } from "../../Context/MainContext";
+import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 export default function Cart() {
+  const { userToken, setUserToken } = useContext(MainContext);
   const shippingCost = 9.65;
   const [count, setCount] = useState(1);
+  const [loginMassg, setLoginMassg] = useState("");
   const increment = (id) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
@@ -47,26 +51,33 @@ export default function Cart() {
   const calculateTotal = () => {
     // Calculate the subtotal by summing the price and quantity of all items
     const subtotal = items.reduce(
-      (total, item) => Math.round((total + item.price * item.quantity) * 100) / 100,
+      (total, item) =>
+        Math.round((total + item.price * item.quantity) * 100) / 100,
       0
     );
-  
+
     // Calculate the VAT at 14% on the subtotal
     const tax = Math.round(subtotal * 0.14 * 100) / 100; // Round to two decimal places
-  
+
     // Shipping cost is 9.65
 
-  
     // Calculate the final total by adding the tax and shipping to the subtotal
     const finalTotal = Math.round((subtotal + tax + shippingCost) * 100) / 100;
-  
+
     return {
       subtotal, // Return the subtotal
       total: finalTotal, // Return the final total
-    };// Return the final total
+    }; // Return the final total
   };
   const { subtotal, total } = calculateTotal(); // Destructure to get both values
-
+  const navigate = useNavigate();
+  const loginChecking = () => {
+    if (userToken) {
+      navigate("chechout");
+    } else {
+      setLoginMassg("Please Signin First");
+    }
+  };
   return (
     <>
       <main id="cart">
@@ -113,7 +124,7 @@ export default function Cart() {
                       </span>
                     </div>
                     <div className="col-md-3 d-flex justify-content-start align-items-center p-0">
-                      <div className="w-100 row border border-light-subtle quantity-btns rounded-2">
+                      <div className="w-100 row border border-light-subtle quantity-btns rounded-2 overflow-hidden">
                         <button
                           className="d-flex justify-content-center align-items-center col-4 transition"
                           onClick={() => decrement(item.id)}
@@ -137,7 +148,7 @@ export default function Cart() {
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
                       <span className="fs-6 text-secondary-emphasis">
-                        $ {item.price * item.quantity}
+                        $ {Math.round(item.price * item.quantity * 100) / 100}
                       </span>
                     </div>
                   </div>
@@ -151,22 +162,16 @@ export default function Cart() {
                   <p className="subtitle w-25">Subtotal:</p>
                   <span className="amount">${subtotal}</span>
                 </div>
-                <div className="d-flex justify-content-center align-items-start flex-column w-100">
-                  <input
-                    type="text"
-                    className="address-input form-control mb-4 w-100"
-                    placeholder="Please Enter Your Addres"
-                  />
-
-                  <div className="d-flex border-bottom border-light-subtle pb-3 w-100 flex-column">
-                    <div className="d-flex justify-content-start align-items-center w-100 gap-4 mb-2">
-                      <p className="subtitle w-25">Shipping:</p>
-                      <span className="amount">${total > 100 ? 0 : shippingCost}</span>
-                    </div>
-                    <p className="text">
-                      Free Shipping for orders more than 100$
-                    </p>
+                <div className="d-flex border-bottom border-light-subtle pb-3 w-100 flex-column">
+                  <div className="d-flex justify-content-start align-items-center w-100 gap-4 mb-2">
+                    <p className="subtitle w-25">Shipping:</p>
+                    <span className="amount">
+                      ${total > 100 ? 0 : shippingCost}
+                    </span>
                   </div>
+                  <p className="text">
+                    Free Shipping for orders more than 100$
+                  </p>
                 </div>
                 <div className="d-flex mb-2 w-100 flex-column">
                   <div className="d-flex mb-2 w-100 gap-4">
@@ -178,13 +183,21 @@ export default function Cart() {
                     purchases
                   </p>
                 </div>
+                {loginMassg && 
+                <>
+                <div className="login-massage d-flex justify-content-center align-items-start flex-column">
+                <p className="text-danger">{loginMassg}</p>
+                <Link to={"/Login"} className="d-flex justify-content-center align-items-center  ">Login <span><MdOutlineArrowRightAlt /></span></Link>
+                </div>
+                </>
+                }
                 <div className="form-btn d-flex justify-content-center-align-items-center w-100">
-                  <Link
-                    to={"/checkout"}
+                  <button
+                    onClick={loginChecking}
                     className="rounded-pill text-uppercase w-100 border-0"
                   >
                     Proceed to Checkout
-                  </Link>
+                  </button>
                 </div>
               </form>
             </div>
