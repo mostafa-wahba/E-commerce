@@ -73,7 +73,7 @@ export default function Cart() {
   const navigate = useNavigate();
   const loginChecking = () => {
     if (userToken) {
-      navigate("chechout");
+      navigate("/checkout");
     } else {
       setLoginMassg("Please Signin First");
     }
@@ -81,8 +81,8 @@ export default function Cart() {
   return (
     <>
       <main id="cart">
-        <div className="container">
-          <div className="row align-items-start">
+        <div className="container d-flex justify-content-center">
+          <div className="row align-items-start w-100 m-0">
             <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
               <div className="d-flex justify-content-center align-items-center flex-column w-100 border">
                 <div className="titles-row row g-3 px-5 py-3 border-bottom w-100 d-none d-lg-flex">

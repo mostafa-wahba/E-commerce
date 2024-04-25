@@ -4,3 +4,30 @@
     font-family: poppins;
     color: var(--text-color);
 }
+#checkout input{
+    border: 1px solid grey;
+}
+.address-details input[type=number]::-webkit-inner-spin-button,
+.address-details input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.product-quantity{
+    background-color: rgb(113, 127, 224,0.46);
+    font-size: 0.75rem;
+    font-weight: 700;
+    top: -7px;
+    left: -25px;
+}
+@media all and (max-width: 768px) {
+    .product-quantity{
+        left: -20px;
+    }   
+}
+.product-quantity span{
+    font-size: 0.85rem;
+}
+.product-desc{
+    font-size: 0.75rem;
+    color: var(--text-color2);
+}
