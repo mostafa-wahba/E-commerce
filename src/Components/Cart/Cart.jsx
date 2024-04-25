@@ -85,7 +85,7 @@ export default function Cart() {
           <div className="row align-items-start">
             <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
               <div className="d-flex justify-content-center align-items-center flex-column w-100 border">
-                <div className="titles-row row g-3 px-5 py-3 border-bottom w-100">
+                <div className="titles-row row g-3 px-5 py-3 border-bottom w-100 d-none d-lg-flex">
                   <div className="col-md-5 d-flex justify-content-start align-items-center">
                     <p>PRODUCT</p>
                   </div>
@@ -119,8 +119,8 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
-                      <span className="fs-6 text-secondary">
-                        $ {item.price}
+                      <span className="fs-6 text-secondary d-flex gap-2">
+                        <span className="d-block d-md-none">Piece: </span>$ {item.price}
                       </span>
                     </div>
                     <div className="col-md-3 d-flex justify-content-start align-items-center p-0">
@@ -147,8 +147,8 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
-                      <span className="fs-6 text-secondary-emphasis">
-                        $ {Math.round(item.price * item.quantity * 100) / 100}
+                      <span className="fs-6 text-secondary-emphasis d-flex gap-2">
+                      <span className="d-block d-md-none">Total Pieces: </span>$ {Math.round(item.price * item.quantity * 100) / 100}
                       </span>
                     </div>
                   </div>
