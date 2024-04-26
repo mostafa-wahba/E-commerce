@@ -107,10 +107,16 @@ background-color: black;
   /* .swiper-wrapper{
     justify-content: center;
   } */
+  .container-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .container-card .card{
     width: 300px;
     height: 500px;
     overflow: hidden;
+    margin: auto;
   }
   
   .container-card .card .card-image{

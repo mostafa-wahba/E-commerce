@@ -53,7 +53,7 @@ export default function RelatedProductSlider() {
     <>
     <div className="container">
       <div className="row">
-        <div className="container-card overflow-hidden">
+        <div className="container-card overflow-hidden d-flex justify-content-center gap-0">
         <Swiper
         onSwiper={setSwiperRef}
         slidesPerView={1}
@@ -88,24 +88,24 @@ export default function RelatedProductSlider() {
         //   }
         // }
         breakpoints={{
-          640: {
-            slidesPerView: 2,
-            // spaceBetween: 20,
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 30,
           },
-          768: {
-            slidesPerView: 4,
-            // spaceBetween: 40,
+          576: {
+            slidesPerView: 2,
+            spaceBetween: 20,
           },
           1024: {
-            slidesPerView: 5,
-            // spaceBetween: 50,
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
         }}
         navigation={true}
       
         modules={[Pagination, Navigation]}
         b
-        className="mySwiper justify-content-between"
+        className="mySwiper justify-content-center text-sm-center"
       >
         <SwiperSlide><div className="card">
             <div className="card-image">
@@ -117,7 +117,7 @@ export default function RelatedProductSlider() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to="#" className="btn btn-primary mt-2">
                 Go somewhere
               </Link>
             </div>
@@ -133,7 +133,7 @@ export default function RelatedProductSlider() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to="#" className="btn btn-primary mt-2">
                 Go somewhere
               </Link>
             </div>
@@ -149,7 +149,7 @@ export default function RelatedProductSlider() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to="#" className="btn btn-primary mt-2 ">
                 Go somewhere
               </Link>
             </div>
@@ -165,7 +165,7 @@ export default function RelatedProductSlider() {
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <Link to="#" className="btn btn-primary">
+              <Link to="#" className="btn btn-primary mt-2">
                 Go somewhere
               </Link>
             </div>
