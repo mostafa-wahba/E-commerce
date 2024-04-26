@@ -13,6 +13,7 @@ import img1 from "../../Assets/g-04.jpg";
 import img2 from "../../Assets/g-03.jpg";
 import { MdStarRate } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
+import RelatedProductSlider from "../RelatedProductSlider/RelatedProductSlider";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -371,6 +372,7 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
+          <RelatedProductSlider/>
         </div>
       </main>
     </>

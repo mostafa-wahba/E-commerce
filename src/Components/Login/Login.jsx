@@ -104,7 +104,7 @@ export default function Login() {
               </div>
             ) : null}
           </div>
-          <NavLink to="#">Forget Password</NavLink>
+          <NavLink to="#" onClick={""}>Forget Password</NavLink>
           <div className="buttons d-flex gap-2 w-100 justify-content-center my-2">
             {isloading ? (
               <button type="button" className="border-0">

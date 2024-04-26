@@ -5,7 +5,8 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import MainContextProvider from "./Context/MainContext";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
-
+// import 'swiper/swiper-bundle.min.css';
+// import "swiper/swiper-bundle.min.js"
 import App from "./App";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 
