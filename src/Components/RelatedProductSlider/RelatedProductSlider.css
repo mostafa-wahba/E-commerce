@@ -1,98 +1,4 @@
-/* .RelatedProductSlider .carousel-inner{
-    padding: 10px;
-}
-.RelatedProductSlider .carousel-inner .carousel-item .card-image{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    height: 100%;
-}
-.RelatedProductSlider .carousel-inner .carousel-item .card-image img{
-    width: 100%;
-    height: 100%; */
-    /* object-fit: contain; */
-/* }
-
-@media screen and (min-width:576px) {
-    .RelatedProductSlider .carousel-inner{
-        display: flex;
-        gap: 10px;
-    }
-    .RelatedProductSlider .carousel-inner .carousel-item{
-        margin-right: 0;
-        flex: 0 0 calc(100%/3);
-        display: block;
-    }
-} */
-
-
-
-/* .related-product .container .card-container{
-padding: 20px;
-overflow: hidden;
-border-radius: 10px;
-background-color: black;
-}
-.related-product .container .card-container .card{
-    border-radius: 10px;
-    overflow: hidden;
-}
-.related-product .container .card-container .card .card-image{
-    width: 400px;
-    position: relative;
-    background-color: bisque;
-    margin-bottom: -15px;
-}
-.related-product .container .card-container .card .card-image img{
-    width: 300px;
-    height: 350px;
-
-}
-
-.related-product .container .card-container .card .card-body{
-    padding: 10px 15px;
-    text-align: center;
-    position: relative;
-    z-index: 10;
-    background-color: black;
-    border-radius: 10px; 
-}*/
-
-/* .swiper {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    Center slide text vertically
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .swiper {
-    width: 100%;
-    height: 300px;
-    margin: 20px auto;
-  }
-  .append-buttons {
-    text-align: center;
-    margin-top: 20px;
-  }
-   */
-  .append-buttons button {
+ .append-buttons button {
     display: inline-block;
     cursor: pointer;
     border: 1px solid #007aff;
@@ -103,11 +9,7 @@ background-color: black;
     margin: 0 10px;
     font-size: 13px;
   }
-
-  /* .swiper-wrapper{
-    justify-content: center;
-  } */
-  .container-card{
+.container-card{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -118,7 +20,6 @@ background-color: black;
     overflow: hidden;
     margin: auto;
   }
-  
   .container-card .card .card-image{
     height: 300px;
   }
@@ -126,9 +27,4 @@ background-color: black;
     width: 100%;
     height: 100%;
   }
-  /* @media screen and (max-width:576) {
-    .container-card .card{
-        width: 100%;
-    } */
-    
   

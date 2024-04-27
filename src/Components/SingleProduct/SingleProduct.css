@@ -16,7 +16,12 @@
     color: #333;
     ;
 }
-
+.spooduct-container{
+    height: 600px;
+}
+.spooduct-container img{
+    object-fit: contain;
+}
 .product-and-product-details .product-details .description-text,
 .product-and-product-details .product-details .product-country span {
     color: #666;

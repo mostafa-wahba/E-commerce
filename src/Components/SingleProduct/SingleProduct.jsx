@@ -39,7 +39,7 @@ export default function SingleProduct() {
           <div className="product-and-product-details d-flex justify-content-center gap-5">
             <div
               id="carouselExampleIndicators"
-              className="carousel slide w-100"
+              className="carousel slide w-100 spooduct-container"
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">

@@ -1,0 +1,67 @@
+.blog .blog-content .image{
+    width: 100%;
+    overflow: hidden;
+}
+.blog .blog-content .image img{
+    width: 100%;
+    transition: .4s all;
+}
+.blog .blog-content .image img:hover{
+    scale: 1.1;
+}
+.blog .blog-content .number{
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    width: 70px;
+}
+.blog .blog-content .number h6{
+    font-weight: bold;
+    font-size: 20px;
+}
+.blog .blog-content .number p{
+    font-size: 10px;
+}
+.blog .blog-content a{
+    transition: .4s all;
+}
+.blog .blog-content .admin a{
+    color: black;
+    transition: .4s all;
+    position: relative;
+}
+.blog .blog-content .admin a::after{
+    content: "->";
+    position: absolute;
+    top: -5px;
+    right: -20px;
+}
+.blog form input{
+    outline: none;
+}
+.blog form svg{
+    right: 20px;
+}
+.blog .categoris-blog ul li{
+transition: .4s all;
+cursor: pointer;
+}
+.blog .blog-content a:hover,
+.blog .blog-content .admin a:hover,
+.blog .categoris-blog ul li:hover, 
+.blog .archive ul li:hover{
+color: var(--hover-color);
+}
+.blog .featured-products .image{
+    width: 100px;
+    height: 100px;
+}
+.blog .featured-products .image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.blog .featured-products .image .overlay:hover{
+    background-color: #7180e0c6;
+}
