@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
-import { MainContext } from "../../Context/MainContext";
+import { AuthenticationContext } from "../../Context/AuthenticationContext";
 import logo from "../../Assets/logo-no-background.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
@@ -11,7 +11,7 @@ import { TiThMenuOutline } from "react-icons/ti";
 import Cookies from "universal-cookie";
 
 export default function Navbar() {
-  const { userToken, setUserToken } = useContext(MainContext);
+  const { userToken, setUserToken } = useContext(AuthenticationContext);
   const [searchShow, setSearchShow] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -34,18 +34,19 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-useEffect(() => {
-  if (cookies.get("userToken")) {
-    setUserToken(true)
-  }
-  else setUserToken(false)
-}, [])
+  useEffect(() => {
+    if (cookies.get("userToken")) {
+      setUserToken(true);
+    } else setUserToken(false);
+  }, []);
 
   return (
     <>
       <nav
         className={`navbar navbar-expand-lg d-flex py-3  ${
-          (scrollOffset||showDropDown) ? "bg-white py-lg-0" : "bg-transparent py-lg-1"
+          scrollOffset || showDropDown
+            ? "bg-white py-lg-0 nav-shadow"
+            : "bg-transparent py-lg-1"
         } transition fixed-top`}
       >
         <div className="container">
@@ -61,7 +62,11 @@ useEffect(() => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <TiThMenuOutline onClick={()=>{setShowDropDown(!showDropDown)}}/>
+            <TiThMenuOutline
+              onClick={() => {
+                setShowDropDown(!showDropDown);
+              }}
+            />
           </button>
           <ul className="menu-icons d-flex d-lg-none justify-content-center align-items-center gap-4 ms-auto mb-0">
             <li>

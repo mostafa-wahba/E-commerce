@@ -86,7 +86,7 @@
   transition: all 0.8s;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
 }
 
 .product-card .product-img:hover img {
@@ -159,6 +159,8 @@
   background-color: #fff;
   transition: all .4s;
   color: var(--bg-color);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
 }
 @media (min-width: 576px) and (max-width: 768px) {
   .product-card .product-img .quick-view {
@@ -174,6 +176,7 @@
 .product-card .product-img .quick-view:hover {
   background-color: var(--bg-color);
   color: #fff;
+  /* box-shadow: ; */
 }
 
 .product-card .product-img:hover .quick-view {

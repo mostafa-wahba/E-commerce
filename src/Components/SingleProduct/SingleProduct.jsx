@@ -34,7 +34,7 @@ export default function SingleProduct() {
   }
   return (
     <>
-      <main>
+      <div id="single-product">
         <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5">
           <div className="product-and-product-details d-flex justify-content-center gap-5">
             <div
@@ -374,7 +374,7 @@ export default function SingleProduct() {
           </div>
           <RelatedProductSlider/>
         </div>
-      </main>
+      </div>
     </>
   );
 }

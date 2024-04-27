@@ -1,5 +1,4 @@
 #shop {
-    margin-top: 10vh;
     padding: 3.5rem 0;
 }
 
@@ -70,6 +69,24 @@
     transition: all 0.4s;
 }
 .filters-btns button:hover svg{
+    color: #fff;
+    transition: all 0.4s;
+}
+
+.load-more-button {
+    background-color: var(--bg-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+    width: 13rem;
+    height: 3rem;
+    transition: all 0.4s;
+    outline: none;
+    text-align: center;
+    font-family: Poppins;
+}
+.load-more-button:hover{
+    background-color: var(--hover-color);
     color: #fff;
     transition: all 0.4s;
 }

@@ -1,13 +1,12 @@
 import { createContext, useState } from "react";
-export const MainContext = createContext();
-export default function MainContextProvider(props) {
+export const AuthenticationContext = createContext();
+export default function AuthenticationContextProvider(props) {
   //   Search input
   const [test, setTest] = useState(false);
   const [userToken, setUserToken] = useState("");
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+
   return (
-    <MainContext.Provider
+    <AuthenticationContext.Provider
       value={{
         test,
         setTest,
@@ -16,6 +15,6 @@ export default function MainContextProvider(props) {
       }}
     >
       {props.children}
-    </MainContext.Provider>
+    </AuthenticationContext.Provider>
   );
 }

@@ -4,11 +4,11 @@ import img1 from "../../Assets/item-cart-04.jpg";
 import img2 from "../../Assets/item-cart-05.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
-import { MainContext } from "../../Context/MainContext";
+import { AuthenticationContext } from "../../Context/AuthenticationContext";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 export default function Cart() {
-  const { userToken, setUserToken } = useContext(MainContext);
+  const { userToken, setUserToken } = useContext(AuthenticationContext);
   const shippingCost = 9.65;
   const [count, setCount] = useState(1);
   const [loginMassg, setLoginMassg] = useState("");
@@ -80,7 +80,7 @@ export default function Cart() {
   };
   return (
     <>
-      <main id="cart">
+      <div id="cart">
         <div className="container d-flex justify-content-center">
           <div className="row align-items-start w-100 m-0">
             <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
@@ -120,7 +120,8 @@ export default function Cart() {
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
                       <span className="fs-6 text-secondary d-flex gap-2">
-                        <span className="d-block d-md-none">Piece: </span>$ {item.price}
+                        <span className="d-block d-md-none">Piece: </span>${" "}
+                        {item.price}
                       </span>
                     </div>
                     <div className="col-md-3 d-flex justify-content-start align-items-center p-0">
@@ -148,7 +149,10 @@ export default function Cart() {
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
                       <span className="fs-6 text-secondary-emphasis d-flex gap-2">
-                      <span className="d-block d-md-none">Total Pieces: </span>$ {Math.round(item.price * item.quantity * 100) / 100}
+                        <span className="d-block d-md-none">
+                          Total Pieces:{" "}
+                        </span>
+                        $ {Math.round(item.price * item.quantity * 100) / 100}
                       </span>
                     </div>
                   </div>
@@ -183,14 +187,22 @@ export default function Cart() {
                     purchases
                   </p>
                 </div>
-                {loginMassg && 
-                <>
-                <div className="login-massage d-flex justify-content-center align-items-start flex-column">
-                <p className="text-danger">{loginMassg}</p>
-                <Link to={"/Login"} className="d-flex justify-content-center align-items-center  ">Login <span><MdOutlineArrowRightAlt /></span></Link>
-                </div>
-                </>
-                }
+                {loginMassg && (
+                  <>
+                    <div className="login-massage d-flex justify-content-center align-items-start flex-column">
+                      <p className="text-danger">{loginMassg}</p>
+                      <Link
+                        to={"/Login"}
+                        className="d-flex justify-content-center align-items-center  "
+                      >
+                        Login{" "}
+                        <span>
+                          <MdOutlineArrowRightAlt />
+                        </span>
+                      </Link>
+                    </div>
+                  </>
+                )}
                 <div className="form-btn d-flex justify-content-center-align-items-center w-100">
                   <button
                     onClick={loginChecking}
@@ -203,7 +215,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

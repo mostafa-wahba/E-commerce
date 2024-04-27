@@ -15,27 +15,43 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
 import UpBtn from "./Components/UpBtn/UpBtn";
+import Layout from "./Layout/Layout";
 
 const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/products" element={<Shop />}></Route>
-        <Route path="/login" element={<ProtectedRoute><Login /></ProtectedRoute>}></Route>
-        <Route path="/register" element={<ProtectedRoute><Register /></ProtectedRoute>}></Route>
-        <Route path="/singleProduct" element={<SingleProduct />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="*" element={<NotFound />} /> {/* This handles undefined routes */}
-
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/products" element={<Shop />}></Route>
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute>
+                <Login />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <Register />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route path="/product:id" element={<SingleProduct />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
-      <UpBtn/>
+      <UpBtn />
       <Footer />
     </>
   );
