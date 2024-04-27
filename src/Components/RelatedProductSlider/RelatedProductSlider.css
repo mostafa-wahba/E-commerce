@@ -1,30 +1,10 @@
- .append-buttons button {
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid #007aff;
-    color: #007aff;
-    text-decoration: none;
-    padding: 4px 10px;
-    border-radius: 4px;
-    margin: 0 10px;
-    font-size: 13px;
-  }
-.container-card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .container-card .card{
-    width: 300px;
-    height: 500px;
-    overflow: hidden;
-    margin: auto;
-  }
-  .container-card .card .card-image{
-    height: 300px;
-  }
-  .container-card .card .card-image img{
-    width: 100%;
-    height: 100%;
-  }
-  
+.swiper-button-prev,.swiper-button-next{
+  color: var(--hover-color) !important;
+}
+.swiper-button-prev{
+  left: var(--swiper-navigation-sides-offset, 0px) !important;
+}
+.swiper-button-next{
+  right: var(--swiper-navigation-sides-offset, 0px) !important;
+  text-align: justify;
+}

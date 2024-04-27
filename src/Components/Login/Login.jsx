@@ -6,23 +6,23 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { MainContext } from "../../Context/MainContext";
+import { AuthenticationContext } from "../../Context/AuthenticationContext";
 export default function Login() {
   const [isloading, setIsloading] = useState(false);
   let navigate = useNavigate();
   const cookies = new Cookies();
-  const {setUserToken} = useContext(MainContext);
+  const { setUserToken } = useContext(AuthenticationContext);
   async function handleLogin(values) {
     try {
       setIsloading(true);
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         `https://ecommerce.routemisr.com/api/v1/auth/signin`,
         values
       );
       if (data.message === "success") {
         // Assuming the token is returned in response.data.token
         cookies.set("userToken", data.token, { path: "/" });
-        setUserToken(data.token)
+        setUserToken(data.token);
         setIsloading(false);
         navigate("/");
         console.log("ok");
@@ -55,7 +55,7 @@ export default function Login() {
           <img src={bg} alt="bg" className="w-100 h-100" />
         </div>
         <form
-        id=""
+          id=""
           onSubmit={formik.handleSubmit}
           className="container d-flex justify-content-center align-items-center flex-column gap-2"
         >
@@ -104,7 +104,9 @@ export default function Login() {
               </div>
             ) : null}
           </div>
-          <NavLink to="#" onClick={""}>Forget Password</NavLink>
+          <NavLink to="#" onClick={""}>
+            Forget Password
+          </NavLink>
           <div className="buttons d-flex gap-2 w-100 justify-content-center my-2">
             {isloading ? (
               <button type="button" className="border-0">
@@ -114,12 +116,12 @@ export default function Login() {
               </button>
             ) : (
               <button
-              type="submit"
-              className="btn btn-primary text-white p-3 btn-blue w-100"
-              disabled={!(formik.isValid && formik.dirty)}
-            >
-              Login
-            </button>
+                type="submit"
+                className="btn btn-primary text-white p-3 btn-blue w-100"
+                disabled={!(formik.isValid && formik.dirty)}
+              >
+                Login
+              </button>
             )}
           </div>
           <p>

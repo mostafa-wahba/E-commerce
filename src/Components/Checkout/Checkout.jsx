@@ -42,7 +42,7 @@ export default function Checkout() {
       ]);
   return (
     <>
-      <main id="checkout">
+      <div id="checkout">
         <div className="container d-flex justify-content-center">
           <div className="row align-items-start justify-content-center gap-1 w-100 m-0">
             <div className="shipment-details col-12 col-lg-7 me-auto mb-5 d-flex justify-content-center align-items-center flex-column gap-5">
@@ -138,7 +138,7 @@ export default function Checkout() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 .not-found-container {
     padding: 3.5rem 0;
     text-align: center;
-    margin: auto;
+    margin: auto !important;
     margin-top: 10vh;
     max-width: 600px;
     color: #333;
