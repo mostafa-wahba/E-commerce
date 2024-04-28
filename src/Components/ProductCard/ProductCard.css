@@ -102,7 +102,7 @@
 
 .product-card .product-content svg {
   color: rgb(201, 195, 195);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 900;
   cursor: pointer;
   transition: all .4s;
@@ -176,11 +176,11 @@
 .product-card .product-img .quick-view:hover {
   background-color: var(--bg-color);
   color: #fff;
-  /* box-shadow: ; */
 }
 
 .product-card .product-img:hover .quick-view {
   bottom: 5%;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 .wishlist-btn{
   position: absolute;
@@ -202,4 +202,11 @@
 .wishlist-btn:hover svg{
   color: var(--hover-color);
   transition: all 0.4s;
+}
+.wishlist-btn-checked svg{
+  color: var(--hover-color);
+}
+.wishlist-btn-unchecked svg{
+  color: var(--grey-color);
+
 }
