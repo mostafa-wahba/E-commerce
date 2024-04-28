@@ -16,9 +16,9 @@ export default function Blog() {
           <h1>Blog</h1>
         </div>
       </div>
-      <div className="container my-5 blog">
+      <div className="container mx-auto my-5 blog">
         <div className="row">
-          <div className="col-lg-8 col-md-11 mx-md-auto mx-ms-auto col-sm-10">
+          <div className="col-lg-9 col-md-11 mx-md-auto mx-ms-auto col-sm-10">
             <div className="blog-content mb-5 position-relative">
               <div className="image">
                 <img src={img1} alt="" />
@@ -113,7 +113,7 @@ export default function Blog() {
               </div>
             </div>
           </div>
-          <div className="col-4 d-flex  align-items-start flex-column text-muted ">
+          <div className="col-3 d-flex  align-items-start flex-column text-muted ">
             <div className="categoris-blog w-100">
                 <form action="" className="position-relative mb-3">
                 <input type="search" name="" id="" placeholder="Search" className=" rounded p-3 border rounded-pill w-100 "/>

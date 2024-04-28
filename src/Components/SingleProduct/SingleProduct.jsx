@@ -207,7 +207,7 @@ export default function SingleProduct() {
                 </button>
               </li>
             </ul>
-            <div className="tab-content" id="pills-tabContent">
+            <div className="tab-content review-details" id="pills-tabContent">
               <div
                 className="tab-pane fade show active"
                 id="pills-home"

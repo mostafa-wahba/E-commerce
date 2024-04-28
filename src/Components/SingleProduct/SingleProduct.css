@@ -19,9 +19,7 @@
 .spooduct-container{
     height: 600px;
 }
-.spooduct-container img{
-    object-fit: contain;
-}
+
 .product-and-product-details .product-details .description-text,
 .product-and-product-details .product-details .product-country span {
     color: #666;
@@ -167,6 +165,19 @@
 .description-and-ratting form [type=submit]:hover{
     background-color: var(--hover-color);
     transition: .4s all;
+}
+.review-details{
+    padding: 10px 200px;
+}
+.description-and-ratting .nav-item .active{
+    border-bottom: 2px solid black;
+    transition: 0 all;
+    /* transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out; */
+    /* transition-behavior: normal, normal, normal; */
+    transition-duration: 0;
+    transition-timing-function:0;
+    transition-delay: 0;
+    transition-property:0;
 }
 @media screen and (max-width:700px) {
     .product-and-product-details {

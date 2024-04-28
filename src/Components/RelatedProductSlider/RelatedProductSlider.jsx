@@ -41,6 +41,7 @@ const randomProducts = getRandomProducts(products, 9); // Get 9 random products
   return (
     <>
       <div className="container">
+        <h2 className="related-product-title text-center">Related Products</h2>
         <div className="row">
           <div className="container-card overflow-hidden">
             <Swiper
@@ -63,7 +64,7 @@ const randomProducts = getRandomProducts(products, 9); // Get 9 random products
               navigation={true}
               modules={[Pagination, Navigation]}
               b
-              className="mySwiper justify-content-center text-sm-center"
+              className="mySwiper justify-content-center text-sm-center" 
             >
               {randomProducts.map((product, index) => (
                   <SwiperSlide>

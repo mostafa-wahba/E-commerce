@@ -16,11 +16,14 @@ import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
 import UpBtn from "./Components/UpBtn/UpBtn";
 import Layout from "./Layout/Layout";
+import Blog from "./Components/Blog/Blog";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 
 const App = () => {
   return (
     <>
       <Navbar />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}></Route>
@@ -48,6 +51,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

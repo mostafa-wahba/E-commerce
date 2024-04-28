@@ -34,7 +34,7 @@
 .blog .blog-content .admin a::after{
     content: "->";
     position: absolute;
-    top: -5px;
+    top: -2px;
     right: -20px;
 }
 .blog form input{
