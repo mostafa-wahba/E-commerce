@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { toast, Zoom } from "react-toastify";
 export const ProductsContext = createContext();
 export default function ProductsContextProvider(props) {
   const [products, setProducts] = useState([]);
@@ -69,6 +70,58 @@ export default function ProductsContextProvider(props) {
   //   };
   //   fetchCategory(); // Fetch data when the component is mounted
   // }, []);
+  const [addToCart, setAddToCart] = useState(false);
+
+  const handleAddToCart = () => {
+    setAddToCart(true); // Set addToCart to trigger the useEffect
+  };
+  const addToCartNotify = () => {
+    try {
+      toast.success("Product has been added to cart successfully", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
+    } catch (error) {
+      console.error("Toast notification error:", error);
+    }
+  };
+  const addToWishlistNotify = (isWishlistCheck) => {
+    if (isWishlistCheck){
+      toast.info("Product has been added to wishlist successfully", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
+    }
+    else{
+    toast.error("Product has been removed from wishlist", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Zoom,
+    });
+  }
+
+  };
+
   return (
     <ProductsContext.Provider
       value={{
@@ -85,6 +138,11 @@ export default function ProductsContextProvider(props) {
         womenProducts,
         menProducts,
         electronicsProducts,
+        addToCart,
+        setAddToCart,
+        addToCartNotify,
+        handleAddToCart,
+        addToWishlistNotify,
       }}
     >
       {props.children}

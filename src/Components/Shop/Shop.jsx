@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Shop.css";
-import { IoFilterOutline } from "react-icons/io5";
-import { IoMdSearch } from "react-icons/io";
+// import { IoFilterOutline } from "react-icons/io5";
+// import { IoMdSearch } from "react-icons/io";
 import ProductCard from "../ProductCard/ProductCard";
 import { ProductsContext } from "../../Context/ProductsContext";
 import Loading from "../Loading/Loading";
