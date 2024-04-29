@@ -43,6 +43,7 @@ export default function SingleProduct() {
     let {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
     setProduct(data.data)
     setImage(data.data.images)
+    // console.log(data.data)
   }
   useEffect(()=>{
     
@@ -141,14 +142,14 @@ export default function SingleProduct() {
             <div className="product-details pt-3 w-100">
               <h4>{product.title}</h4>
               <div className="price d-flex justify-content-between">
-                <p className="price-text">$ {product.price}</p>
-                <p className="curser-pointer">In Stock</p>
+                <div className="text d-flex gap-4">
+                  <p className="price-text text-decoration-line-through ">$ {product.price}</p>
+                  <p className="price-text text-black">$ {product.priceAfterDiscount}</p>
+                </div>
               </div>
               <hr />
               <p className="mb-3 description-text">
-                Go sporty this summer with this vintage navy and white striped
-                v-neck t-shirt from the Nike. Perfect for pairing with denim and
-                white kicks for a stylish sporty vibe.
+                {product.description}
               </p>
               <div className="count-cart d-flex justify-content-start align-items-start gap-4">
                 <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
@@ -176,10 +177,10 @@ export default function SingleProduct() {
                   SKU: <span>P-01</span>
                 </p>
                 <p>
-                  Categories: <span>Accessories, Clothing</span>
+                  Categories: <span>Women</span>
                 </p>
                 <p>
-                  Tags: <span>Accessories, T-shirt</span>
+                  Tags: <span>women</span>
                 </p>
               </div>
               <div className="social-icons d-flex justify-content-center gap-4">
