@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -6,12 +6,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { AuthenticationContext } from "../../Context/AuthenticationContext";
 export default function Login() {
   const [isloading, setIsloading] = useState(false);
   let navigate = useNavigate();
   const cookies = new Cookies();
-  const { setUserToken } = useContext(AuthenticationContext);
   async function handleLogin(values) {
     try {
       setIsloading(true);
@@ -22,7 +20,6 @@ export default function Login() {
       if (data.message === "success") {
         // Assuming the token is returned in response.data.token
         cookies.set("userToken", data.token, { path: "/" });
-        setUserToken(data.token);
         setIsloading(false);
         navigate("/");
         console.log("ok");

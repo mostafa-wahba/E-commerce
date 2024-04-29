@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
-import { AuthenticationContext } from "../../Context/AuthenticationContext";
 import logo from "../../Assets/logo-no-background.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
@@ -11,8 +10,8 @@ import { TiThMenuOutline } from "react-icons/ti";
 import Cookies from "universal-cookie";
 
 export default function Navbar() {
-  const { userToken, setUserToken } = useContext(AuthenticationContext);
   const [searchShow, setSearchShow] = useState(false);
+  const [token, setToken] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
 
@@ -20,7 +19,7 @@ export default function Navbar() {
   const cookies = new Cookies();
   const handleLogout = () => {
     cookies.remove("userToken", { path: "/" }); // Remove cookie
-    setUserToken(null); // Reset context
+    setToken(null); // Reset context
     navigate("/login"); // Redirect to login page
   };
   useEffect(() => {
@@ -36,9 +35,9 @@ export default function Navbar() {
   }, []);
   useEffect(() => {
     if (cookies.get("userToken")) {
-      setUserToken(true);
-    } else setUserToken(false);
-  }, []);
+      setToken(cookies.get("userToken"));
+    } 
+  }, [cookies]);
 
   return (
     <>
@@ -179,7 +178,7 @@ export default function Navbar() {
                 <FaRegHeart />
               </Link>
             </li>
-            {userToken && (
+            {token && (
               <li>
                 <Link to="profile">
                   <CgProfile />
@@ -187,7 +186,7 @@ export default function Navbar() {
               </li>
             )}
             <li className="nav-item d-lg-block d-flex justify-content-center align-items-center ">
-              {userToken ? (
+              {token ? (
                 <NavLink
                   className="nav-link me-lg-4 poppins-medium login-logout"
                   to="/login"

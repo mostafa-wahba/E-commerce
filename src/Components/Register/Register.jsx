@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ export default function Register() {
         setIsloading(false);
         setMsgError(`${errr.response.data.message}`);
       });
-    console.log(data);
     if (data.message === "success") {
       setIsloading(false);
       toLogin("/login");
@@ -50,7 +49,7 @@ export default function Register() {
     validationSchema: validation,
   });
   return (
-    <Fragment>
+    <>
       <div className="register w-100 min-vh-100">
         <div className="image min-vh-100 d-none d-md-block">
           <img src={bg} alt="bg" className="w-100 h-100" />
@@ -205,6 +204,6 @@ export default function Register() {
           </p>
         </form>
       </div>
-    </Fragment>
+    </>
   );
 }
