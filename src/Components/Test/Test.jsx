@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { AuthenticationContext } from "../../Context/AuthenticationContext";
+import { ProductsContext } from "../../Context/ProductsContext";
 
 function Test() {
   const { products, setProducts, categories, setCategories } = useContext(
-    AuthenticationContext
+    ProductsContext
   );
   const [error, setError] = useState("");
   useEffect(() => {

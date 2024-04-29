@@ -7,8 +7,8 @@ export default function Layout() {
     <>
     <main>
       <Outlet />
-      <ToastContainer />
     </main>
+      <ToastContainer />
     </>
   );
 }

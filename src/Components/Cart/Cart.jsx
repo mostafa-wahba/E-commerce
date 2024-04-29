@@ -1,65 +1,81 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Cart.css";
-import img1 from "../../Assets/item-cart-04.jpg";
-import img2 from "../../Assets/item-cart-05.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
-import { AuthenticationContext } from "../../Context/AuthenticationContext";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import Cookies from "universal-cookie";
+import { CartContext } from "../../Context/CartContext";
+import axios from "axios";
 
 export default function Cart() {
-  const { userToken, setUserToken } = useContext(AuthenticationContext);
+  function clearCart() {
+    return axios
+      .delete(`https://ecommerce.routemisr.com/api/v1/cart`, {
+        headers: headers,
+      })
+      .then((res) => res)
+      .catch((err) => err);
+  }
   const shippingCost = 9.65;
-  const [count, setCount] = useState(1);
+  const cookies = new Cookies();
+  const userToken = cookies.get("userToken");
+  const {
+    addedProducts,
+    setAddedProducts,
+    sendToCart,
+    headers,
+    loading,
+    setLoading,
+  } = useContext(CartContext);
   const [loginMassg, setLoginMassg] = useState("");
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setAddedProducts(JSON.parse(storedCart));
+    }
+  }, [setAddedProducts]);
   const increment = (id) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+    setAddedProducts((prevProducts) => {
+      const updatedProducts = prevProducts.map((product) =>
+        product.id === id
+          ? { ...product, quantity: product.quantity + 1 }
+          : product
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedProducts)); // Update local storage
+      return updatedProducts;
+    });
   };
 
   const decrement = (id) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id && item.quantity > 0
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
+    setAddedProducts((prevProducts) => {
+      const updatedProducts = prevProducts.map((product) =>
+        product.id === id && product.quantity > 1
+          ? { ...product, quantity: product.quantity - 1 }
+          : product
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedProducts)); // Update local storage
+      return updatedProducts;
+    });
   };
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      name: "Product A",
-      price: 29.99,
-      quantity: 2,
-      src: img1,
-    },
-    {
-      id: 2,
-      name: "Product B",
-      price: 19.99,
-      quantity: 1,
-      src: img2,
-    },
-  ]);
-  const removeItem = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const removeProduct = (id) => {
+    setAddedProducts((prevProducts) => {
+      const updatedProducts = prevProducts.filter(
+        (product) => product.id !== id
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedProducts));
+      return updatedProducts;
+    });
   };
   const calculateTotal = () => {
     // Calculate the subtotal by summing the price and quantity of all items
-    const subtotal = items.reduce(
-      (total, item) =>
-        Math.round((total + item.price * item.quantity) * 100) / 100,
+    const subtotal = addedProducts.reduce(
+      (total, product) =>
+        Math.round((total + product.price * product.quantity) * 100) / 100,
       0
     );
 
     // Calculate the VAT at 14% on the subtotal
     const tax = Math.round(subtotal * 0.14 * 100) / 100; // Round to two decimal places
-
-    // Shipping cost is 9.65
 
     // Calculate the final total by adding the tax and shipping to the subtotal
     const finalTotal = Math.round((subtotal + tax + shippingCost) * 100) / 100;
@@ -69,15 +85,46 @@ export default function Cart() {
       total: finalTotal, // Return the final total
     }; // Return the final total
   };
+  
   const { subtotal, total } = calculateTotal(); // Destructure to get both values
   const navigate = useNavigate();
-  const loginChecking = () => {
-    if (userToken) {
-      navigate("/checkout");
-    } else {
-      setLoginMassg("Please Signin First");
+  const handleQuantityChange = (id, newQuantity) => {
+    setAddedProducts((prevProducts) => {
+      return prevProducts.map((product) => {
+        if (product.id === id) {
+          return { ...product, quantity: Math.max(1, newQuantity) };
+        }
+        return product;
+      });
+    });
+  };
+  const handleAddToCart = async () => {
+    if (!userToken) {
+      setLoginMassg("Please Sign in First");
+      return; // Stop the function if no user token
+    }
+
+    setLoading(true); // Start loading before the API calls
+    try {
+      await clearCart(); // Ensure the cart is cleared before adding new items
+
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      // Sending requests with delay
+      for (const product of cartItems) {
+        for (let i = 0; i < product.quantity; i++) {
+          await sendToCart(product.id); // Await each request individually
+          await new Promise((r) => setTimeout(r, 200)); // Delay of 200ms between requests
+        }
+      }
+
+      navigate("/checkout"); // Navigate only after all operations succeed
+    } catch (error) {
+      console.error("Failed to add products to cart:", error);
+    } finally {
+      setLoading(false); // Ensure loading is turned off after operations complete
     }
   };
+
   return (
     <>
       <div id="cart">
@@ -99,36 +146,36 @@ export default function Cart() {
                     <p>TOTAL</p>
                   </div>
                 </div>
-                {items.map((item) => (
+                {addedProducts.map((product) => (
                   <div
-                    key={item.id}
-                    className="product-row row g-3 p-5 border-bottom w-100"
+                    key={product.id}
+                    className="product-row row g-3 p-4 px-5 border-bottom w-100"
                   >
                     <div className="col-md-5 d-flex justify-content-start align-items-center">
                       <div className="d-flex justify-content-center align-items-center">
                         <div
-                          className="product-image me-4"
-                          onClick={() => removeItem(item.id)}
+                          className="product-image me-4 w-25"
+                          onClick={() => removeProduct(product.id)}
                         >
                           <div className="product-image-overlay">
                             <FaXmark />
                           </div>
-                          <img src={item.src} alt="product" />
+                          <img src={product.imageCover} alt="product" />
                         </div>
-                        <p>{item.name}</p>
+                        <p className="w-75">{product.title}</p>
                       </div>
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
                       <span className="fs-6 text-secondary d-flex gap-2">
-                        <span className="d-block d-md-none">Piece: </span>${" "}
-                        {item.price}
+                        <span className="d-block d-md-none">Price: </span>${" "}
+                        {product.price}
                       </span>
                     </div>
                     <div className="col-md-3 d-flex justify-content-start align-items-center p-0">
                       <div className="w-100 row border border-light-subtle quantity-btns rounded-2 overflow-hidden">
                         <button
                           className="d-flex justify-content-center align-items-center col-4 transition"
-                          onClick={() => decrement(item.id)}
+                          onClick={() => decrement(product.id)}
                         >
                           -
                         </button>
@@ -136,12 +183,18 @@ export default function Cart() {
                           <input
                             type="number"
                             className="amount-input w-100 h-100 d-flex justify-content-center align-items-center bg-body-tertiary text-center"
-                            value={item.quantity}
+                            value={product.quantity}
+                            onChange={(e) =>
+                              handleQuantityChange(
+                                product.id,
+                                parseInt(e.target.value)
+                              )
+                            }
                           />
                         </div>
                         <button
                           className="d-flex justify-content-center align-items-center col-4 transition"
-                          onClick={() => increment(item.id)}
+                          onClick={() => increment(product.id)}
                         >
                           +
                         </button>
@@ -149,10 +202,10 @@ export default function Cart() {
                     </div>
                     <div className="col-md-2 d-flex justify-content-start align-items-center">
                       <span className="fs-6 text-secondary-emphasis d-flex gap-2">
-                        <span className="d-block d-md-none">
-                          Total Pieces:{" "}
-                        </span>
-                        $ {Math.round(item.price * item.quantity * 100) / 100}
+                        <span className="d-block d-md-none">Total Price: </span>
+                        ${" "}
+                        {Math.round(product.price * product.quantity * 100) /
+                          100}
                       </span>
                     </div>
                   </div>
@@ -205,10 +258,16 @@ export default function Cart() {
                 )}
                 <div className="form-btn d-flex justify-content-center-align-items-center w-100">
                   <button
-                    onClick={loginChecking}
+                    onClick={handleAddToCart}
                     className="rounded-pill text-uppercase w-100 border-0"
                   >
-                    Proceed to Checkout
+                    {loading ? (
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    ) : (
+                      "Proceed to Checkout"
+                    )}
                   </button>
                 </div>
               </form>
