@@ -34,7 +34,7 @@ export default function Login() {
   let validation = Yup.object({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string().required("Password is required")
-    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be start with [A-Z] then follow with [a-z] then numbers"),
+    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password is wrong"),
   });
   let formik = useFormik({
     initialValues: {
