@@ -37,14 +37,17 @@ export default function SingleProduct() {
 
   let {id} =useParams()
   const [product, setProduct]=useState([])
+  const [image, setImage]=useState([])
+  const [active, setActive] = useState(null)
   const getProduct =async ()=>{
     let {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
     setProduct(data.data)
-    // console.log(data.data)
+    setImage(data.data.images)
   }
   useEffect(()=>{
+    
     getProduct()
-  },[])
+  }, [])
   
   return (
     <>
@@ -56,7 +59,8 @@ export default function SingleProduct() {
               className="carousel slide w-100 spooduct-container"
               data-bs-ride="carousel"
             >
-              <div className="carousel-indicators">
+              <div className="carousel-indicators" key={product.id}>
+                {image.map((setImage)=>
                 <button
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
@@ -65,15 +69,18 @@ export default function SingleProduct() {
                   aria-current="true"
                   aria-label="Slide 1"
                 >
-                  <img src={product.images[0]} className="d-block w-100" alt="..." />
+                  <img src={setImage} className="d-block w-100" alt="..." />
+                  {/* <p>{produc}</p> */}
                 </button>
-                <button
+              )}
+                
+                {/* <button
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 >
-                  <img src={product.images[1]} className="d-block w-100" alt="..." />
+                  <img src={image[1]} className="d-block w-100" alt="..."  />
                 </button>
                 <button
                   type="button"
@@ -81,22 +88,32 @@ export default function SingleProduct() {
                   data-bs-slide-to="2"
                   aria-label="Slide 3"
                 >
-                  <img src={product.images[2]} className="d-block w-100" alt="..." />
-                </button>
+                  <img src={image[2]} className="d-block w-100" alt="..." />
+                </button> */}
               </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active w-100">
-                  <img src={product.images[0]} className="d-block w-100" alt="..." />
+              <div className="images carousel-inner">
+                {
+                  image.map((setImage)=>
+                  
+                  // <div className={setActive(setImage)}>
+
+                   <div className="carousel-item active w-100">
+                  <img src={setImage} className="d-block w-100" alt="..." />
+                </div>
+                )
+                }
+                
+                
+                {/* <div className="carousel-item w-100">
+                  <img src={image[1]} className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item w-100">
-                  <img src={product.images[1]} className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item w-100">
-                  <img src={product.images[2]} className="d-block w-100" alt="..." />
-                </div>
+                  <img src={image[2]} className="d-block w-100" alt="..." />
+                </div> */}
               </div>
               <button
-                className="carousel-control-prev"
+              id="btn-icon"
+                className="carousel-control-prev top-50"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev"
@@ -108,7 +125,8 @@ export default function SingleProduct() {
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
-                className="carousel-control-next "
+              id="btn-icon2"
+                className="carousel-control-next top-50"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next"

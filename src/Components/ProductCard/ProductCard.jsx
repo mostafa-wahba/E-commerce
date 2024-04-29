@@ -87,7 +87,7 @@ export default function ProductCard({ product }) {
           </div>
           <div className="product-content w-100 pt-3 p-2 position-relative d-flex justify-content-between align-items-start flex-column">
             <div className="d-flex justify-content-between align-items-center w-100">
-              <Link to="/product/:id" className="text-start">
+              <Link to={'/product/' + product.id} className="text-start">
                 {product.title}
               </Link>
               <AnimatePresence mode="wait">

@@ -196,3 +196,11 @@
         width: 100%;
     }
 }
+#single-product .images .active::after{
+    background:none;
+}
+#btn-icon,#btn-icon2{
+    background-color: var(--hover-color);
+    height: 50px;
+    width: 35px;
+}
