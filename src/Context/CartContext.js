@@ -23,7 +23,7 @@ export default function CartContextProvider(props) {
       `https://ecommerce.routemisr.com/api/v1/cart`,
       { productId: productId },
       { headers: headers }
-    ).then((res) => console.log(res))
+    ).then((res) => res)
       .catch((err) => err);
   }
   function getLoggedUserCart() {

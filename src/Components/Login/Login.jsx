@@ -22,7 +22,6 @@ export default function Login() {
         cookies.set("userToken", data.token, { path: "/" });
         setIsloading(false);
         navigate("/");
-        console.log("ok");
       } else {
         setIsloading(false);
         console.error("Login failed:", data.message);

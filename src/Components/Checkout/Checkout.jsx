@@ -22,11 +22,6 @@ export default function Checkout() {
     };
     fetchCart();
   }, []);
-
-  useEffect(() => {
-    console.log(checkoutProducts);
-  }, [checkoutProducts]);
-
   //     {
   //       id: 1,
   //       name: "Fresh Strawberries",
