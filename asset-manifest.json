@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/E-commerce/static/css/main.41b2121d.css",
-    "main.js": "/E-commerce/static/js/main.11598d05.js",
+    "main.css": "/E-commerce/static/css/main.e5922add.css",
+    "main.js": "/E-commerce/static/js/main.efd267ef.js",
     "static/media/image.png": "/E-commerce/static/media/image.bca544d079af1bd090c4.png",
-    "static/media/o189896b.png": "/E-commerce/static/media/o189896b.cd304772339641b5bbb6.png",
     "static/media/about-02.jpg": "/E-commerce/static/media/about-02.a7ac291f750a0a429206.jpg",
     "static/media/g-03.jpg": "/E-commerce/static/media/g-03.ba75321d52cb7e8ddedd.jpg",
     "static/media/about-01.jpg.webp": "/E-commerce/static/media/about-01.jpg.615b58dc82442750f6c3.webp",
     "static/media/g-01.jpg": "/E-commerce/static/media/g-01.2090440ead7583dc9fc8.jpg",
     "static/media/banner-02.jpg": "/E-commerce/static/media/banner-02.839abedb72233fcf49b5.jpg",
-    "static/media/o187188b.png": "/E-commerce/static/media/o187188b.298c376c530e3372c59e.png",
+    "static/media/blog-05.jpg.webp": "/E-commerce/static/media/blog-05.jpg.4f8bbc42534cb4fce2b1.webp",
     "static/media/g-04.jpg": "/E-commerce/static/media/g-04.bef9e154a058f05bf4d1.jpg",
+    "static/media/blog-04.jpg.webp": "/E-commerce/static/media/blog-04.jpg.2f19a2039baed5b1ced0.webp",
     "static/media/logo-no-background.png": "/E-commerce/static/media/logo-no-background.74d9571dc6250379af9f.png",
+    "static/media/blog-06.jpg.webp": "/E-commerce/static/media/blog-06.jpg.4cfeb063d3ddcfa05072.webp",
     "static/media/banner-01.jpg": "/E-commerce/static/media/banner-01.1119941cd9ea3f01bda4.jpg",
+    "static/media/blog.jpg.webp": "/E-commerce/static/media/blog.jpg.827e08aba26f059eb7b2.webp",
     "static/media/banner-03.jpg": "/E-commerce/static/media/banner-03.9bba8651ce23f5ef5a22.jpg",
     "static/media/bg-01.jpg.webp": "/E-commerce/static/media/bg-01.jpg.32de94f697ad2e89c22a.webp",
     "index.html": "/E-commerce/index.html",
     "static/media/icon-email.png.webp": "/E-commerce/static/media/icon-email.png.9083e877c418b8ce5c41.webp",
-    "main.41b2121d.css.map": "/E-commerce/static/css/main.41b2121d.css.map",
-    "main.11598d05.js.map": "/E-commerce/static/js/main.11598d05.js.map"
+    "main.e5922add.css.map": "/E-commerce/static/css/main.e5922add.css.map",
+    "main.efd267ef.js.map": "/E-commerce/static/js/main.efd267ef.js.map"
   },
   "entrypoints": [
-    "static/css/main.41b2121d.css",
-    "static/js/main.11598d05.js"
+    "static/css/main.e5922add.css",
+    "static/js/main.efd267ef.js"
   ]
 }
