@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
@@ -14,6 +14,8 @@ import img2 from "../../Assets/g-03.jpg";
 import { MdStarRate } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
 import RelatedProductSlider from "../RelatedProductSlider/RelatedProductSlider";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -32,6 +34,18 @@ export default function SingleProduct() {
       }
     });
   }
+
+  let {id} =useParams()
+  const [product, setProduct]=useState([])
+  const getProduct =async ()=>{
+    let {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
+    setProduct(data.data)
+    // console.log(data.data)
+  }
+  useEffect(()=>{
+    getProduct()
+  },[])
+  
   return (
     <>
       <div id="single-product">
@@ -51,7 +65,7 @@ export default function SingleProduct() {
                   aria-current="true"
                   aria-label="Slide 1"
                 >
-                  <img src={img} className="d-block w-100" alt="..." />
+                  <img src={product.images[0]} className="d-block w-100" alt="..." />
                 </button>
                 <button
                   type="button"
@@ -59,7 +73,7 @@ export default function SingleProduct() {
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 >
-                  <img src={img1} className="d-block w-100" alt="..." />
+                  <img src={product.images[1]} className="d-block w-100" alt="..." />
                 </button>
                 <button
                   type="button"
@@ -67,18 +81,18 @@ export default function SingleProduct() {
                   data-bs-slide-to="2"
                   aria-label="Slide 3"
                 >
-                  <img src={img2} className="d-block w-100" alt="..." />
+                  <img src={product.images[2]} className="d-block w-100" alt="..." />
                 </button>
               </div>
               <div className="carousel-inner">
                 <div className="carousel-item active w-100">
-                  <img src={img} className="d-block w-100" alt="..." />
+                  <img src={product.images[0]} className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item w-100">
-                  <img src={img1} className="d-block w-100" alt="..." />
+                  <img src={product.images[1]} className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item w-100">
-                  <img src={img2} className="d-block w-100" alt="..." />
+                  <img src={product.images[2]} className="d-block w-100" alt="..." />
                 </div>
               </div>
               <button
@@ -107,9 +121,9 @@ export default function SingleProduct() {
               </button>
             </div>
             <div className="product-details pt-3 w-100">
-              <h4>Lightweight Jacket</h4>
+              <h4>{product.title}</h4>
               <div className="price d-flex justify-content-between">
-                <p className="price-text">$30.00</p>
+                <p className="price-text">$ {product.price}</p>
                 <p className="curser-pointer">In Stock</p>
               </div>
               <hr />

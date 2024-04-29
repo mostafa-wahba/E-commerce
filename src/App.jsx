@@ -45,7 +45,7 @@ const App = () => {
               </ProtectedRoute>
             }
           ></Route>
-          <Route path="/product:id" element={<SingleProduct />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
