@@ -29,7 +29,7 @@ export default function Register() {
       .max(20, "Miximum length is 10"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string().required("Password is required")
-    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be start with [A-Z] then follow with [a-z] then numbers"),
+    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be start with Capital letter, followed by 5 to 10 lowercase letters or digits."),
     rePassword: Yup.string()
       .required("Repassword is required")
       .oneOf([Yup.ref("password")], "Password doesnt match"),
