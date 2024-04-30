@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoIosArrowRoundDown } from "react-icons/io";
 import { IoIosArrowRoundUp } from "react-icons/io";
@@ -14,6 +14,8 @@ import img2 from "../../Assets/g-03.jpg";
 import { MdStarRate } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
 import RelatedProductSlider from "../RelatedProductSlider/RelatedProductSlider";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 export default function SingleProduct() {
   const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
 
@@ -32,6 +34,22 @@ export default function SingleProduct() {
       }
     });
   }
+
+  let {id} =useParams()
+  const [product, setProduct]=useState([])
+  const [image, setImage]=useState([])
+  const [active, setActive] = useState(null)
+  const getProduct =async ()=>{
+    let {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
+    setProduct(data.data)
+    setImage(data.data.images)
+    // console.log(data.data)
+  }
+  useEffect(()=>{
+    
+    getProduct()
+  }, [])
+  
   return (
     <>
       <div id="single-product">
@@ -42,7 +60,8 @@ export default function SingleProduct() {
               className="carousel slide w-100 spooduct-container"
               data-bs-ride="carousel"
             >
-              <div className="carousel-indicators">
+              <div className="carousel-indicators" key={product.id}>
+                {image.map((setImage)=>
                 <button
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
@@ -51,15 +70,18 @@ export default function SingleProduct() {
                   aria-current="true"
                   aria-label="Slide 1"
                 >
-                  <img src={img} className="d-block w-100" alt="..." />
+                  <img src={setImage} className="d-block w-100" alt="..." />
+                  {/* <p>{produc}</p> */}
                 </button>
-                <button
+              )}
+                
+                {/* <button
                   type="button"
                   data-bs-target="#carouselExampleIndicators"
                   data-bs-slide-to="1"
                   aria-label="Slide 2"
                 >
-                  <img src={img1} className="d-block w-100" alt="..." />
+                  <img src={image[1]} className="d-block w-100" alt="..."  />
                 </button>
                 <button
                   type="button"
@@ -67,22 +89,32 @@ export default function SingleProduct() {
                   data-bs-slide-to="2"
                   aria-label="Slide 3"
                 >
-                  <img src={img2} className="d-block w-100" alt="..." />
-                </button>
+                  <img src={image[2]} className="d-block w-100" alt="..." />
+                </button> */}
               </div>
-              <div className="carousel-inner">
-                <div className="carousel-item active w-100">
-                  <img src={img} className="d-block w-100" alt="..." />
+              <div className="images carousel-inner">
+                {
+                  image.map((setImage)=>
+                  
+                  // <div className={setActive(setImage)}>
+
+                   <div className="carousel-item active w-100">
+                  <img src={setImage} className="d-block w-100" alt="..." />
+                </div>
+                )
+                }
+                
+                
+                {/* <div className="carousel-item w-100">
+                  <img src={image[1]} className="d-block w-100" alt="..." />
                 </div>
                 <div className="carousel-item w-100">
-                  <img src={img1} className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item w-100">
-                  <img src={img2} className="d-block w-100" alt="..." />
-                </div>
+                  <img src={image[2]} className="d-block w-100" alt="..." />
+                </div> */}
               </div>
               <button
-                className="carousel-control-prev"
+              id="btn-icon"
+                className="carousel-control-prev top-50"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev"
@@ -94,7 +126,8 @@ export default function SingleProduct() {
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
-                className="carousel-control-next "
+              id="btn-icon2"
+                className="carousel-control-next top-50"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next"
@@ -107,16 +140,16 @@ export default function SingleProduct() {
               </button>
             </div>
             <div className="product-details pt-3 w-100">
-              <h4>Lightweight Jacket</h4>
+              <h4>{product.title}</h4>
               <div className="price d-flex justify-content-between">
-                <p className="price-text">$30.00</p>
-                <p className="curser-pointer">In Stock</p>
+                <div className="text d-flex gap-4">
+                  <p className="price-text text-decoration-line-through ">$ {product.price}</p>
+                  <p className="price-text text-black">$ {product.priceAfterDiscount}</p>
+                </div>
               </div>
               <hr />
               <p className="mb-3 description-text">
-                Go sporty this summer with this vintage navy and white striped
-                v-neck t-shirt from the Nike. Perfect for pairing with denim and
-                white kicks for a stylish sporty vibe.
+                {product.description}
               </p>
               <div className="count-cart d-flex justify-content-start align-items-start gap-4">
                 <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
@@ -144,10 +177,10 @@ export default function SingleProduct() {
                   SKU: <span>P-01</span>
                 </p>
                 <p>
-                  Categories: <span>Accessories, Clothing</span>
+                  Categories: <span>Women</span>
                 </p>
                 <p>
-                  Tags: <span>Accessories, T-shirt</span>
+                  Tags: <span>women</span>
                 </p>
               </div>
               <div className="social-icons d-flex justify-content-center gap-4">

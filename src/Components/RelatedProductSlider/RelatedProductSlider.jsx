@@ -63,7 +63,7 @@ const randomProducts = getRandomProducts(products, 9); // Get 9 random products
               }}
               navigation={true}
               modules={[Pagination, Navigation]}
-              b
+              
               className="mySwiper justify-content-center text-sm-center" 
             >
               {randomProducts.map((product, index) => (
