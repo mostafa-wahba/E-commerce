@@ -79,7 +79,7 @@ export default function ProductsContextProvider(props) {
     try {
       toast.success("Product has been added to cart successfully", {
         position: "top-left",
-        autoClose: 5000,
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -93,10 +93,22 @@ export default function ProductsContextProvider(props) {
     }
   };
   const addToWishlistNotify = (isWishlistCheck) => {
-    if (isWishlistCheck){
+    if (isWishlistCheck) {
       toast.info("Product has been added to wishlist successfully", {
         position: "top-left",
-        autoClose: 5000,
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Zoom,
+      });
+    } else {
+      toast.error("Product has been removed from wishlist", {
+        position: "top-left",
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -106,20 +118,6 @@ export default function ProductsContextProvider(props) {
         transition: Zoom,
       });
     }
-    else{
-    toast.error("Product has been removed from wishlist", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Zoom,
-    });
-  }
-
   };
 
   return (

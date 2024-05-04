@@ -30,3 +30,24 @@
     font-size: 0.75rem;
     color: var(--text-color2);
 }
+.placeOrder-btn button{
+    background-color: var(--hover-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    padding: 13px 15px;
+    transition: all 0.4s;
+    outline: none;
+    text-align: center;
+}
+.placeOrder-btn button:hover{
+    background-color: #6876d0;
+    transform: all 0.4s;
+}
+.placeOrder-btn button:active{
+    transform: translateY(1px);
+}
+.form-check-input:checked {
+    background-color: var(--hover-color) !important;
+    border-color: var(--hover-color) !important;
+}

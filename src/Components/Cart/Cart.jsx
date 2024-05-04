@@ -8,15 +8,7 @@ import { CartContext } from "../../Context/CartContext";
 import axios from "axios";
 
 export default function Cart() {
-  function clearCart() {
-    return axios
-      .delete(`https://ecommerce.routemisr.com/api/v1/cart`, {
-        headers: headers,
-      })
-      .then((res) => res)
-      .catch((err) => err);
-  }
-  const shippingCost = 9.65;
+  const navigate = useNavigate();
   const cookies = new Cookies();
   const userToken = cookies.get("userToken");
   const {
@@ -26,6 +18,13 @@ export default function Cart() {
     headers,
     loading,
     setLoading,
+    increment,
+    decrement,
+    removeProduct,
+    handleQuantityChange,
+    subtotal,
+    total,
+    shippingCost,clearCart
   } = useContext(CartContext);
   const [loginMassg, setLoginMassg] = useState("");
   useEffect(() => {
@@ -33,71 +32,15 @@ export default function Cart() {
     if (storedCart) {
       setAddedProducts(JSON.parse(storedCart));
     }
+    else setAddedProducts([]);
   }, [setAddedProducts]);
-  const increment = (id) => {
-    setAddedProducts((prevProducts) => {
-      const updatedProducts = prevProducts.map((product) =>
-        product.id === id
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
-      );
-      localStorage.setItem("cart", JSON.stringify(updatedProducts)); // Update local storage
-      return updatedProducts;
-    });
-  };
-
-  const decrement = (id) => {
-    setAddedProducts((prevProducts) => {
-      const updatedProducts = prevProducts.map((product) =>
-        product.id === id && product.quantity > 1
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      );
-      localStorage.setItem("cart", JSON.stringify(updatedProducts)); // Update local storage
-      return updatedProducts;
-    });
-  };
-  const removeProduct = (id) => {
-    setAddedProducts((prevProducts) => {
-      const updatedProducts = prevProducts.filter(
-        (product) => product.id !== id
-      );
-      localStorage.setItem("cart", JSON.stringify(updatedProducts));
-      return updatedProducts;
-    });
-  };
-  const calculateTotal = () => {
-    // Calculate the subtotal by summing the price and quantity of all items
-    const subtotal = addedProducts.reduce(
-      (total, product) =>
-        Math.round((total + product.price * product.quantity) * 100) / 100,
-      0
-    );
-
-    // Calculate the VAT at 14% on the subtotal
-    const tax = Math.round(subtotal * 0.14 * 100) / 100; // Round to two decimal places
-
-    // Calculate the final total by adding the tax and shipping to the subtotal
-    const finalTotal = Math.round((subtotal + tax + shippingCost) * 100) / 100;
-
-    return {
-      subtotal, // Return the subtotal
-      total: finalTotal, // Return the final total
-    }; // Return the final total
-  };
-  
-  const { subtotal, total } = calculateTotal(); // Destructure to get both values
-  const navigate = useNavigate();
-  const handleQuantityChange = (id, newQuantity) => {
-    setAddedProducts((prevProducts) => {
-      return prevProducts.map((product) => {
-        if (product.id === id) {
-          return { ...product, quantity: Math.max(1, newQuantity) };
-        }
-        return product;
-      });
-    });
-  };
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setAddedProducts(JSON.parse(storedCart));
+    }
+    else setAddedProducts([]);
+  }, []);
   const handleAddToCart = async () => {
     if (!userToken) {
       setLoginMassg("Please Sign in First");
@@ -113,7 +56,7 @@ export default function Cart() {
       for (const product of cartItems) {
         for (let i = 0; i < product.quantity; i++) {
           await sendToCart(product.id); // Await each request individually
-          await new Promise((r) => setTimeout(r, 200)); // Delay of 200ms between requests
+          await new Promise((r) => setTimeout(r, 50)); // Delay of 50ms between requests
         }
       }
 
@@ -223,7 +166,7 @@ export default function Cart() {
                   <div className="d-flex justify-content-start align-items-center w-100 gap-4 mb-2">
                     <p className="subtitle w-25">Shipping:</p>
                     <span className="amount">
-                      ${total > 100 ? 0 : shippingCost}
+                      ${total > 500 ? 0 : shippingCost}
                     </span>
                   </div>
                   <p className="text">
@@ -262,8 +205,8 @@ export default function Cart() {
                     className="rounded-pill text-uppercase w-100 border-0"
                   >
                     {loading ? (
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     ) : (
                       "Proceed to Checkout"

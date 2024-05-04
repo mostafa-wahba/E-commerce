@@ -10,7 +10,6 @@ import SingleProduct from "./Components/SingleProduct/SingleProduct";
 import Contact from "./Components/Contact/Contact";
 import Cart from "./Components/Cart/Cart";
 import Shop from "./Components/Shop/Shop";
-import Test from "./Components/Test/Test";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import NotFound from "./Components/NotFound/NotFound";
 import Checkout from "./Components/Checkout/Checkout";
@@ -18,6 +17,7 @@ import UpBtn from "./Components/UpBtn/UpBtn";
 import Layout from "./Layout/Layout";
 import Blog from "./Components/Blog/Blog";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
+import UserRoute from "./Components/UserRoute/UserRoute";
 
 const App = () => {
   return (
@@ -52,12 +52,11 @@ const App = () => {
           <Route
             path="/checkout"
             element={
-              <ProtectedRoute>
+              <UserRoute>
                 <Checkout />
-              </ProtectedRoute>
+              </UserRoute>
             }
           />
-          <Route path="/test" element={<Test />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Route>

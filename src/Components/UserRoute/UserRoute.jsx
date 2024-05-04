@@ -8,7 +8,7 @@ export default function UserRoute(props) {
     let token = cookie.get("userToken")
 
     if (!token) {
-        return <Navigate to={"/"} />
+        return <Navigate to={"/login"} />
     }
     else {
         return props.children;
