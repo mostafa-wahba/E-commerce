@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/E-commerce/static/css/main.9f4e1d2e.css",
-    "main.js": "/E-commerce/static/js/main.518c5730.js",
+    "main.css": "/E-commerce/static/css/main.93d6285d.css",
+    "main.js": "/E-commerce/static/js/main.47c36d65.js",
     "static/media/image.png": "/E-commerce/static/media/image.bca544d079af1bd090c4.png",
     "static/media/about-02.jpg": "/E-commerce/static/media/about-02.a7ac291f750a0a429206.jpg",
-    "static/media/g-03.jpg": "/E-commerce/static/media/g-03.ba75321d52cb7e8ddedd.jpg",
     "static/media/about-01.jpg.webp": "/E-commerce/static/media/about-01.jpg.615b58dc82442750f6c3.webp",
     "static/media/g-01.jpg": "/E-commerce/static/media/g-01.2090440ead7583dc9fc8.jpg",
     "static/media/banner-02.jpg": "/E-commerce/static/media/banner-02.839abedb72233fcf49b5.jpg",
     "static/media/blog-05.jpg.webp": "/E-commerce/static/media/blog-05.jpg.4f8bbc42534cb4fce2b1.webp",
-    "static/media/g-04.jpg": "/E-commerce/static/media/g-04.bef9e154a058f05bf4d1.jpg",
     "static/media/blog-04.jpg.webp": "/E-commerce/static/media/blog-04.jpg.2f19a2039baed5b1ced0.webp",
     "static/media/logo-no-background.png": "/E-commerce/static/media/logo-no-background.74d9571dc6250379af9f.png",
     "static/media/blog-06.jpg.webp": "/E-commerce/static/media/blog-06.jpg.4cfeb063d3ddcfa05072.webp",
@@ -19,11 +17,11 @@
     "static/media/bg-01.jpg.webp": "/E-commerce/static/media/bg-01.jpg.32de94f697ad2e89c22a.webp",
     "index.html": "/E-commerce/index.html",
     "static/media/icon-email.png.webp": "/E-commerce/static/media/icon-email.png.9083e877c418b8ce5c41.webp",
-    "main.9f4e1d2e.css.map": "/E-commerce/static/css/main.9f4e1d2e.css.map",
-    "main.518c5730.js.map": "/E-commerce/static/js/main.518c5730.js.map"
+    "main.93d6285d.css.map": "/E-commerce/static/css/main.93d6285d.css.map",
+    "main.47c36d65.js.map": "/E-commerce/static/js/main.47c36d65.js.map"
   },
   "entrypoints": [
-    "static/css/main.9f4e1d2e.css",
-    "static/js/main.518c5730.js"
+    "static/css/main.93d6285d.css",
+    "static/js/main.47c36d65.js"
   ]
 }
