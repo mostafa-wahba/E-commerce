@@ -6,8 +6,11 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import Cookies from "universal-cookie";
 import { CartContext } from "../../Context/CartContext";
 import axios from "axios";
+import Loading from "../Loading/Loading";
 
 export default function Cart() {
+  const [isLoading, setIsLoading] = useState(true);
+  // const [btnLoading, setBtnLoading] = useState(true);
   const navigate = useNavigate();
   const cookies = new Cookies();
   const userToken = cookies.get("userToken");
@@ -16,8 +19,6 @@ export default function Cart() {
     setAddedProducts,
     sendToCart,
     headers,
-    loading,
-    setLoading,
     increment,
     decrement,
     removeProduct,
@@ -31,15 +32,20 @@ export default function Cart() {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       setAddedProducts(JSON.parse(storedCart));
+    } else {
+      setAddedProducts([]);
     }
-    else setAddedProducts([]);
+    setIsLoading(false);
   }, [setAddedProducts]);
+  
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       setAddedProducts(JSON.parse(storedCart));
+    } else {
+      setAddedProducts([]);
     }
-    else setAddedProducts([]);
+    setIsLoading(false);
   }, []);
   const handleAddToCart = async () => {
     if (!userToken) {
@@ -47,7 +53,7 @@ export default function Cart() {
       return; // Stop the function if no user token
     }
 
-    setLoading(true); // Start loading before the API calls
+    setIsLoading(true); // Start loading before the API calls
     try {
       await clearCart(); // Ensure the cart is cleared before adding new items
 
@@ -64,9 +70,13 @@ export default function Cart() {
     } catch (error) {
       console.error("Failed to add products to cart:", error);
     } finally {
-      setLoading(false); // Ensure loading is turned off after operations complete
+      setIsLoading(false); // Ensure loading is turned off after operations complete
     }
   };
+
+  if (isLoading) {
+    return <Loading />; // Show the loading screen while images are loading
+  }
 
   return (
     <>
@@ -204,7 +214,7 @@ export default function Cart() {
                     onClick={handleAddToCart}
                     className="rounded-pill text-uppercase w-100 border-0"
                   >
-                    {loading ? (
+                    {isLoading ? (
                       <div className="spinner-border" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </div>

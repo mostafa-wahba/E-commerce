@@ -46,10 +46,6 @@ const randomProducts = getRandomProducts(products, 9); // Get 9 random products
           <div className="container-card overflow-hidden">
             <Swiper
               onSwiper={setSwiperRef}
-              // slidesPerView={1}
-              // spaceBetween={30}
-              // centeredSlides={true}
-              // loop={true}
               breakpoints={{
                 0: {
                   slidesPerView: 1,
@@ -67,7 +63,7 @@ const randomProducts = getRandomProducts(products, 9); // Get 9 random products
               className="mySwiper justify-content-center text-sm-center" 
             >
               {randomProducts.map((product, index) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <ProductCard product={product} />
                   </SwiperSlide>
               ))}

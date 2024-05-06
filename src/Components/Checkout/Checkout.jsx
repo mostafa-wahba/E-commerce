@@ -24,7 +24,8 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [cartId, setCartId] = useState(null);
   const [checkoutDetails, setCheckoutDetails] = useState(null);
-  async function handleSubmit(values) {
+  async function handleSubmit(values, { setSubmitting }) {
+    try {
     let response = await checkoutPayment(cartId, values);
     if (response?.data?.status === "success") {
       if (paymentMethod==="Online") {
@@ -38,6 +39,12 @@ export default function Checkout() {
         navigate("/");
         checkoutDone()
       }
+    }
+  }catch (error) {
+      console.error("Checkout failed:", error);
+    } finally {
+      setLoading(false); // Set loading to false once submission is complete
+      setSubmitting(false);
     }
   }
   let validation = Yup.object({
@@ -64,6 +71,7 @@ export default function Checkout() {
 
   useEffect(() => {
     const fetchCart = async () => {
+      try {
       const response = await getLoggedUserCart();
       if (response?.data?.status === "success") {
         setCheckoutDetails(response.data.data);
@@ -73,10 +81,14 @@ export default function Checkout() {
         // Handle error or empty cart scenario
         console.error("Failed to fetch cart:", response);
         setCheckoutProducts([]);
+      }} catch (error) {
+        console.error("Error fetching cart:", error);
+      } finally {
+        setLoading(false); // Set loading to false once fetch is complete
       }
     };
     fetchCart();
-  }, []);
+  }, [getLoggedUserCart, setLoading]);
   const checkoutPayment = (cartId, shippingAddress) => {
     setLoading(true);
     if (!userToken) {

@@ -19,6 +19,17 @@ export default function Home() {
   const [btnState, setBtnState] = useState(false);
   const totalSlides = 3; // Update based on the number of slides
   const navigate = useNavigate();
+  useEffect(() => {
+    setIsLoading(true); // Set loading to true when component mounts
+    if (categories.length > 0) {
+      setMusicCategory(categories.filter((cat) => cat.slug === "music"));
+      setMensFashionCategory(
+        categories.filter((cat) => cat.slug === "men's-fashion")
+      );
+      setMobilesCategory(categories.filter((cat) => cat.slug === "mobiles"));
+      setIsLoading(false); // Set loading to false once categories are set
+    }
+  }, [categories, setIsLoading]);
   const handleSlideChange = (newIndex) => {
     if (newIndex >= totalSlides) {
       setCurrentSlide(0); // Wrap around to the first slide
@@ -42,21 +53,11 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, [currentSlide, totalSlides]); // Added totalSlides to the dependency array
-  useEffect(() => {
-    if (categories) {
-      setIsLoading(false)
-      setMusicCategory(categories?.filter((cat) => cat.slug === "music"));
-      setMensFashionCategory(
-        categories?.filter((cat) => cat.slug === "men's-fashion")
-      );
-      setMobilesCategory(categories?.filter((cat) => cat.slug === "mobiles"));
-    }
-  }, [categories]);
+  if (isLoading) {
+    return <Loading />; // Display the loading screen while data is fetching
+  }
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
         <div id="home">
           <section
             id="carouselExampleFade"
@@ -330,7 +331,6 @@ export default function Home() {
             <Shop />
           </section>
         </div>
-      )}
     </>
   );
 }

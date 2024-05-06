@@ -14,7 +14,9 @@
   --grey-color: #e6e6e6;
   --bg-color: #222;
 }
-
+.text-primary{
+  color: #717fe0 !important;
+}
 body {
   font-family: "Poppins", sans-serif;
 }

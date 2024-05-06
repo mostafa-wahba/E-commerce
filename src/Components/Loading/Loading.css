@@ -1,3 +1,7 @@
+.loading-screen{
+  height: 65vh;
+}
+
 .loading-screen .loading-logo{
     width: 7.5rem;
   }

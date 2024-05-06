@@ -125,6 +125,26 @@ export default function CartContextProvider(props) {
       console.error("Toast notification error:", error);
     }
   };
+  const addProducts = (newProduct) => {
+    setAddedProducts((prevProducts) => {
+      let updatedProducts;
+      const existingProductIndex = prevProducts.findIndex((product) => product.id === newProduct.id);
+      
+      if (existingProductIndex !== -1) {
+        // Clone the array and update the product's quantity if it already exists
+        updatedProducts = prevProducts.map((product, index) =>
+          index === existingProductIndex ? { ...product, quantity: product.quantity + 1 } : product
+        );
+      } else {
+        // Add new product with quantity of 1 if it does not exist
+        updatedProducts = [...prevProducts, { ...newProduct, quantity: 1 }];
+      }
+  
+      // Update localStorage after modifying the product array
+      localStorage.setItem("cart", JSON.stringify(updatedProducts));
+      return updatedProducts;
+    });
+  };
   return (
     <CartContext.Provider
       value={{
@@ -145,7 +165,7 @@ export default function CartContextProvider(props) {
         clearCart,
         checkoutDone,
         isOrderCompleted,
-        setIsOrderCompleted,
+        setIsOrderCompleted,addProducts
       }}
     >
       {props.children}

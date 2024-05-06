@@ -23,20 +23,20 @@
     object-fit: cover;
 }
 
-.carousel-control-next,
-.carousel-control-prev {
+#home .carousel-control-next,
+#home .carousel-control-prev {
     width: 5%;
     z-index: 3;
 }
-.carousel-control-next:hover svg,
-.carousel-control-prev:hover svg {
+#home .carousel-control-next:hover svg,
+#home .carousel-control-prev:hover svg {
     color: var(--hover-color);
 }
-.carousel-control-prev svg,.carousel-control-next svg{
+#home .carousel-control-prev svg,#home .carousel-control-next svg{
     font-size: 2rem;
     color: var(--bg-color);
 }
-.carousel-control-prev svg:hover,.carousel-control-next svg:hover{
+#home .carousel-control-prev svg:hover,#home .carousel-control-next svg:hover{
     color: var(--hover-color);
 }
 .carousel-item-text {

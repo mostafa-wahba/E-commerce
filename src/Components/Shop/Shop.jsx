@@ -54,7 +54,7 @@ export default function Shop() {
           ) : (
             <>
               <div className="row justify-content-between align-items-center mb-5">
-                <div className="col-6">
+                <div className="col-md-6 col-12">
                   <ul
                     className="nav nav-pills mb-3 categories-filter d-flex justify-content-start align-items-center gap-3"
                     id="pills-tab"

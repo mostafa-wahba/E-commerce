@@ -1,120 +1,119 @@
-import React, { useEffect, useState } from "react";
-import { FaRegHeart } from "react-icons/fa6";
-import { IoIosArrowRoundDown } from "react-icons/io";
-import { IoIosArrowRoundUp } from "react-icons/io";
-import { BsHeartFill } from "react-icons/bs";
+import React, { useContext, useEffect, useState } from "react";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import {
+  FaRegStarHalfStroke,
+  FaAngleRight,
+  FaAngleLeft,
+} from "react-icons/fa6";
+import { GoChevronRight,GoChevronLeft } from "react-icons/go";
+import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+import { BsHeartFill, BsInstagram } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SlSocialPintarest } from "react-icons/sl";
-import { BsInstagram } from "react-icons/bs";
 import "./SingleProduct.css";
 import img from "../../Assets/g-01.jpg";
-import img1 from "../../Assets/g-04.jpg";
-import img2 from "../../Assets/g-03.jpg";
 import { MdStarRate } from "react-icons/md";
 import { CiStar } from "react-icons/ci";
 import RelatedProductSlider from "../RelatedProductSlider/RelatedProductSlider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-export default function SingleProduct() {
-  const [count, setCount] = useState(0); // useState returns a pair. 'count' is the current state. 'setCount' is a function we can use to update the state.
+import { CartContext } from "../../Context/CartContext";
+import { ProductsContext } from "../../Context/ProductsContext";
+import Loading from "../Loading/Loading";
 
+export default function SingleProduct() {
+  const { addProducts } = useContext(CartContext);
+  const { addToCartNotify } = useContext(ProductsContext);
+  const [count, setCount] = useState(1);
+  let { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // const handleWishlistToggle = () => {
+  //   const newCheckStatus = !isWishlistCheck;
+  //   setIsWishlistCheck(newCheckStatus); // Update the state
+  //   setTimeout(() => {
+  //     addToWishlistNotify(newCheckStatus); // Pass the updated state to the notification
+  //   }, 0); // You can adjust the delay as needed
+  // };
   function increment() {
-    setCount(function (prevCount) {
-      return (prevCount += 1);
-    });
+    setCount((prevCount) => prevCount + 1);
   }
 
   function decrement() {
-    setCount(function (prevCount) {
-      if (prevCount > 0) {
-        return (prevCount -= 1);
-      } else {
-        return (prevCount = 0);
-      }
-    });
+    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
   }
 
-  let {id} =useParams()
-  const [product, setProduct]=useState([])
-  const [image, setImage]=useState([])
-  const [active, setActive] = useState(null)
-  const getProduct =async ()=>{
-    let {data} =await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
-    setProduct(data.data)
-    setImage(data.data.images)
-    // console.log(data.data)
+  useEffect(() => {
+    const getProduct = async () => {
+      setLoading(true);
+      try {
+        let response = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
+        setProduct(response.data.data);
+        setImages(response.data.data.images);
+      } catch (error) {
+        console.error("Failed to fetch product data:", error);
+      }
+      setLoading(false);
+    };
+
+    getProduct();
+  }, [id]);
+  function addProductToCart(id, product) {
+    addToCartNotify(id); // Pass the product ID for notification
+    for (let i = 0; i < count; i++) {
+      addProducts(product);
+    }
   }
-  useEffect(()=>{
-    
-    getProduct()
-  }, [])
-  
+  if (loading) {
+    return <Loading/>; // Here you can customize your loading indicator
+  }
   return (
     <>
       <div id="single-product">
-        <div className="container single-product-container d-flex  flex-column justify-content-between align-items-center gap-5">
+        <div className="container single-product-container d-flex flex-column justify-content-between align-items-center gap-5">
           <div className="product-and-product-details d-flex justify-content-center gap-5">
             <div
               id="carouselExampleIndicators"
-              className="carousel slide w-100 spooduct-container"
+              className="carousel slide"
               data-bs-ride="carousel"
             >
-              <div className="carousel-indicators" key={product.id}>
-                {image.map((setImage)=>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                >
-                  <img src={setImage} className="d-block w-100" alt="..." />
-                  {/* <p>{produc}</p> */}
-                </button>
-              )}
-                
-                {/* <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                >
-                  <img src={image[1]} className="d-block w-100" alt="..."  />
-                </button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIndicators"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                >
-                  <img src={image[2]} className="d-block w-100" alt="..." />
-                </button> */}
+              <div className="carousel-indicators">
+                {images.map((image, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : undefined}
+                    aria-label={`Slide ${index + 1}`}
+                  >
+                    <img
+                      src={image}
+                      className="d-block w-100"
+                      alt={`Product ${index + 1}`}
+                    />
+                  </button>
+                ))}
               </div>
-              <div className="images carousel-inner">
-                {
-                  image.map((setImage)=>
-                  
-                  // <div className={setActive(setImage)}>
-
-                   <div className="carousel-item active w-100">
-                  <img src={setImage} className="d-block w-100" alt="..." />
-                </div>
-                )
-                }
-                
-                
-                {/* <div className="carousel-item w-100">
-                  <img src={image[1]} className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item w-100">
-                  <img src={image[2]} className="d-block w-100" alt="..." />
-                </div> */}
+              <div className="carousel-inner">
+                {images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  >
+                    <img
+                      src={image}
+                      className="d-block w-100"
+                      alt={`Product ${index + 1}`}
+                    />
+                  </div>
+                ))}
               </div>
               <button
-              id="btn-icon"
-                className="carousel-control-prev top-50"
+                className="carousel-control-prev"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev"
@@ -122,35 +121,34 @@ export default function SingleProduct() {
                 <span
                   className="carousel-control-prev-icon"
                   aria-hidden="true"
-                ></span>
+                ><GoChevronLeft />
+</span>
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
-              id="btn-icon2"
-                className="carousel-control-next top-50"
+                className="carousel-control-next"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="next"
               >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
+                <span className="carousel-control-next-icon" aria-hidden="true">
+                <GoChevronRight />
+                </span>
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="product-details pt-3 w-100">
+            <div className="product-details pt-3">
               <h4>{product.title}</h4>
               <div className="price d-flex justify-content-between">
                 <div className="text d-flex gap-4">
-                  <p className="price-text text-decoration-line-through ">$ {product.price}</p>
-                  <p className="price-text text-black">$ {product.priceAfterDiscount}</p>
+                  <p className="price-text text-decoration-line-through ">
+                    $ {product.price * 3}
+                  </p>
+                  <p className="price-text text-black">$ {product.price}</p>
                 </div>
               </div>
               <hr />
-              <p className="mb-3 description-text">
-                {product.description}
-              </p>
+              <p className="mb-3 description-text">{product.description}</p>
               <div className="count-cart d-flex justify-content-start align-items-start gap-4">
                 <div className="product-count d-flex justify-content-between align-items-center gap-4 h-100">
                   <span className="ms-4">{count}</span>
@@ -164,7 +162,12 @@ export default function SingleProduct() {
                     </button>
                   </div>
                 </div>
-                <button className="add-cart-btn text-white transition py-2 px-4 h-100">
+                <button
+                  onClick={() => {
+                    addProductToCart(product.id, product);
+                  }}
+                  className="add-cart-btn text-white transition py-2 px-4 h-100"
+                >
                   Add to cart
                 </button>
                 <div className="heart-icon p-3 h-100">
@@ -174,13 +177,30 @@ export default function SingleProduct() {
 
               <div className="product-country mt-5 d-flex flex-column gap-2">
                 <p>
-                  SKU: <span>P-01</span>
+                  Brand: <span>{product?.brand?.name}</span>
                 </p>
                 <p>
-                  Categories: <span>Women</span>
+                  Categories: <span>{product?.category?.name}</span>
                 </p>
-                <p>
-                  Tags: <span>women</span>
+                {product?.subcategory ? (
+                  <p>
+                    Tags: <span>{product?.subcategory[0]?.name}</span>
+                  </p>
+                ) : (
+                  ""
+                )}
+                <p className="d-flex gap-1">
+                  Rating:{" "}
+                  <span className="text-primary d-flex justify-content-start align-items-center gap-1">
+                    {product?.ratingsAverage}{" "}
+                    {product?.ratingsAverage > 4.4 ? (
+                      <FaStar className="mb-1" />
+                    ) : product?.ratingsAverage > 1.4 ? (
+                      <FaRegStarHalfStroke className="mb-1" />
+                    ) : (
+                      <FaRegStar className="mb-1" />
+                    )}
+                  </span>
                 </p>
               </div>
               <div className="social-icons d-flex justify-content-center gap-4">
@@ -191,7 +211,7 @@ export default function SingleProduct() {
               </div>
             </div>
           </div>
-          <div className="description-and-ratting w-100 row border p-2 ">
+          <div className="description-and-ratting w-100 row border py-4">
             <ul
               className="nav nav-pills mb-3 d-flex justify-content-center align-items-center"
               id="pills-tab"
@@ -200,27 +220,13 @@ export default function SingleProduct() {
               <li className="nav-item text-dark" role="presentation">
                 <button
                   className="nav-link active"
-                  id="pills-home-tab"
+                  id="pills-info-tab"
                   data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
+                  data-bs-target="#pills-info"
                   type="button"
                   role="tab"
-                  aria-controls="pills-home"
+                  aria-controls="pills-info"
                   aria-selected="true"
-                >
-                  Description
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  className="nav-link"
-                  id="pills-profile-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-profile"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected="false"
                 >
                   Addational Information
                 </button>
@@ -228,128 +234,93 @@ export default function SingleProduct() {
               <li className="nav-item" role="presentation">
                 <button
                   className="nav-link"
-                  id="pills-contact-tab"
+                  id="pills-reviews-tab"
                   data-bs-toggle="pill"
-                  data-bs-target="#pills-contact"
+                  data-bs-target="#pills-reviews"
                   type="button"
                   role="tab"
-                  aria-controls="pills-contact"
+                  aria-controls="pills-reviews"
                   aria-selected="false"
                 >
-                  Reviwes (1)
+                  Reviwes ({product?.reviews?.length})
                 </button>
               </li>
             </ul>
-            <div className="tab-content review-details" id="pills-tabContent">
+            <div
+              className="tab-content review-details w-75 mx-auto my-4"
+              id="pills-tabContent"
+            >
               <div
                 className="tab-pane fade show active"
-                id="pills-home"
+                id="pills-info"
                 role="tabpanel"
-                aria-labelledby="pills-home-tab"
-                tabIndex="0"
-              >
-                <p className="text-muted">
-                  Aenean sit amet gravida nisi. Nam fermentum est felis, quis
-                  feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque
-                  luctus dui at ante aliquet, in hendrerit lectus interdum.
-                  Morbi elementum sapien rhoncus pretium maximus. Nulla lectus
-                  enim, cursus et elementum sed, sodales vitae eros. Ut ex quam,
-                  porta consequat interdum in, faucibus eu velit. Quisque
-                  rhoncus ex ac libero varius molestie. Aenean tempor sit amet
-                  orci nec iaculis. Cras sit amet nulla libero. Curabitur
-                  dignissim, nunc nec laoreet consequat, purus nunc porta lacus,
-                  vel efficitur tellus augue in ipsum. Cras in arcu sed metus
-                  rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
-                </p>
-              </div>
-              <div
-                className="tab-pane fade"
-                id="pills-profile"
-                role="tabpanel"
-                aria-labelledby="pills-profile-tab"
+                aria-labelledby="pills-info-tab"
                 tabIndex="0"
               >
                 <div className="single-product-info d-flex justify-content-center align-items-center ">
                   <div className="d-flex flex-column gap-3">
-                  <div className="each-info d-flex justify-content-around gap-5">
-                    <span>Weight</span>
-                    <span>79.2Kg</span>
-                  </div>
-                  <div className="each-info d-flex justify-content-around gap-5">
-                    <span>Dimensions</span>
-                    <span>110 x 33 x 100 cm</span>
-                  </div>
-                  <div className="each-info d-flex justify-content-around gap-5">
-                    <span>Materials</span>
-                    <span>60% cotton</span>
-                  </div>
-                  <div className="each-info d-flex justify-content-around gap-5">
-                    <span>Color</span>
-                    <span>Black, Blue, Grey</span>
-                  </div>
-                  <div className="each-info d-flex justify-content-around gap-5">
-                    <span>Size</span>
-                    <span>XL, L, M, S</span>
-                  </div>
-                  </div>
-                </div>
-                {/* <div className="row ">
-                  <div className="col-6 col-md-12 d-flex justify-content-center">
-                    <div className="items-details w-50 d-flex justify-content-center flex-column ">
-                      <div className="each-item d-flex justify-content-between gap-2 text-muted ">
-                        <span>Weight</span>
-                        <span>79.2Kg</span>
-                      </div>
-                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
-                        <span>Dimensions</span>
-                        <span>110 x 33 x 100 cm</span>
-                      </div>
-                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
-                        <span>Materials</span>
-                        <span>60% cotton</span>
-                      </div>
-                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
-                        <span>Color</span>
-                        <span>Black, Blue, Grey</span>
-                      </div>
-                      <div className="each-item d-flex justify-content-between gap-2 text-muted">
-                        <span>Size</span>
-                        <span>XL, L, M, S</span>
-                      </div>
+                    <div className="d-flex justify-content-between gap-5">
+                      <span>Weight</span>
+                      <span>79.2Kg</span>
+                    </div>
+                    <div className="d-flex justify-content-between gap-5">
+                      <span>Dimensions</span>
+                      <span>110 x 33 x 100 cm</span>
+                    </div>
+                    <div className="d-flex justify-content-between gap-5">
+                      <span>Materials</span>
+                      <span>60% cotton</span>
+                    </div>
+                    <div className="d-flex justify-content-between gap-5">
+                      <span>Color</span>
+                      <span>Black, Blue, Grey</span>
+                    </div>
+                    <div className="d-flex justify-content-between gap-5">
+                      <span>Size</span>
+                      <span>XL, L, M, S</span>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
               <div
                 className="tab-pane fade"
-                id="pills-contact"
+                id="pills-reviews"
                 role="tabpanel"
-                aria-labelledby="pills-contact-tab"
+                aria-labelledby="pills-reviews-tab"
                 tabIndex="0"
               >
                 <div className="reviews d-flex justify-content-center align-items-center flex-column ">
-                  <div className="user-review d-flex ">
-                    <div className="user-image me-3">
-                      <img src={img} alt="" />
-                    </div>
-                    <div className="user-name ">
-                      <div className="name-and-rating d-flex justify-content-between align-items-center gap-5">
-                        <h6 className="">Ariana Grande</h6>
-                        <div className="rating">
-                          <MdStarRate />
-                          <MdStarRate />
-                          <MdStarRate />
-                          <MdStarRate />
-                          <CiStar />
+                  {product?.reviews > 0 ? (
+                    product?.reviews?.map((review, index) => (
+                      <div key={index} className="user-review d-flex ">
+                        <div className="user-image me-3">
+                          <img src={img} alt="" />
+                        </div>
+                        <div className="user-name ">
+                          <div className="name-and-rating d-flex justify-content-between align-items-center gap-5">
+                            <h6 className="">Ariana Grande</h6>
+                            <div className="rating">
+                              <MdStarRate />
+                              <MdStarRate />
+                              <MdStarRate />
+                              <MdStarRate />
+                              <CiStar />
+                            </div>
+                          </div>
+                          <p className="text-muted">
+                            Quod autem in homine praestantissimum atque optimum
+                            est, id deseruit. Apud ceteros autem philosophos
+                          </p>
                         </div>
                       </div>
-                      <p className="text-muted">
-                        Quod autem in homine praestantissimum atque optimum est,
-                        id deseruit. Apud ceteros autem philosophos
-                      </p>
-                    </div>
-                  </div>
-                  <form
+                    ))
+                  ) : (
+                    <h6 className="text-muted poppins-bold">
+                      There is no reviews for this product
+                    </h6>
+                  )}
+
+                  {/* <form
                     action=""
                     className=" mt-5 d-flex flex-column gap-5 w-100"
                   >
@@ -400,12 +371,12 @@ export default function SingleProduct() {
                       value="Submit"
                       className="btn btn-dark"
                     />
-                  </form>
+                  </form> */}
                 </div>
               </div>
             </div>
           </div>
-          <RelatedProductSlider/>
+          <RelatedProductSlider />
         </div>
       </div>
     </>

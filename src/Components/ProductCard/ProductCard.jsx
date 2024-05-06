@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./ProductCard.css";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,7 +16,7 @@ export default function ProductCard({ product }) {
 
   const { addToCartNotify, handleAddToCart, addToWishlistNotify } =
     useContext(ProductsContext);
-  const { addedProducts, setAddedProducts } = useContext(CartContext);
+  const { addProducts } = useContext(CartContext);
   const [isAnimated, setIsAnimated] = useState(false);
   const [isWishlistCheck, setIsWishlistCheck] = useState(false);
 
@@ -37,26 +37,7 @@ export default function ProductCard({ product }) {
       addToWishlistNotify(newCheckStatus); // Pass the updated state to the notification
     }, 0); // You can adjust the delay as needed
   };
-  const addProducts = (newProduct) => {
-    setAddedProducts((prevProducts) => {
-      let updatedProducts;
-      const existingProductIndex = prevProducts.findIndex((product) => product.id === newProduct.id);
-      
-      if (existingProductIndex !== -1) {
-        // Clone the array and update the product's quantity if it already exists
-        updatedProducts = prevProducts.map((product, index) =>
-          index === existingProductIndex ? { ...product, quantity: product.quantity + 1 } : product
-        );
-      } else {
-        // Add new product with quantity of 1 if it does not exist
-        updatedProducts = [...prevProducts, { ...newProduct, quantity: 1 }];
-      }
-  
-      // Update localStorage after modifying the product array
-      localStorage.setItem("cart", JSON.stringify(updatedProducts));
-      return updatedProducts;
-    });
-  };
+
 
   return (
     <>
@@ -81,13 +62,13 @@ export default function ProductCard({ product }) {
           </svg>
           <div className="product-img position-relative">
             <img src={product.imageCover} alt={product.title} />
-            <Link to={'/product/' + product.id} className="quick-view">
+            <Link to={`/product/${product.id}`} className="quick-view">
               View Product
             </Link>
           </div>
           <div className="product-content w-100 pt-3 p-2 position-relative d-flex justify-content-between align-items-start flex-column">
             <div className="d-flex justify-content-between align-items-center w-100">
-              <Link to={'/product/' + product.id} className="text-start">
+              <Link to={`/product/${product.id}`} className="text-start">
                 {product.title}
               </Link>
               <AnimatePresence mode="wait">

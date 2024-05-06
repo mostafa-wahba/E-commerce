@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./About.css";
 import img from "../../Assets/bg-01.jpg.webp";
 import about from "../../Assets/about-01.jpg.webp";
 import about2 from "../../Assets/about-02.jpg";
+import Loading from "../Loading/Loading";
 
 export default function About() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const images = [img, about, about2];
+    Promise.all(images.map(image => {
+      const img = new Image();
+      img.src = image;
+      return new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    })).then(() => {
+      setIsLoading(false);
+    }).catch((error) => {
+      console.error("Failed to load images", error);
+      setIsLoading(false);
+    });
+  }, []);
+
+  if (isLoading) {
+    return <Loading />; // Show the loading screen while images are loading
+  }
+
   return (
     <>
       <div id="about">
