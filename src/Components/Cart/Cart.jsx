@@ -25,7 +25,8 @@ export default function Cart() {
     handleQuantityChange,
     subtotal,
     total,
-    shippingCost,clearCart
+    shippingCost,
+    clearCart,
   } = useContext(CartContext);
   const [loginMassg, setLoginMassg] = useState("");
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Cart() {
     }
     setIsLoading(false);
   }, [setAddedProducts]);
-  
+
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -86,18 +87,26 @@ export default function Cart() {
             <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
               <div className="d-flex justify-content-center align-items-center flex-column w-100 border">
                 <div className="titles-row row g-3 px-5 py-3 border-bottom w-100 d-none d-lg-flex">
-                  <div className="col-md-5 d-flex justify-content-start align-items-center">
-                    <p>PRODUCT</p>
-                  </div>
-                  <div className="col-md-2  d-flex justify-content-start align-items-center">
-                    <p>PRICE</p>
-                  </div>
-                  <div className="col-md-3 d-flex justify-content-start align-items-center">
-                    <p>QUANTITY</p>
-                  </div>
-                  <div className="col-md-2 d-flex justify-content-start align-items-center">
-                    <p>TOTAL</p>
-                  </div>
+                  {addedProducts?.legnth ? (
+                    <>
+                      <div className="col-md-5 d-flex justify-content-start align-items-center">
+                        <p>PRODUCT</p>
+                      </div>
+                      <div className="col-md-2  d-flex justify-content-start align-items-center">
+                        <p>PRICE</p>
+                      </div>
+                      <div className="col-md-3 d-flex justify-content-start align-items-center">
+                        <p>QUANTITY</p>
+                      </div>
+                      <div className="col-md-2 d-flex justify-content-start align-items-center">
+                        <p>TOTAL</p>
+                      </div>
+                    </>
+                  ) : (
+                    <h3 className="fs-4 d-flex justify-content-center align-items-center">
+                      There is no products in your cart
+                    </h3>
+                  )}
                 </div>
                 {addedProducts.map((product) => (
                   <div
@@ -212,7 +221,10 @@ export default function Cart() {
                 <div className="form-btn d-flex justify-content-center-align-items-center w-100">
                   <button
                     onClick={handleAddToCart}
-                    className="rounded-pill text-uppercase w-100 border-0"
+                    className={`rounded-pill text-uppercase w-100 border-0 ${
+                      !addedProducts.length ? "disabled" : ""
+                    }`}
+                    disabled={!addedProducts.length}
                   >
                     {isLoading ? (
                       <div className="spinner-border" role="status">
