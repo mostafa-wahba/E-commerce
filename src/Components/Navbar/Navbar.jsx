@@ -10,6 +10,7 @@ import { TiThMenuOutline } from "react-icons/ti";
 import Cookies from "universal-cookie";
 import { CartContext } from "../../Context/CartContext";
 import { useContext } from "react";
+import { WishlistContext } from "../../Context/WishlistContext";
 
 export default function Navbar() {
   const [searchShow, setSearchShow] = useState(false);
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
   const { addedProducts } = useContext(CartContext);
+  const { wishlistProductsCounter } = useContext(WishlistContext);
   const navigate = useNavigate();
   const cookies = new Cookies();
   const handleLogout = () => {
@@ -142,16 +144,23 @@ export default function Navbar() {
             </li>
             <li>
               <Link to="cart" className="position-relative cart-icon">
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill ">
-                  {addedProducts?.length}
-                </span>
+                {addedProducts?.length > 0 && (
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill ">
+                    {addedProducts?.length}
+                  </span>
+                )}
                 <FaShoppingCart />
               </Link>
             </li>
             {token && (
               <>
                 <li>
-                  <Link to="wishlist">
+                  <Link to="wishlist" className="position-relative cart-icon">
+                    {wishlistProductsCounter > 0 && (
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill ">
+                        {wishlistProductsCounter}
+                      </span>
+                    )}
                     <FaRegHeart />
                   </Link>
                 </li>

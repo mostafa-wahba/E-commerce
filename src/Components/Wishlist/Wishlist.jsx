@@ -10,9 +10,9 @@ import Loading from "../Loading/Loading";
 export default function Wishlist() {
   const { addProducts } = useContext(CartContext);
   const { addToCartNotify } = useContext(ProductsContext);
-  const { getProductsFromWishlist, removeProductFromWishlist,removeLoading } =
+  const { getProductsFromWishlist, removeProductFromWishlist,wishlistProductsCounter, setWishlistProductsCounter } =
     useContext(WishlistContext);
-  const [addedWishlistProducts, setAddedWishlistProducts] = useState([]);
+  const [addedWishlistProducts, setAddedWishlistProducts] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function Wishlist() {
         const response = await getProductsFromWishlist();
         if (response?.data?.status === "success") {
           setAddedWishlistProducts(response.data.data);
+          setWishlistProductsCounter(response.data.count);
         } else {
           console.error("Failed to fetch Wishlist:", response);
         }

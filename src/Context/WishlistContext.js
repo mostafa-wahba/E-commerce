@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 export const WishlistContext = createContext();
 export default function WishlistContextProvider(props) {
     const [loginPopup, setLoginPopup] = useState(false);
-  const [addedWishlistProducts, setAddedWishlistProducts] = useState([]);
+  const [wishlistProductsCounter, setWishlistProductsCounter] = useState([]);
   let [headers, setHeaders] = useState({});
   const cookies = new Cookies();
 
@@ -34,7 +34,7 @@ export default function WishlistContextProvider(props) {
         headers: headers,
       });
       if (response.status === 200 || response.status === 204) {
-        setAddedWishlistProducts((currentProducts) =>
+        setWishlistProductsCounter((currentProducts) =>
           currentProducts.filter((product) => product.id !== id)
         );
         toast.warning("Product removed from wishlist", {
@@ -65,7 +65,7 @@ export default function WishlistContextProvider(props) {
   return (
     <WishlistContext.Provider
       value={{
-        loginPopup, setLoginPopup,addedWishlistProducts, setAddedWishlistProducts,getProductsFromWishlist,removeProductFromWishlist
+        loginPopup, setLoginPopup,wishlistProductsCounter, setWishlistProductsCounter,getProductsFromWishlist,removeProductFromWishlist
       }}
     >
       {props.children}
