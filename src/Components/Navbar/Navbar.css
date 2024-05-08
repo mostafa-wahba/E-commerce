@@ -69,3 +69,6 @@ nav svg:hover {
 .menu-icons .search input {
     transition: all 0.4s;
 }
+.menu-icons .cart-icon span{
+    background-color: var(--hover-color);
+}

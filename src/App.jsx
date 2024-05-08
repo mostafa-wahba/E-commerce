@@ -18,6 +18,7 @@ import Layout from "./Layout/Layout";
 import Blog from "./Components/Blog/Blog";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import UserRoute from "./Components/UserRoute/UserRoute";
+import Wishlist from "./Components/Wishlist/Wishlist";
 
 const App = () => {
   return (
@@ -47,7 +48,16 @@ const App = () => {
           ></Route>
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/wishlist"
+            element={
+              // <UserRoute>
+                <Wishlist />
+              // </UserRoute>
+            }
+          />
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/checkout"
@@ -57,7 +67,6 @@ const App = () => {
               </UserRoute>
             }
           />
-          <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

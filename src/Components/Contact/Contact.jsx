@@ -110,7 +110,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div style={{ width: "100%" }}>
+        <div className="map">
           <iframe
             title="map"
             width="100%"

@@ -8,13 +8,15 @@ import { FaRegHeart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TiThMenuOutline } from "react-icons/ti";
 import Cookies from "universal-cookie";
+import { CartContext } from "../../Context/CartContext";
+import { useContext } from "react";
 
 export default function Navbar() {
   const [searchShow, setSearchShow] = useState(false);
   const [token, setToken] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
-
+  const { addedProducts } = useContext(CartContext);
   const navigate = useNavigate();
   const cookies = new Cookies();
   const handleLogout = () => {
@@ -36,7 +38,7 @@ export default function Navbar() {
   useEffect(() => {
     if (cookies.get("userToken")) {
       setToken(cookies.get("userToken"));
-    } 
+    }
   }, [cookies]);
 
   return (
@@ -121,36 +123,6 @@ export default function Navbar() {
                   Contact
                 </NavLink>
               </li>
-              {/* <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Categories
-                  </Link>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Category1
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Category2
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/">
-                        Best Seller
-                      </Link>
-                    </li>
-                  </ul>
-                </li> */}
             </ul>
           </div>
           <ul className="d-none menu-icons d-lg-flex justify-content-center align-items-center gap-4 ms-auto mb-0">
@@ -169,21 +141,26 @@ export default function Navbar() {
               </span>
             </li>
             <li>
-              <Link to="cart">
+              <Link to="cart" className="position-relative cart-icon">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill ">
+                  {addedProducts?.length}
+                </span>
                 <FaShoppingCart />
               </Link>
             </li>
-            <li>
-              <Link to="wishlist">
-                <FaRegHeart />
-              </Link>
-            </li>
             {token && (
-              <li>
-                <Link to="profile">
-                  <CgProfile />
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to="wishlist">
+                    <FaRegHeart />
+                  </Link>
+                </li>
+                <li>
+                  <Link to="profile">
+                    <CgProfile />
+                  </Link>
+                </li>
+              </>
             )}
             <li className="nav-item d-lg-block d-flex justify-content-center align-items-center ">
               {token ? (
