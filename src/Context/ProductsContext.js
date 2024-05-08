@@ -20,11 +20,11 @@ export default function ProductsContextProvider(props) {
           "https://ecommerce.routemisr.com/api/v1/products"
         );
         setProducts(data.data);
-        // setIsLoading(false); // Set loading to false once data is fetched
+        setIsLoading(false); // Set loading to false once data is fetched
         filterProducts(data.data); // Fetch data when the component is mounted
       } catch (error) {
         setError("Failed to fetch products"); // Set error if fetching fails
-        // setIsLoading(false); // Still set loading to false even in case of error
+        setIsLoading(false); // Still set loading to false even in case of error
       }
     };
     fetchProducts();
@@ -47,34 +47,14 @@ export default function ProductsContextProvider(props) {
           "https://ecommerce.routemisr.com/api/v1/categories"
         );
         setCategories(data.data);
-        // setIsLoading(false); // Set loading to false once data is fetched
+        setIsLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         setError("Failed to fetch products"); // Set error if fetching fails
-        // setIsLoading(false); // Still set loading to false even in case of error
+        setIsLoading(false); // Still set loading to false even in case of error
       }
     };
     fetchCategories(); // Fetch data when the component is mounted
   }, []);
-  // useEffect(() => {
-  //   const fetchCategory = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `https://ecommerce.routemisr.com/api/v1/categories/${id}`
-  //       );
-  //       setCategory(data.data);
-  //       setIsLoading(false); // Set loading to false once data is fetched
-  //     } catch (error) {
-  //       setError("Failed to fetch products"); // Set error if fetching fails
-  //       setIsLoading(false); // Still set loading to false even in case of error
-  //     }
-  //   };
-  //   fetchCategory(); // Fetch data when the component is mounted
-  // }, []);
-  const [addToCart, setAddToCart] = useState(false);
-
-  const handleAddToCart = () => {
-    setAddToCart(true); // Set addToCart to trigger the useEffect
-  };
   const addToCartNotify = () => {
     try {
       toast.success("Product has been added to cart successfully", {
@@ -136,10 +116,7 @@ export default function ProductsContextProvider(props) {
         womenProducts,
         menProducts,
         electronicsProducts,
-        addToCart,
-        setAddToCart,
         addToCartNotify,
-        handleAddToCart,
         addToWishlistNotify,
       }}
     >

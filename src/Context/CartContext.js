@@ -5,13 +5,21 @@ import { toast, Zoom } from "react-toastify";
 export const CartContext = createContext();
 export default function CartContextProvider(props) {
   const [loading, setLoading] = useState(false);
+  let [headers, setHeaders] = useState({});
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [addedProducts, setAddedProducts] = useState([]);
   const shippingCost = 9.65;
   const cookies = new Cookies();
-  const headers = {
-    token: cookies.get("userToken"),
-  };
+
+  useEffect(() => {
+    const userToken = cookies.get("userToken"); // Retrieve the userToken from cookies
+    if (userToken) {
+      setHeaders({
+        ...headers,
+        token: userToken
+      });
+    }
+  }, []);
 
   function sendToCart(productId) {
     return axios

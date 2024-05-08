@@ -18,7 +18,6 @@ export default function Cart() {
     addedProducts,
     setAddedProducts,
     sendToCart,
-    headers,
     increment,
     decrement,
     removeProduct,
@@ -74,7 +73,9 @@ export default function Cart() {
       setIsLoading(false); // Ensure loading is turned off after operations complete
     }
   };
-
+  useEffect(() => {
+    console.log(addedProducts);
+  }, [addedProducts]);
   if (isLoading) {
     return <Loading />; // Show the loading screen while images are loading
   }
@@ -87,7 +88,7 @@ export default function Cart() {
             <div className="products-list col-lg-10 col-xl-7 me-auto mb-5 d-flex justify-content-center align-items-center p-0">
               <div className="d-flex justify-content-center align-items-center flex-column w-100 border">
                 <div className="titles-row row g-3 px-5 py-3 border-bottom w-100 d-none d-lg-flex">
-                  {addedProducts?.legnth ? (
+                  {addedProducts.length>0 ? (
                     <>
                       <div className="col-md-5 d-flex justify-content-start align-items-center">
                         <p>PRODUCT</p>

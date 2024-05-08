@@ -5,7 +5,7 @@ import {
   FaAngleRight,
   FaAngleLeft,
 } from "react-icons/fa6";
-import { GoChevronRight,GoChevronLeft } from "react-icons/go";
+import { GoChevronRight, GoChevronLeft } from "react-icons/go";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
 import { BsHeartFill, BsInstagram } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
@@ -30,13 +30,6 @@ export default function SingleProduct() {
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const handleWishlistToggle = () => {
-  //   const newCheckStatus = !isWishlistCheck;
-  //   setIsWishlistCheck(newCheckStatus); // Update the state
-  //   setTimeout(() => {
-  //     addToWishlistNotify(newCheckStatus); // Pass the updated state to the notification
-  //   }, 0); // You can adjust the delay as needed
-  // };
   function increment() {
     setCount((prevCount) => prevCount + 1);
   }
@@ -49,7 +42,9 @@ export default function SingleProduct() {
     const getProduct = async () => {
       setLoading(true);
       try {
-        let response = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
+        let response = await axios.get(
+          `https://ecommerce.routemisr.com/api/v1/products/${id}`
+        );
         setProduct(response.data.data);
         setImages(response.data.data.images);
       } catch (error) {
@@ -67,7 +62,7 @@ export default function SingleProduct() {
     }
   }
   if (loading) {
-    return <Loading/>; // Here you can customize your loading indicator
+    return <Loading />; // Here you can customize your loading indicator
   }
   return (
     <>
@@ -118,11 +113,9 @@ export default function SingleProduct() {
                 data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev"
               >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ><GoChevronLeft />
-</span>
+                <span className="carousel-control-prev-icon" aria-hidden="true">
+                  <GoChevronLeft />
+                </span>
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
@@ -132,7 +125,7 @@ export default function SingleProduct() {
                 data-bs-slide="next"
               >
                 <span className="carousel-control-next-icon" aria-hidden="true">
-                <GoChevronRight />
+                  <GoChevronRight />
                 </span>
                 <span className="visually-hidden">Next</span>
               </button>

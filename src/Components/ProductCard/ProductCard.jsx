@@ -6,7 +6,7 @@ import { BsFillPatchCheckFill, BsCartPlusFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { ProductsContext } from "../../Context/ProductsContext";
 import { CartContext } from "../../Context/CartContext";
-
+import axios from "axios";
 export default function ProductCard({ product }) {
   const iconVariants = {
     initial: { scale: 0, opacity: 0 },
@@ -14,15 +14,13 @@ export default function ProductCard({ product }) {
     exit: { scale: 0, opacity: 0, transition: { duration: 0.5 } },
   };
 
-  const { addToCartNotify, handleAddToCart, addToWishlistNotify } =
-    useContext(ProductsContext);
-  const { addProducts } = useContext(CartContext);
+  const { addToCartNotify, addToWishlistNotify } = useContext(ProductsContext);
+  const { addProducts, headers } = useContext(CartContext);
   const [isAnimated, setIsAnimated] = useState(false);
   const [isWishlistCheck, setIsWishlistCheck] = useState(false);
 
-  const handleCartClick = () => {
+  const handleCartAnimation = () => {
     setIsAnimated(true); // Start animation for this card
-    handleAddToCart(product.id); // Pass the unique product ID
     addToCartNotify(product.id); // Pass the product ID for notification
     setTimeout(() => {
       setIsAnimated(false); // Stop animation after a short delay
@@ -38,7 +36,16 @@ export default function ProductCard({ product }) {
     }, 0); // You can adjust the delay as needed
   };
 
-
+  function sendToWishlist(productId) {
+    return axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/wishlist`,
+        { productId: productId },
+        { headers: headers }
+      )
+      .then((res) => res)
+      .catch((err) => err);
+  }
   return (
     <>
       {product && (
@@ -92,7 +99,7 @@ export default function ProductCard({ product }) {
                     animate="animate"
                     exit="exit"
                     onClick={() => {
-                      handleCartClick();
+                      handleCartAnimation();
                       addProducts(product);
                     }}
                     className="cart-icon"
@@ -104,17 +111,24 @@ export default function ProductCard({ product }) {
             </div>
             <span>$ {product.price}</span>
           </div>
-          <span
-            id="addToWishlist"
-            onClick={handleWishlistToggle}
-            className={`wishlist-btn shadow ${
-              isWishlistCheck
-                ? "wishlist-btn-checked"
-                : "wishlist-btn-unchecked"
-            }`}
-          >
-            <FaHeart />
-          </span>
+          {headers.token ? (
+            <span
+              id="addToWishlist"
+              onClick={() => {
+                handleWishlistToggle();
+                sendToWishlist(product.id);
+              }}
+              className={`wishlist-btn shadow ${
+                isWishlistCheck
+                  ? "wishlist-btn-checked"
+                  : "wishlist-btn-unchecked"
+              }`}
+            >
+              <FaHeart />
+            </span>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </>

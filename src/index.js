@@ -8,14 +8,17 @@ import App from "./App";
 import { HashRouter } from "react-router-dom";
 import ProductsContextProvider from "./Context/ProductsContext";
 import CartContextProvider from "./Context/CartContext";
+import WishlistContextProvider from "./Context/WishlistContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CartContextProvider>
+    <WishlistContextProvider>
     <ProductsContextProvider>
       <HashRouter>
         <App />
       </HashRouter>
     </ProductsContextProvider>
+    </WishlistContextProvider>
   </CartContextProvider>
 );

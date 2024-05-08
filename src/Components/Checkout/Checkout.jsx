@@ -15,32 +15,32 @@ export default function Checkout() {
     total,
     shippingCost,
     headers,
-    loading,
-    setLoading,
     clearCart,
     checkoutDone,
+    setAddedProducts,
   } = useContext(CartContext);
   const [checkoutProducts, setCheckoutProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [cartId, setCartId] = useState(null);
   const [checkoutDetails, setCheckoutDetails] = useState(null);
   async function handleSubmit(values, { setSubmitting }) {
     try {
-    let response = await checkoutPayment(cartId, values);
-    if (response?.data?.status === "success") {
-      if (paymentMethod==="Online") {
-        window.location.href = response.data.session.url;
-        clearCart();
-        localStorage.removeItem("cart")
+      let response = await checkoutPayment(cartId, values);
+      if (response?.data?.status === "success") {
+        if (paymentMethod === "Online") {
+          window.location.href = response.data.session.url;
+          clearCart();
+          localStorage.removeItem("cart");
+        } else {
+          clearCart();
+          localStorage.removeItem("cart");
+          setAddedProducts([]);
+          navigate("/");
+          checkoutDone();
+        }
       }
-      else{
-        clearCart();
-        localStorage.removeItem("cart");
-        navigate("/");
-        checkoutDone()
-      }
-    }
-  }catch (error) {
+    } catch (error) {
       console.error("Checkout failed:", error);
     } finally {
       setLoading(false); // Set loading to false once submission is complete
@@ -71,17 +71,19 @@ export default function Checkout() {
 
   useEffect(() => {
     const fetchCart = async () => {
+      setLoading(true);
       try {
-      const response = await getLoggedUserCart();
-      if (response?.data?.status === "success") {
-        setCheckoutDetails(response.data.data);
-        setCheckoutProducts(response.data.data.products);
-        setCartId(response.data.data._id);
-      } else {
-        // Handle error or empty cart scenario
-        console.error("Failed to fetch cart:", response);
-        setCheckoutProducts([]);
-      }} catch (error) {
+        const response = await getLoggedUserCart();
+        if (response?.data?.status === "success") {
+          setCheckoutDetails(response.data.data);
+          setCheckoutProducts(response.data.data.products);
+          setCartId(response.data.data._id);
+        } else {
+          // Handle error or empty cart scenario
+          console.error("Failed to fetch cart:", response);
+          setCheckoutProducts([]);
+        }
+      } catch (error) {
         console.error("Error fetching cart:", error);
       } finally {
         setLoading(false); // Set loading to false once fetch is complete
@@ -95,37 +97,36 @@ export default function Checkout() {
       setLoading(false);
       navigate("/");
     } else {
-      if (paymentMethod==="Cash") {
+      if (paymentMethod === "Cash") {
         return axios
-        .post(
-          `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
-          { shippingAddress: shippingAddress },
-          { headers: headers }
-        )
-        .then((response) => {
-          setLoading(false);
-          return response;
-        })
-        .catch((error) => {
-          setLoading(false);
-          return error;
-        });
-      }
-      else{
+          .post(
+            `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
+            { shippingAddress: shippingAddress },
+            { headers: headers }
+          )
+          .then((response) => {
+            setLoading(false);
+            return response;
+          })
+          .catch((error) => {
+            setLoading(false);
+            return error;
+          });
+      } else {
         return axios
-        .post(
-          `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
-          { shippingAddress: shippingAddress },
-          { headers: headers }
-        )
-        .then((response) => {
-          setLoading(false);
-          return response;
-        })
-        .catch((error) => {
-          setLoading(false);
-          return error;
-        });
+          .post(
+            `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+            { shippingAddress: shippingAddress },
+            { headers: headers }
+          )
+          .then((response) => {
+            setLoading(false);
+            return response;
+          })
+          .catch((error) => {
+            setLoading(false);
+            return error;
+          });
       }
     }
   };
