@@ -10,6 +10,14 @@
 #wishlist .product-row .add-cart-btn{
     width: 15rem;
 }
+#wishlist .product-row .product-name{
+    color: var(--text-color);
+    transition: all 0.4s;
+}
+#wishlist .product-row .product-name:hover{
+    color: var(--hover-color);
+    transition: all 0.4s;
+}
 #wishlist .product-row .add-cart-btn button{
     padding: 1rem;
     background-color: var(--hover-color);

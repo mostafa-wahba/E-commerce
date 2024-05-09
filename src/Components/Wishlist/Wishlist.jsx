@@ -5,12 +5,17 @@ import { FaXmark } from "react-icons/fa6";
 import { ProductsContext } from "../../Context/ProductsContext";
 import { WishlistContext } from "../../Context/WishlistContext";
 import Loading from "../Loading/Loading";
+import { Link } from "react-router-dom";
 
 export default function Wishlist() {
   const { addProducts } = useContext(CartContext);
   const { addToCartNotify } = useContext(ProductsContext);
-  const { addedWishlistProducts, removeProductFromWishlist, loadingItems,isLoading } =
-    useContext(WishlistContext);
+  const {
+    addedWishlistProducts,
+    removeProductFromWishlist,
+    loadingItems,
+    isLoading,
+  } = useContext(WishlistContext);
 
   function addProductToCart(id, product) {
     addToCartNotify(id);
@@ -57,10 +62,12 @@ export default function Wishlist() {
                             }
                           >
                             <div className="product-image-overlay">
-                            {loadingItems.has(product.id) ? (
-      <div className="spinner-border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
+                              {loadingItems.has(product.id) ? (
+                                <div className="spinner-border" role="status">
+                                  <span className="visually-hidden">
+                                    Loading...
+                                  </span>
+                                </div>
                               ) : (
                                 <FaXmark />
                               )}
@@ -68,9 +75,9 @@ export default function Wishlist() {
                             <img src={product.imageCover} alt="product" />
                           </div>
                           <div className="d-flex flex-column justify-content-start w-75">
-                            <span className="fw-medium fs-5">
+                            <Link to={`/product/${product.id}`} className="fw-medium fs-5 product-name">
                               {product.title}
-                            </span>
+                            </Link>
                             <span>{product.brand?.name}</span>
                           </div>
                         </div>

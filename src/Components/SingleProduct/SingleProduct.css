@@ -120,11 +120,7 @@
 
 .count-cart .heart-icon {
     border: 1px solid var(--hover-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: var(--hover-color);
-    border: 1px solid var(--hover-color);
     transition: all 0.4s;
 }
 
@@ -134,7 +130,13 @@
     transition: all 0.4s;
     cursor: pointer;
 }
-
+.count-cart .heart-icon-checked{
+    border: 1px solid var(--hover-color);
+    color: #fff;
+    background-color: var(--hover-color);
+    transition: all 0.4s;
+    cursor: pointer;
+}
 .social-icons {
     margin: 30px 0;
 }

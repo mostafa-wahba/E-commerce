@@ -22,16 +22,20 @@ import { CartContext } from "../../Context/CartContext";
 import { ProductsContext } from "../../Context/ProductsContext";
 import Loading from "../Loading/Loading";
 import { WishlistContext } from "../../Context/WishlistContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function SingleProduct() {
+  const { token } = useContext(AuthContext);
   const { addProducts } = useContext(CartContext);
-  const { addToCartNotify } = useContext(ProductsContext);
-  const { sendToWishlist } = useContext(WishlistContext);
+  const { addToCartNotify,addToWishlistNotify } = useContext(ProductsContext);
+  const { sendToWishlist} = useContext(WishlistContext);
   const [count, setCount] = useState(1);
   let { id } = useParams();
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isWishlistCheck, setIsWishlistCheck] = useState(false);
+
   function increment() {
     setCount((prevCount) => prevCount + 1);
   }
@@ -63,6 +67,22 @@ export default function SingleProduct() {
       addProducts(product);
     }
   }
+  const handleWishlistToggle = async () => {
+    const newCheckStatus = !isWishlistCheck;
+    setIsWishlistCheck(newCheckStatus); // Toggle the wishlist status
+    if (token) { // Check if user is logged in
+      try {
+        await sendToWishlist(product.id); // Send product to wishlist
+        addToWishlistNotify(newCheckStatus); // Notify about the wishlist addition
+      } catch (error) {
+        console.error('Failed to add to wishlist:', error);
+        setIsWishlistCheck(!newCheckStatus); // Revert state on failure
+      }
+    } else {
+      // Prompt user to login or show a notification
+      console.log("Please log in to add items to your wishlist.");
+    }
+  };
   if (loading) {
     return <Loading />; // Here you can customize your loading indicator
   }
@@ -166,8 +186,8 @@ export default function SingleProduct() {
                   Add to cart
                 </button>
                 <div
-                onClick={sendToWishlist(product.id)}
-                className="heart-icon p-3 h-100">
+                onClick={handleWishlistToggle}
+                className={`${isWishlistCheck?"heart-icon-checked":"heart-icon"} p-3 h-100 d-flex justify-content-center align-items-center`}>
                   <BsHeartFill />
                 </div>
               </div>
