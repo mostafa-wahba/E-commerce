@@ -3,11 +3,9 @@ import "./Layout.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { CartContext } from "../Context/CartContext";
-import { WishlistContext } from "../Context/WishlistContext";
 export default function Layout() {
   const location = useLocation();
   const { checkoutDone } = useContext(CartContext);
-  const { loginPopup, setLoginPopup } = useContext(WishlistContext);
   useEffect(() => {
     if (location.pathname === "/allorders") {
       location.pathname("/");

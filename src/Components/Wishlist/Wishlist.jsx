@@ -1,56 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Wishlist.css";
 import { CartContext } from "../../Context/CartContext";
 import { FaXmark } from "react-icons/fa6";
 import { ProductsContext } from "../../Context/ProductsContext";
-
 import { WishlistContext } from "../../Context/WishlistContext";
 import Loading from "../Loading/Loading";
 
 export default function Wishlist() {
   const { addProducts } = useContext(CartContext);
   const { addToCartNotify } = useContext(ProductsContext);
-  const { getProductsFromWishlist, removeProductFromWishlist,wishlistProductsCounter, setWishlistProductsCounter } =
+  const { addedWishlistProducts, removeProductFromWishlist, loadingItems,isLoading } =
     useContext(WishlistContext);
-  const [addedWishlistProducts, setAddedWishlistProducts] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      setLoading(true)
-      try {
-        const response = await getProductsFromWishlist();
-        if (response?.data?.status === "success") {
-          setAddedWishlistProducts(response.data.data);
-          setWishlistProductsCounter(response.data.count);
-        } else {
-          console.error("Failed to fetch Wishlist:", response);
-        }
-      } catch (error) {
-        console.error("Error fetching Wishlist:", error);
-      } finally {
-        setLoading(false); // Set loading to false once fetch is complete
-      }
-    };
-    fetchWishlist();
-  }, [setLoading, getProductsFromWishlist]);
 
   function addProductToCart(id, product) {
     addToCartNotify(id);
     addProducts(product);
   }
 
-  if (loading) {
+  if (isLoading) {
     return <Loading />;
   }
-
   return (
     <>
       <div id="wishlist">
         <div className="container">
           <div className="row align-items-start w-100 m-0">
             <div className="products-list d-flex justify-content-center align-items-center flex-column w-100 border p-0">
-              {addedWishlistProducts?.length ? (
+              {addedWishlistProducts?.length === 0 ? (
+                <h3 className="fs-4 d-flex justify-content-center align-items-center my-5 p-0">
+                  No items added to the wishlist
+                </h3>
+              ) : (
                 <>
                   <div className="titles-row row g-3 px-5 py-3 border-bottom w-100 d-none d-md-flex">
                     <div className="col-md-5 d-flex justify-content-start align-items-center ps-md-5">
@@ -63,7 +43,7 @@ export default function Wishlist() {
                       <p>STOCK STATUS</p>
                     </div>
                   </div>
-                  {addedWishlistProducts.map((product) => (
+                  {addedWishlistProducts?.map((product) => (
                     <div
                       key={product.id}
                       className="product-row row py-4 px-lg-4 border-bottom w-100 position-relative row-gap-3"
@@ -77,7 +57,13 @@ export default function Wishlist() {
                             }
                           >
                             <div className="product-image-overlay">
-                              <FaXmark />
+                            {loadingItems.has(product.id) ? (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+                              ) : (
+                                <FaXmark />
+                              )}
                             </div>
                             <img src={product.imageCover} alt="product" />
                           </div>
@@ -85,7 +71,7 @@ export default function Wishlist() {
                             <span className="fw-medium fs-5">
                               {product.title}
                             </span>
-                            <span>{product.brand.name}</span>
+                            <span>{product.brand?.name}</span>
                           </div>
                         </div>
                       </div>
@@ -117,15 +103,10 @@ export default function Wishlist() {
                         onClick={() => removeProductFromWishlist(product.id)}
                       >
                         <FaXmark />
-                        
                       </span>
                     </div>
                   ))}
                 </>
-              ) : (
-                <h3 className="fs-4 d-flex justify-content-center align-items-center my-5 p-0">
-                  No items added to the wishlist
-                </h3>
               )}
             </div>
           </div>

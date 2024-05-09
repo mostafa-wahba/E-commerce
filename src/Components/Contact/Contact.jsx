@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Contact.css";
 import img from "../../Assets/bg-01.jpg.webp";
 import icon from "../../Assets/icon-email.png.webp";
@@ -6,6 +6,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { BsTelephone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 export default function Contact() {
+
   return (
     <>
       <div id="contact-us">

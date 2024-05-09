@@ -73,9 +73,6 @@ export default function Cart() {
       setIsLoading(false); // Ensure loading is turned off after operations complete
     }
   };
-  useEffect(() => {
-    console.log(addedProducts);
-  }, [addedProducts]);
   if (isLoading) {
     return <Loading />; // Show the loading screen while images are loading
   }

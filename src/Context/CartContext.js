@@ -5,7 +5,7 @@ import { toast, Zoom } from "react-toastify";
 export const CartContext = createContext();
 export default function CartContextProvider(props) {
   const [loading, setLoading] = useState(false);
-  let [headers, setHeaders] = useState({});
+  const [headers, setHeaders] = useState({});
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
   const [addedProducts, setAddedProducts] = useState([]);
   const shippingCost = 9.65;

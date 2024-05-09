@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Navbar.css";
 import logo from "../../Assets/logo-no-background.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoSearchSharp } from "react-icons/io5";
-import { FaShoppingCart } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaShoppingCart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { TiThMenuOutline } from "react-icons/ti";
-import Cookies from "universal-cookie";
 import { CartContext } from "../../Context/CartContext";
-import { useContext } from "react";
 import { WishlistContext } from "../../Context/WishlistContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Navbar() {
   const [searchShow, setSearchShow] = useState(false);
-  const [token, setToken] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [scrollOffset, setScrollOffset] = useState(0);
   const { addedProducts } = useContext(CartContext);
   const { wishlistProductsCounter } = useContext(WishlistContext);
-  const navigate = useNavigate();
-  const cookies = new Cookies();
-  const handleLogout = () => {
-    cookies.remove("userToken", { path: "/" }); // Remove cookie
-    setToken(null); // Reset context
-    navigate("/login"); // Redirect to login page
-  };
+  const { logout, token } = useContext(AuthContext);
   useEffect(() => {
     const handleScroll = () => {
       setScrollOffset(window.pageYOffset);
@@ -37,11 +28,6 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  useEffect(() => {
-    if (cookies.get("userToken")) {
-      setToken(cookies.get("userToken"));
-    }
-  }, [cookies]);
 
   return (
     <>
@@ -53,7 +39,7 @@ export default function Navbar() {
         } transition fixed-top`}
       >
         <div className="container">
-          <Link className="navbar-brand me-auto" to="">
+          <Link className="navbar-brand me-auto" to="/">
             <img src={logo} alt="" />
           </Link>
           <button
@@ -176,7 +162,7 @@ export default function Navbar() {
                 <NavLink
                   className="nav-link me-lg-4 poppins-medium login-logout"
                   to="/login"
-                  onClick={handleLogout}
+                  onClick={logout}
                 >
                   Logout
                 </NavLink>

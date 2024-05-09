@@ -309,6 +309,7 @@ export default function Checkout() {
                 <button
                   type="submit"
                   className="rounded-pill text-uppercase w-100 border-0"
+                  disabled={!(formik.isValid && formik.dirty)}
                 >
                   {loading ? (
                     <div className="spinner-border" role="status">

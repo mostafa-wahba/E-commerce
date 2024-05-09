@@ -1,42 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
 import bg from "../../Assets/image.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
-import Cookies from "universal-cookie";
+import { AuthContext } from "../../Context/AuthContext"; // Ensure the path is correct
+
 export default function Login() {
   const [isloading, setIsloading] = useState(false);
-  let navigate = useNavigate();
-  const cookies = new Cookies();
-  async function handleLogin(values) {
+  const { login } = useContext(AuthContext);
+
+  const handleLogin = async (values) => {
+    setIsloading(true);
     try {
-      setIsloading(true);
-      const { data } = await axios.post(
-        `https://ecommerce.routemisr.com/api/v1/auth/signin`,
-        values
-      );
-      if (data.message === "success") {
-        // Assuming the token is returned in response.data.token
-        cookies.set("userToken", data.token, { path: "/" });
-        setIsloading(false);
-        navigate("/");
-      } else {
-        setIsloading(false);
-        console.error("Login failed:", data.message);
-      }
+      await login(values.email, values.password);
     } catch (error) {
-      setIsloading(false);
       console.error("Login error:", error);
+      setIsloading(false);
     }
-  }
-  let validation = Yup.object({
+  };
+
+  const validation = Yup.object({
     email: Yup.string().required("Email is required").email("Email is invalid"),
-    password: Yup.string().required("Password is required")
-    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password is wrong"),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password is wrong"),
   });
-  let formik = useFormik({
+
+  const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -44,6 +35,7 @@ export default function Login() {
     onSubmit: handleLogin,
     validationSchema: validation,
   });
+
   return (
     <>
       <div className="login w-100 vh-100">

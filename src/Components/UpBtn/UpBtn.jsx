@@ -21,8 +21,10 @@ const moveUp=()=>{
 window.addEventListener("scroll",showAndHide)
   return (
     <>
-      <span className="up-btn" style={{opacity:showBtn? 1:0}}>
-        <IoMdArrowDropup onClick={moveUp}/>
+      <span
+      onClick={moveUp}
+      className="up-btn" style={{opacity:showBtn? 1:0}}>
+        <IoMdArrowDropup />
       </span>
     </>
   );

@@ -1,43 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Register.css";
 import bg from "../../Assets/image.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext"; // Ensure the path is correct
+
 export default function Register() {
-  let toLogin = useNavigate();
+  const { register } = useContext(AuthContext); // Use the register function from AuthContext
   const [isloading, setIsloading] = useState(false);
   const [msgError, setMsgError] = useState("");
+  let navigate = useNavigate();
+
   async function handleRegister(values) {
     setIsloading(true);
-    let { data } = await axios
-      .post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
-      .catch((errr) => {
-        setIsloading(false);
-        setMsgError(`${errr.response.data.message}`);
-      });
-    if (data.message === "success") {
+    try {
+      await register(values);
       setIsloading(false);
-      toLogin("/login");
+      navigate("/login"); // Assuming the context handles navigation on failure internally
+    } catch (error) {
+      setIsloading(false);
+      setMsgError(error.message || "An unexpected error occurred");
     }
   }
-  let validation = Yup.object({
+
+  const validation = Yup.object({
     name: Yup.string()
       .required("Name is required")
-      .min(3, "Minimum length is 3")
-      .max(20, "Miximum length is 10"),
+      .min(3, "Minimum length is 3 characters")
+      .max(20, "Maximum length is 20 characters"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
-    password: Yup.string().required("Password is required")
-    .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should be start with Capital letter, followed by 5 to 10 lowercase letters or digits."),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(/^[A-Z][a-z0-9]{5,10}$/, "Password should start with a capital letter, followed by 5 to 10 lowercase letters or digits."),
     rePassword: Yup.string()
-      .required("Repassword is required")
-      .oneOf([Yup.ref("password")], "Password doesnt match"),
+      .required("Confirm password is required")
+      .oneOf([Yup.ref("password")], "Passwords must match"),
     phone: Yup.string()
       .required("Phone Number is required")
-      .matches(/^01[012][0-9]{8}$/, "Phone number must be a valid number"),
+      .matches(/^01[012][0-9]{8}$/, "Phone number must be a valid Egyptian mobile number"),
   });
-  let formik = useFormik({
+
+  const formik = useFormik({
     initialValues: {
       name: "",
       email: "",

@@ -6,16 +6,18 @@ import { BsFillPatchCheckFill, BsCartPlusFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { ProductsContext } from "../../Context/ProductsContext";
 import { CartContext } from "../../Context/CartContext";
-import axios from "axios";
+import { WishlistContext } from "../../Context/WishlistContext";
+import { AuthContext } from "../../Context/AuthContext";
 export default function ProductCard({ product }) {
   const iconVariants = {
     initial: { scale: 0, opacity: 0 },
     animate: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
     exit: { scale: 0, opacity: 0, transition: { duration: 0.5 } },
   };
-
+  const { token } = useContext(AuthContext);
   const { addToCartNotify, addToWishlistNotify } = useContext(ProductsContext);
-  const { addProducts, headers } = useContext(CartContext);
+  const { addProducts } = useContext(CartContext);
+  const { sendToWishlist } = useContext(WishlistContext);
   const [isAnimated, setIsAnimated] = useState(false);
   const [isWishlistCheck, setIsWishlistCheck] = useState(false);
 
@@ -26,26 +28,22 @@ export default function ProductCard({ product }) {
       setIsAnimated(false); // Stop animation after a short delay
     }, 1500); // Match the timeout to the duration of the animation
   };
-  const handleWishlistToggle = () => {
+  const handleWishlistToggle = async () => {
     const newCheckStatus = !isWishlistCheck;
-    setIsWishlistCheck(newCheckStatus); // Update the state
-
-    // Delay to ensure the state update has completed before running the notification
-    setTimeout(() => {
-      addToWishlistNotify(newCheckStatus); // Pass the updated state to the notification
-    }, 0); // You can adjust the delay as needed
+    setIsWishlistCheck(newCheckStatus); // Toggle the wishlist status
+    if (token) { // Check if user is logged in
+      try {
+        await sendToWishlist(product.id); // Send product to wishlist
+        addToWishlistNotify(newCheckStatus); // Notify about the wishlist addition
+      } catch (error) {
+        console.error('Failed to add to wishlist:', error);
+        setIsWishlistCheck(!newCheckStatus); // Revert state on failure
+      }
+    } else {
+      // Prompt user to login or show a notification
+      console.log("Please log in to add items to your wishlist.");
+    }
   };
-
-  function sendToWishlist(productId) {
-    return axios
-      .post(
-        `https://ecommerce.routemisr.com/api/v1/wishlist`,
-        { productId: productId },
-        { headers: headers }
-      )
-      .then((res) => res)
-      .catch((err) => err);
-  }
   return (
     <>
       {product && (
@@ -111,13 +109,10 @@ export default function ProductCard({ product }) {
             </div>
             <span>$ {product.price}</span>
           </div>
-          {headers.token ? (
+          {token ? (
             <span
               id="addToWishlist"
-              onClick={() => {
-                handleWishlistToggle();
-                sendToWishlist(product.id);
-              }}
+              onClick={handleWishlistToggle}
               className={`wishlist-btn shadow ${
                 isWishlistCheck
                   ? "wishlist-btn-checked"

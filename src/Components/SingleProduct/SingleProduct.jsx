@@ -21,10 +21,12 @@ import axios from "axios";
 import { CartContext } from "../../Context/CartContext";
 import { ProductsContext } from "../../Context/ProductsContext";
 import Loading from "../Loading/Loading";
+import { WishlistContext } from "../../Context/WishlistContext";
 
 export default function SingleProduct() {
   const { addProducts } = useContext(CartContext);
   const { addToCartNotify } = useContext(ProductsContext);
+  const { sendToWishlist } = useContext(WishlistContext);
   const [count, setCount] = useState(1);
   let { id } = useParams();
   const [product, setProduct] = useState([]);
@@ -163,7 +165,9 @@ export default function SingleProduct() {
                 >
                   Add to cart
                 </button>
-                <div className="heart-icon p-3 h-100">
+                <div
+                onClick={sendToWishlist(product.id)}
+                className="heart-icon p-3 h-100">
                   <BsHeartFill />
                 </div>
               </div>

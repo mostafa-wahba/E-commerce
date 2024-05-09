@@ -9,16 +9,19 @@ import { HashRouter } from "react-router-dom";
 import ProductsContextProvider from "./Context/ProductsContext";
 import CartContextProvider from "./Context/CartContext";
 import WishlistContextProvider from "./Context/WishlistContext";
+import { AuthProvider } from "./Context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <CartContextProvider>
-    <WishlistContextProvider>
-    <ProductsContextProvider>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </ProductsContextProvider>
-    </WishlistContextProvider>
-  </CartContextProvider>
+  <HashRouter>
+    <AuthProvider>
+      <CartContextProvider>
+        <WishlistContextProvider>
+          <ProductsContextProvider>
+            <App />
+          </ProductsContextProvider>
+        </WishlistContextProvider>
+      </CartContextProvider>
+    </AuthProvider>
+  </HashRouter>
 );

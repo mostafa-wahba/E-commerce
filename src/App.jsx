@@ -19,6 +19,7 @@ import Blog from "./Components/Blog/Blog";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import UserRoute from "./Components/UserRoute/UserRoute";
 import Wishlist from "./Components/Wishlist/Wishlist";
+import Profile from "./Components/Profile/Profile";
 
 const App = () => {
   return (
@@ -53,9 +54,9 @@ const App = () => {
           <Route
             path="/wishlist"
             element={
-              // <UserRoute>
+              <UserRoute>
                 <Wishlist />
-              // </UserRoute>
+              </UserRoute>
             }
           />
           <Route path="/cart" element={<Cart />} />
@@ -67,6 +68,14 @@ const App = () => {
               </UserRoute>
             }
           />
+          {/* <Route
+            path="/profile"
+            element={
+              <UserRoute>
+                <Profile />
+              </UserRoute>
+            }
+          /> */}
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
