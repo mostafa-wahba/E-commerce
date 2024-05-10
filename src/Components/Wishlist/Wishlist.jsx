@@ -21,7 +21,7 @@ export default function Wishlist() {
     addToCartNotify(id);
     addProducts(product);
   }
-
+  console.log(addedWishlistProducts);
   if (isLoading) {
     return <Loading />;
   }
@@ -31,7 +31,8 @@ export default function Wishlist() {
         <div className="container">
           <div className="row align-items-start w-100 m-0">
             <div className="products-list d-flex justify-content-center align-items-center flex-column w-100 border p-0">
-              {addedWishlistProducts?.length === 0 ? (
+              {addedWishlistProducts?.length === 0 ||
+              addedWishlistProducts === null ? (
                 <h3 className="fs-4 d-flex justify-content-center align-items-center my-5 p-0">
                   No items added to the wishlist
                 </h3>
@@ -75,7 +76,10 @@ export default function Wishlist() {
                             <img src={product.imageCover} alt="product" />
                           </div>
                           <div className="d-flex flex-column justify-content-start w-75">
-                            <Link to={`/product/${product.id}`} className="fw-medium fs-5 product-name">
+                            <Link
+                              to={`/product/${product.id}`}
+                              className="fw-medium fs-5 product-name"
+                            >
                               {product.title}
                             </Link>
                             <span>{product.brand?.name}</span>

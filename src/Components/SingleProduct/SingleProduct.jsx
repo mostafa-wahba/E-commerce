@@ -27,8 +27,9 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function SingleProduct() {
   const { token } = useContext(AuthContext);
   const { addProducts } = useContext(CartContext);
-  const { addToCartNotify,addToWishlistNotify } = useContext(ProductsContext);
-  const { sendToWishlist} = useContext(WishlistContext);
+  const { addToCartNotify } = useContext(ProductsContext);
+  const { sendToWishlist, removeProductFromWishlist,addToWishlistNotify } =
+    useContext(WishlistContext);
   const [count, setCount] = useState(1);
   let { id } = useParams();
   const [product, setProduct] = useState([]);
@@ -70,12 +71,13 @@ export default function SingleProduct() {
   const handleWishlistToggle = async () => {
     const newCheckStatus = !isWishlistCheck;
     setIsWishlistCheck(newCheckStatus); // Toggle the wishlist status
-    if (token) { // Check if user is logged in
+    if (token) {
+      // Check if user is logged in
       try {
         await sendToWishlist(product.id); // Send product to wishlist
         addToWishlistNotify(newCheckStatus); // Notify about the wishlist addition
       } catch (error) {
-        console.error('Failed to add to wishlist:', error);
+        console.error("Failed to add to wishlist:", error);
         setIsWishlistCheck(!newCheckStatus); // Revert state on failure
       }
     } else {
@@ -186,8 +188,16 @@ export default function SingleProduct() {
                   Add to cart
                 </button>
                 <div
-                onClick={handleWishlistToggle}
-                className={`${isWishlistCheck?"heart-icon-checked":"heart-icon"} p-3 h-100 d-flex justify-content-center align-items-center`}>
+                  onClick={() => {
+                    if (isWishlistCheck) {
+                      removeProductFromWishlist(product.id);
+                      setIsWishlistCheck(false);
+                    } else handleWishlistToggle();
+                  }}
+                  className={`${
+                    isWishlistCheck ? "heart-icon-checked" : "heart-icon"
+                  } p-3 h-100 d-flex justify-content-center align-items-center`}
+                >
                   <BsHeartFill />
                 </div>
               </div>

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
 import { toast, Zoom } from "react-toastify";
 export const ProductsContext = createContext();
 export default function ProductsContextProvider(props) {
@@ -12,7 +11,6 @@ export default function ProductsContextProvider(props) {
   const [menProducts, setMenProducts] = useState([]);
   const [electronicsProducts, setElectronicsProducts] = useState([]);
   const [error, setError] = useState("");
-  let { id } = useParams();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -72,33 +70,6 @@ export default function ProductsContextProvider(props) {
       console.error("Toast notification error:", error);
     }
   };
-  const addToWishlistNotify = (isWishlistCheck) => {
-    if (isWishlistCheck) {
-      toast.info("Product has been added to wishlist successfully", {
-        position: "top-left",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Zoom,
-      });
-    } else {
-      toast.error("Product has been removed from wishlist", {
-        position: "top-left",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Zoom,
-      });
-    }
-  };
 
   return (
     <ProductsContext.Provider
@@ -116,8 +87,7 @@ export default function ProductsContextProvider(props) {
         womenProducts,
         menProducts,
         electronicsProducts,
-        addToCartNotify,
-        addToWishlistNotify,
+        addToCartNotify
       }}
     >
       {props.children}

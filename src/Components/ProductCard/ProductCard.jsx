@@ -15,9 +15,10 @@ export default function ProductCard({ product }) {
     exit: { scale: 0, opacity: 0, transition: { duration: 0.5 } },
   };
   const { token } = useContext(AuthContext);
-  const { addToCartNotify, addToWishlistNotify } = useContext(ProductsContext);
+  const { addToCartNotify } = useContext(ProductsContext);
   const { addProducts } = useContext(CartContext);
-  const { sendToWishlist } = useContext(WishlistContext);
+  const { sendToWishlist, removeProductFromWishlist,addToWishlistNotify } =
+    useContext(WishlistContext);
   const [isAnimated, setIsAnimated] = useState(false);
   const [isWishlistCheck, setIsWishlistCheck] = useState(false);
 
@@ -31,12 +32,13 @@ export default function ProductCard({ product }) {
   const handleWishlistToggle = async () => {
     const newCheckStatus = !isWishlistCheck;
     setIsWishlistCheck(newCheckStatus); // Toggle the wishlist status
-    if (token) { // Check if user is logged in
+    if (token) {
+      // Check if user is logged in
       try {
         await sendToWishlist(product.id); // Send product to wishlist
         addToWishlistNotify(newCheckStatus); // Notify about the wishlist addition
       } catch (error) {
-        console.error('Failed to add to wishlist:', error);
+        console.error("Failed to add to wishlist:", error);
         setIsWishlistCheck(!newCheckStatus); // Revert state on failure
       }
     } else {
@@ -112,7 +114,13 @@ export default function ProductCard({ product }) {
           {token ? (
             <span
               id="addToWishlist"
-              onClick={handleWishlistToggle}
+              onClick={() => {
+                if (isWishlistCheck) {
+                  removeProductFromWishlist(product.id)
+                  setIsWishlistCheck(false)
+                }
+                else handleWishlistToggle();
+              }}
               className={`wishlist-btn shadow ${
                 isWishlistCheck
                   ? "wishlist-btn-checked"
